@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// ROUTE PENPOS
+Route::group(
+    ['prefix' => 'penpos', 'as' => 'penpos.'],
+    function () {
+        // Dashboard
+        Route::get('/', 'Penpos\DashboardController@index')->name('index');
+    }
+);
+
+// ROUTE PEMAIN
+Route::group(
+    ['prefix' => 'pemain', 'as' => 'pemain.'],
+    function () {
+        // Dashboard
+        Route::get('/', 'Pemain\DashboardController@index')->name('index');
+    }
+);
