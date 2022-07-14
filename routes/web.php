@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // ROUTE PENPOS
 Route::group(
@@ -31,6 +31,8 @@ Route::group(
     ['prefix' => 'pemain', 'as' => 'pemain.'],
     function () {
         // Dashboard
-        Route::get('/', 'Pemain\DashboardController@index')->name('index');
+        Route::get('/', 'PemainController@dashboard')->name('dashboard');
+        Route::post('/check/potongan', 'KartuController@checkPotongan')->name('check.potongan');
+        Route::post('/tukar', 'KartuController@tukar')->name('tukar');
     }
 );
