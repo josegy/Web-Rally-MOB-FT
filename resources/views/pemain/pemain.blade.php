@@ -1,3 +1,4 @@
+{{-- tak buat dulu tinggal tak copas nti ke front-end e (PROTOTYPE) --}}
 <!DOCTYPE html>
 <html lang="en">
 
