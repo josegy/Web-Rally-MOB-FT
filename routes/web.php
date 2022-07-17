@@ -33,6 +33,7 @@ Route::group(
     function () {
         // Dashboard
         Route::get('/', 'PemainController@dashboard')->name('dashboard');
+        Route::post('/changejenis', 'PemainController@changeJenis')->name('change');
         Route::post('/check/potongan', 'KartuController@checkPotongan')->name('check.potongan');
         Route::post('/tukar', 'KartuController@tukar')->name('tukar');
     }

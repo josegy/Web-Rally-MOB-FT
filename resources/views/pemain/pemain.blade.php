@@ -28,7 +28,7 @@
         @for ($x = 0; $x < count($kartu_pemain); $x++)
             <li>
                 <h4>Nama: {{ str_replace('_', ' ', $kartu_pemain[$x]->namaKartu) }}</h4>
-                <h4>Gambar: {{ $kartu_pemain[$x]->gambar }}</h4>
+                <img src="{{ asset('/asset/img/' . $kartu_pemain[$x]->gambar . '.png') }}" alt="">
             </li>
         @endfor
     </ul>
@@ -36,22 +36,101 @@
     <button type="button" id="tukarKartu" class="btn btn-warning">Tukar Kartu</button>
 
     {{-- Modal --}}
+    {{-- Modal Konfirmasi Tukar --}}
     <div class="modal fade" id="tukar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="tukarLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tukarLabel">Upgrade</h5>
+                    <h5 class="modal-title" id="tukarLabel">Tukar Kartu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
-                    <button id="random" class="btn btn-secondary">Random</button>
-                    <button id="pilih" class="btn btn-secondary">Pilih</button>
-                    <button id="spesial" class="btn btn-secondary">Spesial</button>
+                    <button id="random" class="btn btn-secondary" data-bs-dismiss="modal">Random</button>
+                    <button id="pilih" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#choose">Pilih</button>
+                    <button id="spesial" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#special">Spesial</button>
                 </div>
                 <div class="modal-footer">
                     {{-- button cancel --}}
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Notif Tukar --}}
+    <div class="modal fade" id="notif" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="notifLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notifLabel">Notif</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body flex">
+                    Kartu berhasil ditukarkan!! kamu mendapat kartu <b><span id="detailKartu"></span></b>
+                </div>
+                <div class="modal-footer">
+                    {{-- button ok --}}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Pilihan --}}
+    <div class="modal fade" id="choose" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="chooseLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chooseLabel">Choose</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body flex">
+                    <select id="chooseCard">
+                        @for ($y = 0; $y < count($kartu); $y++)
+                            <option value="{{ $kartu[$y]->namaKartu }}">
+                                {{ str_replace('_', ' ', $kartu[$y]->namaKartu) }}</option>
+                        @endfor
+                    </select>
+
+                </div>
+                <div class="modal-footer">
+                    {{-- button confirm --}}
+                    <button id="konfirmasi_pilihan" type="button" class="btn btn-success"
+                        data-bs-dismiss="modal">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Spesial --}}
+    <div class="modal fade" id="special" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="specialLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="specialLabel">Choose</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body flex">
+                    <select id="jenis">
+                        <option value="angka">Angka</option>
+                        <option value="simbol">Simbol</option>
+                    </select>
+                    <select id="specialCard">
+                        @for ($z = 6; $z <= 10; $z++)
+                            <option value="{{ $z }}">{{ $z }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    {{-- button confirm --}}
+                    <button id="konfirmasi_spesial" type="button" class="btn btn-success"
+                        data-bs-dismiss="modal">Confirm</button>
                 </div>
             </div>
         </div>
@@ -110,11 +189,60 @@
                 url: "{{ route('pemain.tukar') }}",
                 data: {
                     '_token': '<?php echo csrf_token(); ?>',
-                    'pilihan': 'random'
+                    'tipe': 'random'
                 },
                 success: function(data) {
-                    alert('success');
-                    alert(data.pilihan);
+                    // alert('success');
+                    let cardName = data.card[0].name.replace('_', ' ');
+                    console.log(cardName);
+
+                    $('#detailKartu').text(cardName);
+                    $('#notif').modal('show');
+                },
+                error: function() {
+                    alert('error');
+
+                }
+            })
+        })
+
+        //  kalau konfirmasi pilih diklik
+        $('#konfirmasi_pilihan').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('pemain.tukar') }}",
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>',
+                    'tipe': 'pilih',
+                    'pilihan': $('#chooseCard').val()
+                },
+                success: function(data) {
+                    // alert('success');
+                    let cardName = data.card[0].name.replace('_', ' ');
+                    console.log(cardName);
+
+                    $('#detailKartu').text(cardName);
+                    $('#notif').modal('show');
+                },
+                error: function() {
+                    alert('error');
+
+                }
+            })
+        })
+
+        // kalau konfirmasi spesial diklik
+        $('#konfirmasi_spesial').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('pemain.tukar') }}",
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>',
+                    'tipe': 'spesial'
+                },
+                success: function(data) {
+                    // alert('success');
+                    alert(data.card);
 
                 },
                 error: function() {
@@ -124,44 +252,20 @@
             })
         })
 
-        //  kalau button pilih diklik
-        $('#pilih').click(function() {
+        $('#jenis').change(function() {
             $.ajax({
                 type: 'POST',
-                url: "{{ route('pemain.tukar') }}",
+                url: "{{ route('pemain.change') }}",
                 data: {
                     '_token': '<?php echo csrf_token(); ?>',
-                    'pilihan': 'pilih'
+                    'jenis': $('#jenis').val()
                 },
                 success: function(data) {
-                    alert('success');
-                    alert(data.pilihan);
-
+                    // alert('success');
+                    $('#specialCard').html(data.data);
                 },
                 error: function() {
                     alert('error');
-
-                }
-            })
-        })
-
-        // kalau button spesial diklik
-        $('#spesial').click(function() {
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('pemain.tukar') }}",
-                data: {
-                    '_token': '<?php echo csrf_token(); ?>',
-                    'pilihan': 'spesial'
-                },
-                success: function(data) {
-                    alert('success');
-                    alert(data.pilihan);
-
-                },
-                error: function() {
-                    alert('error');
-
                 }
             })
         })

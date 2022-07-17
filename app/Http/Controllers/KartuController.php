@@ -35,26 +35,72 @@ class KartuController extends Controller
 
     function tukar(Request $request)
     {
-        $pilihan = $request->get('pilihan');
+        $tipe = $request->get('tipe');
 
         // kalau pemain pilih 'random'
-        if ($pilihan == 'random') {
-            $msg = 'random';
+        if ($tipe == 'random') {
+            // delete 3 potongan
+            for ($i = 0; $i < 3; $i++) {
+                $idDelete = DB::table('kartu_pemain')
+                    ->select(DB::raw('min(id) as id'))
+                    ->where('kartu_id', '=', 25)
+                    ->where('pemain_id', '=', 1)
+                    ->get();
+
+                DB::table('kartu_pemain')->where('id', '=', $idDelete[0]->id)->delete();
+            }
+
+            $idCard = rand(1, 20);
+            DB::table('kartu_pemain')->insert([
+                'kartu_id' => $idCard,
+                'pemain_id' => 1
+            ]);
+
+            $card = DB::table('kartu')
+                ->select('name')
+                ->where('id', '=', $idCard)
+                ->get();
         }
         // kalau pemain pilih 'pilih'
-        else if ($pilihan == 'pilih') {
-            $msg = 'pilih';
+        else if ($tipe == 'pilih') {
+            // delete 5 potongan
+            for ($i = 0; $i < 5; $i++) {
+                $idDelete = DB::table('kartu_pemain')
+                    ->select(DB::raw('min(id) as id'))
+                    ->where('kartu_id', '=', 25)
+                    ->where('pemain_id', '=', 1)
+                    ->get();
 
+                DB::table('kartu_pemain')->where('id', '=', $idDelete[0]->id)->delete();
+            }
+
+            $pilihan = $request->get('pilihan');
+
+            $card = DB::table('kartu')
+                ->where('name', 'like', '%' . $pilihan . '%')
+                ->get();
+
+            DB::table('kartu_pemain')->insert([
+                'kartu_id' => $card[0]->id,
+                'pemain_id' => 1
+            ]);
         }
         // kalau pemain pilih 'spesial'
-        else if ($pilihan == 'spesial') {
-            $msg = 'spesial';
+        else if ($tipe == 'spesial') {
+            // $idDelete = DB::table('kartu_pemain')
+            //     ->select(DB::raw('min(id) as id'))
+            //     ->where('kartu_id', '=', 25)
+            //     ->where('pemain_id', '=', 1)
+            //     ->get();
 
+            // DB::table('kartu_pemain')->where('id', '=', $idDelete[0]->id)->delete();
+
+            $card = 'spesial';
         }
 
         return response()->json(array(
             'success' => true,
-            'pilihan' => $msg
+            'card' => $card
         ));
     }
 }
