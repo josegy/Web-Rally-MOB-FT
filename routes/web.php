@@ -24,6 +24,7 @@ Route::group(
     function () {
         // Dashboard
         Route::get('/', 'Penpos\DashboardController@index')->name('index');
+        Route::post('/cekPosSingle', 'Penpos\DashboardController@cekPosSingle')->name('cekPosSingle');
     }
 );
 

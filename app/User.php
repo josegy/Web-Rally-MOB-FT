@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pemain()
+    {
+        return $this->belongsTo(Pemain::class, 'pemain_id');
+    }
+
+    public function penpos()
+    {
+        return $this->belongsTo(Penpos::class, 'penpos_id');
+    }
 }

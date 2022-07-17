@@ -7,6 +7,7 @@
   <meta name="description" content="An impressive and flawless site template that includes various UI elements and countless features, attractive ready-made blocks and rich pages, basically everything you need to create a unique and professional website.">
   <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
   <meta name="author" content="elemis">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <title>Sandbox - Modern & Multipurpose Bootstrap 5 Template</title>
   <link rel="shortcut icon" href="{{ asset('template/assets/img/favicon.png') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
@@ -61,29 +62,31 @@
                             <label><h3>Nama Tim :</h3></label>
                         </div>
                         <div class="col-md-4">
-                            <select name="namaTim" class="form-select" required>
-                                <option value="" hidden>Pilih Tim</option>
-                                <option value="Tim1">Tim 1</option>
-                                <option value="Tim2">Tim 2</option>
-                                <option value="Tim3">Tim 3</option>
+                            <select name="namaTim" id="pemain_id" class="form-select" required>
+                                <option value="" hidden>-- Pilih Nama Pemain --</option>
+                                @foreach ($all_pemain as $pemain)
+                                    <option value="{{ $pemain->id }}">
+                                        {{ $pemain->name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-4 text-start">
                             <form action="">
-                                <button type="button" class="btn btn-primary" name="btnSubmit">Submit</button>
+                                <button type="button" class="btn btn-primary" id='cekPos' name="btnSubmit" onclick='cekPosSingle()'>Check</button>
                             </form>
                         </div>
                     </div>
                     <br>
                     <div>
                         <form action="" method="GET">
-                            <button type="button" class="btn btn-success" name="btnMenang">Menang</button>
-                            <button type="button" class="btn btn-danger" name="btnKalah">Kalah</button>
+                            <button type="button" class="btn btn-success" name="btnMenang" id="btn_menang" disabled>Menang</button>
+                            <button type="button" class="btn btn-danger" name="btnKalah" id="btn_kalah" disabled>Kalah</button>
                         </form>
                     </div>
                 </div>
                 <div class="card-footer text-muted pos-penuh">
-                  <span class="font-color">Status Pos</span>
+                  <span class="font-color" id="status_pos">{{ strtoupper($penpos->status)}}</span>
               </div>
             </div>
         </div>
@@ -223,12 +226,35 @@
   <script src="{{ asset('template/assets/js/theme.js') }}"></script>
   <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
   <script>
+    function cekPosSingle() {
+      $('#cekPos').attr('disabled', true);
+        $.ajax({
+          type: 'POST',
+          url: "{{ route('penpos.cekPosSingle') }}",
+          data:{
+              '_token': '<?php echo csrf_token(); ?>',
+              'pemain1_id': $('#pemain_id').val(),
+          },
+          success: function (data) {
+            if (data.status != ""){
+              $('#status_pos').html(data.penpos.status);
+              $('#btn_menang').attr('disabled',false);
+              $('#btn_kalah').attr('disabled',false);
+            }
+            $('#cekPos').attr('disabled', false);
+          }
+      });
+    }
+
     window.onload = function() {
         if (screen.width < 1000) {
             var mvp = document.getElementById('vp');
             mvp.setAttribute('content','user-scalable=no,width=1000');
         }
     }
+
+    
+    
     </script>
 </body>
 
