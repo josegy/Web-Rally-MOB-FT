@@ -18,9 +18,19 @@ class KartuController extends Controller
             ->where('k.is_full', '=', false)
             ->get();
 
-        return response()->json(array([
-            'potongan' => $potongan
-        ]));
+        $jumlahPotongan = count($potongan);
+
+        $kartu = DB::table('kartu_pemain as kp')
+            ->where('kartu_id', '!=', 25)
+            ->get();
+
+        $jumlahKartu = count($kartu);
+
+        return response()->json(array(
+            'potongan' => $potongan,
+            'jumlahPotongan' => $jumlahPotongan,
+            'jumlahKartu' => $jumlahKartu
+        ));
     }
 
     function tukar(Request $request)
@@ -29,16 +39,22 @@ class KartuController extends Controller
 
         // kalau pemain pilih 'random'
         if ($pilihan == 'random') {
+            $msg = 'random';
         }
         // kalau pemain pilih 'pilih'
         else if ($pilihan == 'pilih') {
+            $msg = 'pilih';
+
         }
         // kalau pemain pilih 'spesial'
         else if ($pilihan == 'spesial') {
+            $msg = 'spesial';
+
         }
 
-        return response()->json(array([
-            'success' => true
-        ]));
+        return response()->json(array(
+            'success' => true,
+            'pilihan' => $msg
+        ));
     }
 }
