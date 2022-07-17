@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,6 @@ Route::group(
         Route::post('/tukar', 'KartuController@tukar')->name('tukar');
     }
 );
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
