@@ -13,9 +13,9 @@ class Pemain extends Model
         return $this->belongsToMany(Kartu::class, 'kartu_pemain', 'kartu_id', 'pemain_id')
             ->withPivot(['id']);
     }
-    public function pemains()
+    public function penposes()
     {
-        return $this->belongsToMany(Pemain::class, 'penpos_pemain', 'pemain_id', 'penpos_id')
+        return $this->belongsToMany(Penpos::class, 'penpos_pemain', 'penpos_id', 'pemain_id')
             ->withPivot(['is_done']);
     }
 }
