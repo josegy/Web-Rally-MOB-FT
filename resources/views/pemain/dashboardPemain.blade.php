@@ -15,6 +15,7 @@
 	<link rel="preload" href="{{ asset('template/assets/css/fonts/thicccboi.css') }}" as="style" onload="this.rel='stylesheet'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 	<div class="content-wrapper">
@@ -509,17 +510,14 @@
 		</section>
 		<!-- /section -->
 	</div>
+	
     <div>
-        <a href="#" class="btn btn-primary rounded-pill mx-1 mb-2 mb-md-0" data-bs-toggle="modal" data-bs-target="#modal-02">Kartu Terkumpul</a>
         <div class="modal fade" id="modal-02" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
             <div class="modal-body">
                 <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="row">
-                {{-- <div class="col-md-10 offset-md-1">
-                    <figure class="mb-6"><img src="{{ asset('template/assets/img/illustrations/i7.png') }}" srcset="{{ asset('template/assets/img/illustrations/i7@2x.png') }} 2x" alt="" /></figure>
-                </div> --}}
                 <!-- /column -->
                 </div>
                 <!-- /.row -->
@@ -645,19 +643,6 @@
                         </section>
                     </div>
                 </div>
-                <a href="#" class="text-decoration-none popup" style="text-align: right" onclick="myFunction()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                    </svg>
-                    Petunjuk Redeem Kartu
-                    <span class="popuptext" id="myPopup">
-                        <ul>
-                            <li>Potongan kartu tersebut dapat ditukarkan pada Dealers Table.</li>
-                            <li>Potongan kartu yang diperoleh dapat ditukarkan dengan kartu acak apabila menukarkan 3 potongan kartu dan kartu yang dapat dipilih apabila menukarkan 5 potongan kartu.</li>
-                            <li>Apabila ada kartu yang tidak diinginkan, dapat ditukarkan menggunakan “penukaran spesial”. Per team hanya memiliki kesempatan “penukaran spesial” sebanyak 1 kali. Kelompok dapat memilih salah satu dari angka maupun simbol yang diinginkan dan menggunakan 1 kartu yang tidak diinginkan dan tambahan 1 potongan kartu agar dapat diacak.</li>
-                        </ul>
-                    </span>
-                </a>
                 <!-- /.row -->
             </div>
             <!--/.modal-body -->
@@ -669,6 +654,67 @@
         <!--/.modal -->
     </div>
 	<!-- /.content-wrapper -->
+
+	<div>
+		<div class="modal fade" id="modal-03" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered modal-md">
+			  <div class="modal-content text-justify">
+				<div class="modal-body">
+				  <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				  <div class="row">
+					<h3 style="text-align: center">Mekanisme Penukaran Kartu</h3>
+					  <div>
+						  <ol>
+							  <li>Potongan kartu dapat ditukarkan pada Dealers Table.</li>
+							  <li>Potongan kartu yang diperoleh dapat ditukarkan dengan kartu acak apabila menukarkan 3 potongan kartu dan kartu yang dapat dipilih apabila 5 potongan kartu.</li>
+							  <li>Apabila ada kartu yang tidak diinginkan, dapat ditukarkan menggunakan “penukaran spesial”. Setiap tim hanya memiliki kesempatan “penukaran spesial” sebanyak 1 kali. Kelompok dapat memilih salah satu dari angka maupun simbol yang diinginkan dan menggunakan 1 kartu yang tidak diinginkan dan tambahan 1 potongan kartu agar dapat diacak.</li>
+						  </ol>
+					  </div>
+					<!-- /column -->
+				  </div>
+				  <!-- /.row -->
+				</div>
+				<!--/.modal-body -->
+			  </div>
+			  <!--/.modal-content -->
+			</div>
+			<!--/.modal-dialog -->
+		  </div>
+		  <!--/.modal -->
+	</div>
+
+	<div class="fab-container">
+		<div class="fab fab-icon-holder">
+			<i class="fas fa-question"></i>
+		</div>
+
+		<ul class="fab-options">
+			<li>
+				<span class="fab-label">Kartu Terkumpul</span>
+				<div class="fab-icon-holder">
+					<i>
+						<a href="#" class="" style="color: white" data-bs-toggle="modal" data-bs-target="#modal-02">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-spade-fill" viewBox="0 0 16 16">
+								<path d="M7.184 11.246A3.5 3.5 0 0 1 1 9c0-1.602 1.14-2.633 2.66-4.008C4.986 3.792 6.602 2.33 8 0c1.398 2.33 3.014 3.792 4.34 4.992C13.86 6.367 15 7.398 15 9a3.5 3.5 0 0 1-6.184 2.246 19.92 19.92 0 0 0 1.582 2.907c.231.35-.02.847-.438.847H6.04c-.419 0-.67-.497-.438-.847a19.919 19.919 0 0 0 1.582-2.907z"/>
+							</svg>
+						</a>
+					</i>
+				</div>
+			</li>
+			<li>
+				<span class="fab-label">Mekanisme Penukaran</span>
+				<div class="fab-icon-holder">
+					<i>
+						<a href="#" class="" style="color: white" data-bs-toggle="modal" data-bs-target="#modal-03">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+								<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+							</svg>
+						</a>
+					</i>
+				</div>
+			</li>
+		</ul>
+	</div>
 
     <script src="{{ asset('template/assets/js/theme.js') }}"></script>
     <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
@@ -689,12 +735,5 @@
         }
     })
     </script>
-    <script>
-        // When the user clicks on div, open the popup
-        function myFunction() {
-          var popup = document.getElementById("myPopup");
-          popup.classList.toggle("show");
-        }
-        </script>
 </body>
 </html>
