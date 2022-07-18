@@ -8,8 +8,8 @@
   <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
   <meta name="author" content="elemis">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <title>Sandbox - Modern & Multipurpose Bootstrap 5 Template</title>
-  <link rel="shortcut icon" href="{{ asset('template/assets/img/favicon.png') }}">
+  <title> MOB-FT</title>
+  <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMob.png') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
@@ -299,16 +299,6 @@
       });
 
     }
-
-    window.onload = function() {
-        if (screen.width < 1000) {
-            var mvp = document.getElementById('vp');
-            mvp.setAttribute('content','user-scalable=no,width=1000');
-        }
-    }
-
-    
-    
     </script>
 </body>
 

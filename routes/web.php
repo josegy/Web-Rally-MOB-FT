@@ -53,3 +53,7 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard2', function () {
     return view('admin.dashboard2');
 });
+
+Route::get('/pemain', function () {
+    return view('pemain.dashboardPemain');
+});
