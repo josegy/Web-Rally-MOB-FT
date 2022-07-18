@@ -25,6 +25,9 @@ Route::group(
         // Dashboard
         Route::get('/', 'Penpos\DashboardController@index')->name('index');
         Route::post('/cekPosSingle', 'Penpos\DashboardController@cekPosSingle')->name('cekPosSingle');
+        Route::post('/ubahStatusPosBattle', 'Penpos\DashboardController@ubahStatusPosBattle')->name('ubahStatusPosBattle');
+        Route::post('/cekPemainBattle', 'Penpos\DashboardController@cekPemainBattle')->name('cekPemainBattle');
+        Route::post('/resultGame', 'Penpos\DashboardController@resultGame')->name('resultGame');
     }
 );
 

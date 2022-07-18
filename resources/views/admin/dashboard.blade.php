@@ -37,7 +37,13 @@
                   <li class="nav-item dropdown language-select">
                     <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nama Admin</a>
                     <ul class="dropdown-menu">
-                      <li class="nav-item"><a class="dropdown-item" href="#">Keluar</a></li>
+                      <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                        </form>
+                      </li>
                     </ul>
                   </li>
                 </ul>
@@ -80,13 +86,13 @@
                     <br>
                     <div>
                         <form action="" method="GET">
-                            <button type="button" class="btn btn-success" name="btnMenang" id="btn_menang" disabled>Menang</button>
-                            <button type="button" class="btn btn-danger" name="btnKalah" id="btn_kalah" disabled>Kalah</button>
+                            <button type="button" class="btn btn-primary" id="btn_menang" disabled onclick="resultGame('Menang')">Menang</button>
+                            <button type="button" class="btn btn-danger" id="btn_kalah" disabled onclick="resultGame('Kalah')">Kalah</button>
                         </form>
                     </div>
                 </div>
                 <div class="card-footer text-muted pos-penuh">
-                  <span class="font-color" id="status_pos">{{ strtoupper($penpos->status)}}</span>
+                  <span class="font-color" id="status_pos">{{ $penpos->status}}</span>
               </div>
             </div>
         </div>
@@ -236,14 +242,62 @@
               'pemain1_id': $('#pemain_id').val(),
           },
           success: function (data) {
-            if (data.status != ""){
+            if (data.status != "error"){
+              //Update status pos di dashboard
               $('#status_pos').html(data.penpos.status);
+              //Hapus disabled pada button menang/kalah
               $('#btn_menang').attr('disabled',false);
               $('#btn_kalah').attr('disabled',false);
+              
+              // Kunci dropdown listnya 
+              $('#pemain_id').attr('disabled', true);
             }
+            else{
+              alert(data.msg);
+              $('#cekPos').attr('disabled', false);
+            }
+          }
+      });
+    }
+
+    function resultGame($hasil) {
+      let pemain_click = $('#pemain_id').val();
+
+      $.ajax({
+          type: 'POST',
+          url: "{{ route('penpos.resultGame') }}",
+          data:{
+              '_token': '<?php echo csrf_token(); ?>',
+              'pemain1_id': pemain_click,
+              'status_game': $hasil,
+          },
+          success: function (data) {
+            if (data.status != "error"){
+              //Update dropdown box nya
+              var option_pemain = `<option value="" hidden selected>-- Pilih Nama Pemain --</option>`;
+              $.each(data.all_pemain, (key, pemain) => {
+                option_pemain += `<option value=${pemain.id}>${pemain.name}</option>`;
+              });
+              $('#pemain_id').html(option_pemain);
+
+              // Buka kunci drop downnya
+              $('#pemain_id').attr('disabled', false);
+              
+              //Kunci button menang kalah
+              $('#btn_menang').attr('disabled',true);
+              $('#btn_kalah').attr('disabled',true);
+
+              //Perbaruhi status penposnya
+              $('#status_pos').html(data.penpos.status);
+            }
+            else{
+              alert(data.msg);
+            }
+            // Buka kunci pada button cek
             $('#cekPos').attr('disabled', false);
           }
       });
+
     }
 
     window.onload = function() {

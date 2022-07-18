@@ -8,6 +8,7 @@
   <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
   <meta name="author" content="elemis">
   <title>Sandbox - Modern & Multipurpose Bootstrap 5 Template</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="shortcut icon" href="{{ asset('template/assets/img/favicon.png') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
@@ -36,7 +37,13 @@
                   <li class="nav-item dropdown language-select">
                     <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nama Admin</a>
                     <ul class="dropdown-menu">
-                      <li class="nav-item"><a class="dropdown-item" href="#">Keluar</a></li>
+                      <li class="nav-item">
+                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                        </form>
+                      </li>
                     </ul>
                   </li>
                 </ul>
@@ -63,16 +70,18 @@
                                     <label> <h3>Nama Tim 1 :</h3></label>
                                 </div>
                                 <div class="col-md-5">
-                                    <select name="namaTim" class="form-select" required>
-                                        <option value="" hidden>Pilih Tim</option>
-                                        <option value="Tim1">Tim 1</option>
-                                        <option value="Tim2">Tim 2</option>
-                                        <option value="Tim3">Tim 3</option>
-                                    </select>
+                                  <select name="namaTim" id="pemain1_id" class="form-select" required>
+                                    <option value="" hidden>-- Pilih Nama Pemain --</option>
+                                    @foreach ($all_pemain as $pemain)
+                                        <option value="{{ $pemain->id }}">
+                                            {{ $pemain->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 </div>
                                 <div class="col-md-3 text-start">
                                     <form action="">
-                                        <button type="button" class="btn btn-success" name="btnCheck1">Check</button>
+                                        <button type="button" class="btn btn-success" id='cekPemain1' validasi="0" onclick='cekPosBattle(1)'>Check</button>
                                     </form>
                                 </div>
                             </div>
@@ -86,16 +95,18 @@
                                     <label> <h3>Nama Tim 2 :</h3></label>
                                 </div>
                                 <div class="col-md-5">
-                                    <select name="namaTim" class="form-select" required>
-                                        <option value="" hidden>Pilih Tim</option>
-                                        <option value="Tim1">Tim 1</option>
-                                        <option value="Tim2">Tim 2</option>
-                                        <option value="Tim3">Tim 3</option>
-                                    </select>
+                                  <select name="namaTim" id="pemain2_id" class="form-select" required>
+                                    <option value="" hidden>-- Pilih Nama Pemain --</option>
+                                    @foreach ($all_pemain as $pemain)
+                                        <option value="{{ $pemain->id }}">
+                                            {{ $pemain->name }}
+                                        </option>
+                                    @endforeach
+                                  </select>
                                 </div>
                                 <div class="col-md-3 text-start">
                                     <form action="">
-                                        <button type="button" class="btn btn-success" name="btnCheck2">Check</button>
+                                        <button type="button" class="btn btn-success" validasi="0" id='cekPemain2' onclick='cekPosBattle(2)'>Check</button>
                                     </form>
                                 </div>
                             </div>
@@ -103,15 +114,16 @@
                     </div>
                     <div>
                         <form action="" method="GET">
-                            <button type="button" class="btn btn-primary" name="btnMenang">Menang</button>
-                            <button type="button" class="btn btn-danger" name="btnKalah">Kalah</button>
-                            <button type="button" class="btn btn-warning" name="btnSeri">Seri</button>
+                            <button type="button" class="btn btn-success" onclick='updateStatus()' id="btnSubmit">Submit</button>
+                            <button type="button" class="btn btn-primary" id="btnMenang" disabled onclick="resultGame('Menang')">Menang</button>
+                            <button type="button" class="btn btn-danger" id="btnKalah" disabled onclick="resultGame('Kalah')">Kalah</button>
+                            <button type="button" class="btn btn-warning" id="btnSeri" disabled onclick="resultGame('Seri')">Seri</button>
                         </form>
                     </div>
                 </div>
                 <br>
                 <div class="card-footer text-muted pos-penuh">
-                    <span class="font-color">Status Pos</span>
+                  <span class="font-color" id="status_pos">{{ $penpos->status}}</span>
                 </div>
             </div>
         </div>
@@ -288,6 +300,130 @@
   <script src="{{ asset('template/assets/js/theme.js') }}"></script>
   <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
   <script>
+    function updateStatus() {
+      let validasi1 = $('#cekPemain1').attr('validasi');
+      let validasi2 = $('#cekPemain2').attr('validasi');
+      let totalValidasi = validasi1 + validasi2;
+      
+      $.ajax({
+          type: 'POST',
+          url: "{{ route('penpos.ubahStatusPosBattle') }}",
+          data:{
+              '_token': '<?php echo csrf_token(); ?>',
+              'totalValidasi': totalValidasi,
+              'pemain1_id': $('#pemain1_id').val(),
+              'pemain2_id': $('#pemain2_id').val(),
+          },
+          success: function (data) {
+            if (data.status != "error"){
+              //Kalau tidak error brarti status penpos full
+              $('#status_pos').html(data.penpos.status);
+              // Disabled di button menang,kalah,seri dimatikan
+              $('#btnMenang').attr('disabled',false);
+              $('#btnKalah').attr('disabled',false);
+              $('#btnSeri').attr('disabled',false);
+              // Disabled di button check diaktifkan
+              $('#cekPemain1').attr('disabled', true);
+              $('#cekPemain2').attr('disabled', true);
+
+              // Button Submit dimatikan
+              $('#btnSubmit').attr('disabled', true);
+            }
+            else{
+              alert(data.msg);
+              // Disabled di button check dimatikan
+              $('#cekPemain1').attr('disabled', false);
+              $('#cekPemain2').attr('disabled', false);
+              // Buka kunci drop downnya
+              $('#pemain1_id').attr('disabled', false);
+              $('#pemain2_id').attr('disabled', false);
+            }
+          }
+      });
+    }
+
+    function cekPosBattle($pemain) {
+      let pemain_click = '';
+
+      $('#cekPemain'+ $pemain).attr('disabled', true);
+      pemain_click = $('#pemain'+$pemain+'_id').val();
+
+      $.ajax({
+          type: 'POST',
+          url: "{{ route('penpos.cekPemainBattle') }}",
+          data:{
+              '_token': '<?php echo csrf_token(); ?>',
+              'pemain_id': pemain_click,
+          },
+          success: function (data) {
+            if (data.status != "error"){
+              // Kalau tidak error brarti status penpos menunggu lawan
+              $('#status_pos').html(data.penpos.status);
+              
+              // Kunci dropdown listnya 
+              $('#pemain'+$pemain+'_id').attr('disabled', true);
+              
+              // Set validasi
+              $('#cekPemain'+ $pemain).attr('validasi', 1);
+            }
+            else{
+              alert(data.msg);
+              $('#cekPemain'+ $pemain).attr('disabled', false);
+            }
+          }
+      });
+
+    }
+
+    function resultGame($hasil) {
+      let pemain_click = $('#pemain1_id').val();
+      let pemain_lawan = $('#pemain2_id').val();
+
+      $.ajax({
+          type: 'POST',
+          url: "{{ route('penpos.resultGame') }}",
+          data:{
+              '_token': '<?php echo csrf_token(); ?>',
+              'pemain1_id': pemain_click,
+              'pemain2_id': pemain_lawan,
+              'status_game': $hasil,
+          },
+          success: function (data) {
+            if (data.status != "error"){
+              //Update dropdown box nya
+              var option_pemain = `<option value="" hidden selected>-- Pilih Nama Pemain --</option>`;
+              $.each(data.all_pemain, (key, pemain) => {
+                option_pemain += `<option value=${pemain.id}>${pemain.name}</option>`;
+              });
+              $('#pemain1_id').html(option_pemain);
+              $('#pemain2_id').html(option_pemain);
+
+              // Disabled di button check dibuka
+              $('#cekPemain1').attr('disabled', false);
+              $('#cekPemain2').attr('disabled', false);
+              // Buka kunci drop downnya
+              $('#pemain1_id').attr('disabled', false);
+              $('#pemain2_id').attr('disabled', false);
+
+              // Button Submit dibuka
+              $('#btnSubmit').attr('disabled', false);
+
+              //Kunci button menang kalah seri
+              $('#btnMenang').attr('disabled', true);
+              $('#btnKalah').attr('disabled', true);
+              $('#btnSeri').attr('disabled', true);
+
+              //Perbaruhi status penposnya
+              $('#status_pos').html(data.penpos.status);
+            }
+            else{
+              alert(data.msg);
+            }
+          }
+      });
+
+    }
+
     window.onload = function() {
         if (screen.width < 1000) {
             var mvp = document.getElementById('vp');

@@ -10,7 +10,7 @@ class Penpos extends Model
     protected $table='penpos';
     
     public function pemains(){
-        return $this->belongsToMany(Pemain::class, 'penpos_pemain', 'pemain_id', 'penpos_id')
+        return $this->belongsToMany(Pemain::class, 'penpos_pemain', 'penpos_id', 'pemain_id')
         ->withPivot(['is_done']);
     }
 }
