@@ -9,6 +9,8 @@ use App\Penpos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Events\penposStatus;
+use Illuminate\Http\Response;
 
 class DashboardController extends Controller
 {
@@ -23,17 +25,28 @@ class DashboardController extends Controller
         $penpos->save();
 
         if ($penpos->type == "Single") {
-            return view('admin.dashboard', compact('all_pemain', 'penpos'));
+            return view('penpos.single', compact('all_pemain', 'penpos'));
         } else if ($penpos->type == "Battle") {
-            return view('admin.dashboard2', compact('all_pemain', 'penpos'));
+            return view('penpos.battle', compact('all_pemain', 'penpos'));
         }
     }
 
+    // Buat dapatin semua pemain yang belum pernah bermain di pos
     public function getAllPemain()
     {
+        // Ambil penpos yang sedang login
         $penpos = Auth::user()->penpos;
         $all_pemain = $penpos->pemains()->where('is_done', 0)->get();
         return $all_pemain;
+    }
+
+    // Buat dapatin semua pemain yang belum pernah bermain di pos dan sedang berada di posisi bermain
+    public function getAllPemainPlaying()
+    {
+        // Ambil penpos yang sedang login
+        $penpos = Auth::user()->penpos;
+        //$all_pemain_playing = $penpos->pemains()->where('is_done', 0)->where('playing',1)->get();
+        //return $all_pemain_playing;
     }
 
     //FUCNTION UNTUK CEK APAKAH PEMAIN PERNAH BERMAIN DI PENPOS SINGLE?
@@ -70,6 +83,7 @@ class DashboardController extends Controller
 
         //get penpos_pemain
         $bermain = $penpos->pemains->where('id', $pemain->id)->first();
+
         if ($bermain->pivot->is_done) {
             $status = 'error';
             $msg = 'Tim pemain ini sudah bermain di pos ' . $penpos->name;
@@ -84,10 +98,18 @@ class DashboardController extends Controller
         $penpos->status = 'PENUH';
         $penpos->save();
 
+        // UBAH status playing jadi 1 karena hendak bermain
+        //$penpos->pemains()->sync([$pemain->id => ['playing' => 0]], false);
+
         $status = 'success';
         $msg = 'Status pos berhasil diubah menjadi penuh. Permainan siap dimulai!';
 
+        //pusher
+        $penposStatus = ['penpos' => $penpos, 'status' => 'PENUH'];
+        event(new penposStatus($penposStatus));
+
         return response()->json(array(
+            "success" => true,
             'penpos' => $penpos,
             'status' => $status,
             'msg' => $msg,
@@ -134,12 +156,17 @@ class DashboardController extends Controller
 
             $status = 'success';
             $msg = 'Status pos berhasil diubah menjadi penuh. Permainan siap dimulai!';
+
+            //pusher
+            $penposStatus = ['penpos' => $penpos, 'status' => 'PENUH'];
+            event(new penposStatus($penposStatus));
         } else {
             $status = 'error';
             $msg = 'Terdapat pemain yang masih belum di validasi';
         }
 
         return response()->json(array(
+            "success" => true,
             'penpos' => $penpos,
             'status' => $status,
             'msg' => $msg,
@@ -189,13 +216,22 @@ class DashboardController extends Controller
             ), 200);
         }
 
+        // UBAH Status penpos
         $penpos->status = 'MENUNGGU LAWAN';
         $penpos->save();
+
+        // UBAH status playing jadi 1 karena hendak bermain
+        //$penpos->pemains()->sync([$pemain->id => ['playing' => 0]], false);
+
+        //pusher
+        $penposStatus = ['penpos' => $penpos, 'status' => 'MENUNGGU LAWAN'];
+        event(new penposStatus($penposStatus));
 
         $status = 'success';
         $msg = 'Status pos berhasil diubah menjadi menunggu lawan!';
 
         return response()->json(array(
+            "success" => true,
             'penpos' => $penpos,
             'status' => $status,
             'msg' => $msg,
@@ -257,6 +293,9 @@ class DashboardController extends Controller
                 $pemain1->kartus()->attach($kartuKalah->id);
                 $msg = 'Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
             }
+            // UBAH status playing jadi 0 karena sudah selesai bermain
+            // $penpos->pemains()->sync([$pemain1->id => ['playing' => 0]], false);
+
             // UBAH Status pemain_penpos menjadi done (1)
             $penpos->pemains()->sync([$pemain1->id => ['is_done' => 1]], false);
         } else if ($penpos->type == "Battle") {
@@ -286,6 +325,10 @@ class DashboardController extends Controller
                 $msg += 'Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
             }
             $pemain2->save();
+            // UBAH status playing jadi 0 karena sudah selesai bermain
+            // $penpos->pemains()->sync([$pemain1->id => ['playing' => 0]], false);
+            // $penpos->pemains()->sync([$pemain2->id => ['playing' => 0]], false);
+
             // UBAH Status pemain_penpos menjadi done (1)
             $penpos->pemains()->sync([$pemain1->id => ['is_done' => 1]], false);
             $penpos->pemains()->sync([$pemain2->id => ['is_done' => 1]], false);
@@ -297,13 +340,78 @@ class DashboardController extends Controller
         $penpos->status = 'OPEN';
         $penpos->save();
 
+        //pusher
+        $penposStatus = ['penpos' => $penpos, 'status' => 'OPEN'];
+        event(new penposStatus($penposStatus));
+
         $status = 'success';
 
         $all_pemain = $this->getAllPemain();
 
         return response()->json(array(
-            'penpos'=> $penpos,
-            'all_pemain'=> $all_pemain,
+            "success" => true,
+            'penpos' => $penpos,
+            'all_pemain' => $all_pemain,
+            'status' => $status,
+            'msg' => $msg,
+        ), 200);
+    }
+
+    public function resetPlaying(Request $request)
+    {
+        $msg = '';
+        $status = '';
+        // Ambil penpos yang login
+        $penpos = Auth::user()->penpos;
+        // Ambil penpos yang mau reset
+        $pemain = Pemain::find($request['pemain_id']);
+        $totalValidasi = '';
+
+        //Cek apakah pemainnya ada atau tidak
+        if ($pemain == null) {
+            $status = 'error';
+            $msg = 'Pemain yang dimasukan tidak valid';
+
+            return response()->json(array(
+                'status' => $status,
+                'msg' => $msg,
+            ), 200);
+        }
+
+
+        if ($penpos->type == "Single") {
+            // Langsung ubah status penpos jadi OPEN
+            $penpos->status = 'OPEN';
+        } else if ($penpos->type == "Battle") {
+            $totalValidasi = $request['totalValidasi'];
+            // CEK totalValidasi 
+            // kalau 0 dan 0 berarti dua-duanya reset
+            if($totalValidasi == "00"){
+                $penpos->status = 'OPEN';
+            }
+            // Kasus kalau salah satu minta reset tapi yang satunya tetap
+            else if ($totalValidasi == "01" || $totalValidasi == "10"){
+                $penpos->status = 'MENUNGGU LAWAN';
+            }
+        }
+
+        // Simpan ke db statusnya
+        $penpos->save();
+
+        // UBAH data pemain_penpos di bagian playing jadi 0
+        // $penpos->pemains()->sync([$pemain->id => ['playing' => 0]], false);
+
+        // Ambil data all_pemain dan all_pemain_playing
+        $all_pemain = $this->getAllPemain();
+        // $all_pemain_playing = $this->getAllPemainPlaying();
+
+        $status = 'success';
+        $msg = 'Berhasil melakukan reset playing';
+
+        return response()->json(array(
+            'penpos' => $penpos,
+            'all_pemain' => $all_pemain,
+            // 'all_pemain_playing' => $all_pemain_playing,
             'status' => $status,
             'msg' => $msg,
         ), 200);

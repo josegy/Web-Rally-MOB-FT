@@ -46,14 +46,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/dashboard2', function () {
-    return view('admin.dashboard2');
-});
-
 Route::get('/pemain', function () {
     return view('pemain.dashboardPemain');
 });

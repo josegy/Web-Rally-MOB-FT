@@ -5,15 +5,6 @@
     }
 }
 
-.pos-kosong {
-background-color: green;
-}
-.pos-penuh {
-background-color: red;
-}
-.pos-menunggu {
-background-color: yellow;
-}
 .font-color{
 color: white;
 font-weight: bold;
@@ -43,8 +34,6 @@ h1 {
 
 	font-size: 3em;
 	color: #444444;
-
-	height: 100vh;
 }
 
 .fab-container {
@@ -59,8 +48,7 @@ h1 {
 	width: 50px;
 	height: 50px;
 	border-radius: 100%;
-	background: #016fb9;
-
+	background: #54a8c7;
 	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
@@ -74,14 +62,13 @@ h1 {
 	justify-content: center;
 
 	height: 100%;
-	font-size: 25px;
 	color: #ffffff;
 }
 
 .fab {
 	width: 60px;
 	height: 60px;
-	background: blue;
+	background: #3f78e0;
 }
 
 .fab-options {
@@ -121,4 +108,10 @@ h1 {
 	color: #ffffff;
 	box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 	margin-right: 10px;
+}
+
+.kartu-potongan {
+	height: 100px;
+	object-fit: cover;
+	object-position: 0 0;
 }
