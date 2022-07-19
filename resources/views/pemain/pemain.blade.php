@@ -117,6 +117,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
+                    <h5>Pilih Kartu:</h5>
+                    <select id="selectKartu">
+                        @foreach ($selectKartu as $sk)
+                            <option value="{{ $sk->namaKartu }}">{{ str_replace('_', ' ', $sk->namaKartu) }}
+                            </option>
+                        @endforeach
+                    </select><br><br>
+                    <h5>Pilih Jenis:</h5>
                     <select id="jenis">
                         <option value="angka">Angka</option>
                         <option value="simbol">Simbol</option>
@@ -151,6 +159,8 @@
                     console.log(jumlahPotongan);
                     console.log(jumlahKartu);
 
+                    $('#selectKartu').html(data.selectKartu);
+
                     if (jumlahPotongan < 1) {
                         $('#spesial').prop('disabled', true);
                         $('#random').prop('disabled', true);
@@ -171,6 +181,10 @@
                         }
                         $('#pilih').prop('disabled', true);
                         console.log('masuk 5');
+                    }
+
+                    if (jumlahKartu < 1) {
+                        $('#spesial').prop('disabled', true);
                     }
 
                     $('#tukar').modal('show');
@@ -238,12 +252,17 @@
                 url: "{{ route('pemain.tukar') }}",
                 data: {
                     '_token': '<?php echo csrf_token(); ?>',
-                    'tipe': 'spesial'
+                    'tipe': 'spesial',
+                    'kartu': $('#selectKartu').val(),
+                    'specialCard': $('#specialCard').val()
                 },
                 success: function(data) {
                     // alert('success');
-                    alert(data.card);
+                    console.log(data.card);
+                    let cardName = data.card[0].name.replace('_', ' ');
 
+                    $('#detailKartu').text(cardName);
+                    $('#notif').modal('show');
                 },
                 error: function() {
                     alert('error');
