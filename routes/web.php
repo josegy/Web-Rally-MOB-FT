@@ -28,6 +28,7 @@ Route::group(
         Route::post('/ubahStatusPosBattle', 'Penpos\DashboardController@ubahStatusPosBattle')->name('ubahStatusPosBattle');
         Route::post('/cekPemainBattle', 'Penpos\DashboardController@cekPemainBattle')->name('cekPemainBattle');
         Route::post('/resultGame', 'Penpos\DashboardController@resultGame')->name('resultGame');
+        Route::post('/resetPlaying', 'Penpos\DashboardController@resetPlaying')->name('resetPlaying');
     }
 );
 

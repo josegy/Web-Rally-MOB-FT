@@ -17,6 +17,6 @@ class Pemain extends Model
     public function penpos()
     {
         return $this->belongsToMany(Penpos::class, 'penpos_pemain', 'pemain_id', 'penpos_id')
-            ->withPivot(['is_done']);
+            ->withPivot(['is_done','playing']);
     }
 }

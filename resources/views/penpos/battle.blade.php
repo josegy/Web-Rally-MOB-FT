@@ -13,17 +13,26 @@
             </div>
             <div class="col-auto mx-3">
               <select name="namaTim" id="pemain1_id" class="form-select" required>
-                <option value="" hidden>-- Pilih Nama Pemain --</option>
+                @if (count($all_pemain_playing) != 0)
+                <option value="" >-- Pilih Nama Pemain Playing--</option>
+                @foreach ($all_pemain_playing as $pemainPlaying)
+                <option value="{{ $pemainPlaying->id }}">
+                  {{ $pemainPlaying->name }}
+                </option>
+                @endforeach                 
+                @endif
+                <option value="" >-- Pilih Nama Pemain --</option>
                 @foreach ($all_pemain as $pemain)
-                    <option value="{{ $pemain->id }}">
-                        {{ $pemain->name }}
-                    </option>
+                <option value="{{ $pemain->id }}">
+                  {{ $pemain->name }}
+                </option>
                 @endforeach
               </select>
             </div>
             <div class="col-auto">
               <form action="">
-                <button type="button" class="btn btn-primary" id='cekPemain1' name="btnSubmit" onclick='cekPosBattle(1)'>Cek</button>
+                <button type="button" class="btn btn-primary" id='cekPemain1' validasi="0" name="btnSubmit" onclick='cekPosBattle(1)'>Cek</button>
+                <button type="button" class="btn btn-primary" id='resetPos1' onclick='resetPlaying(1)'>Reset</button>
               </form>
             </div>
           </div>
@@ -33,17 +42,26 @@
             </div>
             <div class="col-auto mx-3">
               <select name="namaTim" id="pemain2_id" class="form-select" required>
-                <option value="" hidden>-- Pilih Nama Pemain --</option>
+                @if (count($all_pemain_playing) != 0)
+                <option value="" >-- Pilih Nama Pemain Playing--</option>
+                @foreach ($all_pemain_playing as $pemainPlaying)
+                <option value="{{ $pemainPlaying->id }}">
+                  {{ $pemainPlaying->name }}
+                </option>
+                @endforeach                      
+                @endif
+                <option value="" >-- Pilih Nama Pemain --</option>
                 @foreach ($all_pemain as $pemain)
-                    <option value="{{ $pemain->id }}">
-                        {{ $pemain->name }}
-                    </option>
+                <option value="{{ $pemain->id }}">
+                  {{ $pemain->name }}
+                </option>
                 @endforeach
               </select>
             </div>
             <div class="col-auto">
               <form action="">
-                <button type="button" class="btn btn-primary" id='cekPemain2' name="btnSubmit" onclick='cekPosBattle(2)'>Cek</button>
+                <button type="button" class="btn btn-primary" id='cekPemain2' validasi="0" name="btnSubmit" onclick='cekPosBattle(2)'>Cek</button>
+                <button type="button" class="btn btn-primary" id='resetPos2' onclick='resetPlaying(2)'>Reset</button>
               </form>
             </div>
           </div>
@@ -105,11 +123,27 @@
             </div>
         </div>
         <br>
-        @if ($penpos->status == "OPEN")
-        <div class="card-footer text-muted bg-red">
-            <span class="font-color" id="status_pos">Status Pos: Kosong</span>
+        @if ($penpos->status == "KOSONG")
+        @php
+            $warna = "card-footer text-muted bg-red";    
+        @endphp
+        @elseif ($penpos->status == "PENUH")
+        @php
+            $warna = "card-footer text-muted bg-green";
+        @endphp
+        @else
+        @php
+            $warna = "card-footer text-muted bg-yellow";
+        @endphp
+        @endif
+        <div class="{{$warna}}" id='alertPos'>
+            <span class="font-color" id="status_pos">Status Pos: {{$penpos->status}}</span>
         </div>
-        @elseif ($penpos->status == "CLOSE")
+        {{-- @if ($penpos->status == "KOSONG")
+        <div class="card-footer text-muted bg-red">
+            <span class="font-color" id="status_pos">Status Pos: Open</span>
+        </div>
+        @elseif ($penpos->status == "PENUH")
         <div class="card-footer text-muted bg-green">
           <span class="font-color" id="status_pos">Status Pos: Penuh</span>
         </div>
@@ -117,7 +151,7 @@
         <div class="card-footer text-muted bg-yellow">
           <span class="font-color" id="status_pos">Status Pos: Menunggu Lawan</span>
         </div>
-        @endif
+        @endif --}}
     </div>
 </div>
 </section>
@@ -140,8 +174,18 @@
         },
         success: function (data) {
           if (data.status != "error"){
-            //Kalau tidak error brarti status penpos full
-            $('#status_pos').html(data.penpos.status);
+            //Update status pos di dashboard
+            if (data.penpos.status == "KOSONG"){
+              $('#alertPos').attr('class','card-footer text-muted bg-red');
+            }
+            else if (data.penpos.status == "PENUH"){
+              $('#alertPos').attr('class','card-footer text-muted bg-green');
+            }
+            else{
+              $('#alertPos').attr('class','card-footer text-muted bg-yellow');
+            }
+            $('#status_pos').html("Status Pos: " + data.penpos.status);
+
             // Disabled di button menang,kalah,seri dimatikan
             $('#btnMenang').attr('disabled',false);
             $('#btnKalah').attr('disabled',false);
@@ -161,6 +205,11 @@
             // Buka kunci drop downnya
             $('#pemain1_id').attr('disabled', false);
             $('#pemain2_id').attr('disabled', false);
+            // Set validation jadi 0 smua
+            $('#cekPemain1').attr('validasi', 0);
+            $('#cekPemain2').attr('validasi', 0);
+
+            //Penpos harus cek validasi lagi
           }
         }
     });
@@ -181,8 +230,17 @@
         },
         success: function (data) {
           if (data.status != "error"){
-            // Kalau tidak error brarti status penpos menunggu lawan
-            $('#status_pos').html(data.penpos.status);
+            //Update status pos di dashboard
+            if (data.penpos.status == "KOSONG"){
+              $('#alertPos').attr('class','card-footer text-muted bg-red');
+            }
+            else if (data.penpos.status == "PENUH"){
+              $('#alertPos').attr('class','card-footer text-muted bg-green');
+            }
+            else{
+              $('#alertPos').attr('class','card-footer text-muted bg-yellow');
+            }
+            $('#status_pos').html("Status Pos: " + data.penpos.status);
             
             // Kunci dropdown listnya 
             $('#pemain'+$pemain+'_id').attr('disabled', true);
@@ -197,6 +255,100 @@
         }
     });
 
+  }
+
+  function resetPlaying($pemain) {
+    let pemain_click = '';
+    
+    let validasi1 = $('#cekPemain1').attr('validasi');
+    let validasi2 = $('#cekPemain2').attr('validasi');
+    let totalValidasi = validasi1 + validasi2;
+
+    // Set validasi jadi 0
+    $('#cekPemain'+ $pemain).attr('validasi', 0);
+
+    //Disable button yang trigger resetPlaying
+    $('#resetPos'+ $pemain).attr('disabled', true);
+
+    //Ambil value pemain_id yang click ini
+    pemain_click = $('#pemain'+$pemain+'_id').val();
+
+    $.ajax({
+      type: 'POST',
+      url: "{{ route('penpos.resetPlaying') }}",
+      data:{
+          '_token': '<?php echo csrf_token(); ?>',
+          'pemain_id': pemain_click,
+          'totalValidasi': totalValidasi,
+      },
+      success: function (data) {
+	      // JANGAN LUPA TAMBAHIN IF DATA.STATUS != ERROR
+        if (data.status != "error"){
+          // Deklarasi variabel option_pemain
+          var option_pemain = '';	
+
+          // Kunci button menang kalah
+          $('#btnMenang').attr('disabled',true);
+          $('#btnSeri').attr('disabled',true);
+          $('#btnKalah').attr('disabled',true);
+    
+          //Update status pos di dashboard
+          if (data.penpos.status == "KOSONG"){
+            $('#alertPos').attr('class','card-footer text-muted bg-red');
+          }
+          else if (data.penpos.status == "PENUH"){
+            $('#alertPos').attr('class','card-footer text-muted bg-green');
+          }
+          else{
+            $('#alertPos').attr('class','card-footer text-muted bg-yellow');
+          }
+          $('#status_pos').html("Status Pos: " + data.penpos.status);
+
+          // Buka kunci button Cek
+          $('#cekPemain'+$pemain).attr('disabled', false);
+
+          // Buka kunci button submit
+          $('#btnSubmit').attr('disabled', false);
+
+          // Update drop down
+          // CEK apakah masih ada yang playing?
+          if(data.total != 0)
+          {
+            option_pemain += `<option value="" selected>-- Pilih Nama Pemain Playing --</option>`;
+            $.each(data.all_pemain_playing, (key, pemain_playing) => {
+              option_pemain += `<option value=${pemain_playing.id}>${pemain_playing.name}</option>`;
+            });
+          }
+          option_pemain += `<option value="" selected>-- Pilih Nama Pemain --</option>`;
+          $.each(data.all_pemain, (key, pemain) => {
+            option_pemain += `<option value=${pemain.id}>${pemain.name}</option>`;
+          });
+          
+          if(data.total == 0)
+          {
+            // Isikan dropdown box nya
+            $('#pemain1_id').html(option_pemain);
+            $('#pemain2_id').html(option_pemain);
+            // Buka kunci dropdown
+            $('#pemain1_id').attr('disabled', false);
+            $('#pemain2_id').attr('disabled', false);
+          }
+          else{
+            // Isikan dropdown box nya
+            $('#pemain'+$pemain+'_id').html(option_pemain);
+            // Buka kunci dropdown
+            $('#pemain'+$pemain+'_id').attr('disabled', false);
+          }
+          
+        }
+        else{
+          alert(data.msg);
+        }
+        
+        // Buka kunci button resetnya
+        $('#resetPos'+ $pemain).attr('disabled', false);
+      }
+    });
   }
 
   function resultGame($hasil) {
@@ -237,8 +389,17 @@
             $('#btnKalah').attr('disabled', true);
             $('#btnSeri').attr('disabled', true);
 
-            //Perbaruhi status penposnya
-            $('#status_pos').html(data.penpos.status);
+            //Update status pos di dashboard
+            if (data.penpos.status == "KOSONG"){
+              $('#alertPos').attr('class','card-footer text-muted bg-red');
+            }
+            else if (data.penpos.status == "PENUH"){
+              $('#alertPos').attr('class','card-footer text-muted bg-green');
+            }
+            else{
+              $('#alertPos').attr('class','card-footer text-muted bg-yellow');
+            }
+            $('#status_pos').html("Status Pos: " + data.penpos.status);
           }
           else{
             alert(data.msg);
