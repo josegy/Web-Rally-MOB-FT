@@ -37,7 +37,7 @@
     <div class="content-wrapper">
         {{-- Navbar --}}
         <header class="wrapper bg-soft-primary">
-            <nav class="navbar navbar-expand-lg center-nav transparent navbar-light pt-5">
+            <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-5">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
                         <a href="#">
@@ -58,7 +58,7 @@
                             <li class="nav-item dropdown language-select">
                                 <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">{{ Auth::user()->pemain->name }}</a>
+                                    aria-expanded="false">{{ $user->name }}</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a href="{{ route('logout') }}" class="dropdown-item text-danger"
@@ -80,6 +80,7 @@
     </div>
 
     <section class="wrapper bg-soft-primary text-center" style="overflow: auto">
+        <h2 class="fs-44">MAP RALLY</h2>
         <img src="{{ asset('asset/img/FakultasTeknik(Isometric)-01.png') }}" alt="Map" usemap="#image-map"
             width="1200" />
 
@@ -98,14 +99,10 @@
             <area target="_blank" alt="Lorong TF" title="Lorong TF" href="https://www.google.com" coords="531,391,11"
                 shape="circle" />
             <area target="_blank" alt="Boulevard" title="Boulevard" href="https://www.google.com" coords="738,390,11"
-                shape="circle" style="width: 10px; height: 10px; background-color:black; border-radius: 10px;"/>
+                shape="circle" style="width: 10px; height: 10px; background-color:black; border-radius: 10px;" />
         </map>
-        <a class="btn btn-primary rounded-pill mt-5" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus"
-            data-bs-placement="right" title="Sample Title" data-bs-content="Top popover">
-            Popover on top
-        </a>
-        <button type="button" id="tukarKartu" class="btn btn-primary rounded-pill mt-5" tabindex="0">Redeem
-            Card</button>
+        {{-- <button type="button" id="tukarKartu" class="btn btn-primary rounded-pill mt-5" tabindex="0">Redeem
+            Card</button> --}}
     </section>
 
     {{-- Modal Kartu --}}
@@ -115,138 +112,32 @@
                 <div class="modal-body">
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-3">
-                        <h3>KARTU UTUH</h3>
-                        <ul>
+                        <h3>Kartu Utuh</h3>
+                        <div id="listUtuh" class="owl-carousel owl-theme mt-2">
                             @for ($x = 0; $x < count($utuh); $x++)
-                                <li>
-                                    <h4>Nama: {{ str_replace('_', ' ', $utuh[$x]->namaKartu) }}</h4>
-                                    <img src="{{ asset('/asset/img/' . $utuh[$x]->gambar . '.png') }}"
-                                        alt="">
-                                </li>
+                                <div class="item">
+                                    <div class="card border-0 shadow">
+                                        <img src="{{ asset('/asset/img/' . $utuh[$x]->gambar . '.png') }}"
+                                            class="card-img-top">
+                                    </div>
+                                    <h6>{{ str_replace('_', ' ', $utuh[$x]->namaKartu) }}</h6>
+                                </div>
                             @endfor
-                        </ul>
-                        {{-- dipunyaku g muncul kartu e klo pake bawah jadi ku comment --}}
-                        <div class="owl-carousel owl-theme mt-2">
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-keriting-08.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>1</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-12.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>2</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-13.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>3</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-14.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>4</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-09.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>5</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-10.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>6</h6>
-                            </div>
-                            <!-- item ends -->
                         </div>
                         <hr class="my-8">
-                        <h3>KARTU PECAHAN</h3>
-                        <ul>
+                        <h3>Kartu Pecahan</h3>
+                        <div id="listPotongan" class="owl-carousel owl-theme mt-2">
                             @for ($x = 0; $x < count($potongan); $x++)
-                                <li>
-                                    <h4>Nama: {{ str_replace('_', ' ', $potongan[$x]->namaKartu) }}</h4>
-                                    <img src="{{ asset('/asset/img/' . $potongan[$x]->gambar . '.png') }}"
-                                        alt="">
-                                </li>
+                                <div class="item">
+                                    <div class="card border-0 shadow ">
+                                        <img src="{{ asset('/asset/img/' . $potongan[$x]->gambar . '.png') }}"
+                                            class="card-img-top kartu-potongan">
+                                    </div>
+                                    <h6>{{ str_replace('_', ' ', $potongan[$x]->namaKartu) }}</h6>
+                                </div>
                             @endfor
-                        </ul>
-                        {{-- <div class="owl-carousel owl-theme mt-2"> --}}
-                        {{-- <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-06.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>1</h6>
-                            </div>
                             <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-07.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>2</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-08.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>3</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-09.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>4</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-10.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>5</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-11.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>6</h6>
-                            </div>
-                            <!-- item ends --> --}}
-                        {{-- </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -257,24 +148,28 @@
     {{-- Modal Mekanisme --}}
     <div class="modal fade" id="modal-03" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content text-justify">
-                <div class="modal-body">
+            <div class="modal-content">
+                <div class="modal-body" style="text-align: justify">
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="row">
-                        <h3 style="text-align: center">Mekanisme Penukaran Kartu</h3>
-                        <div>
-                            <ol>
-                                <li>Potongan kartu dapat ditukarkan pada Dealers Table.</li>
-                                <li>Potongan kartu yang diperoleh dapat ditukarkan dengan kartu acak apabila menukarkan
-                                    3 potongan kartu dan kartu yang dapat dipilih apabila 5 potongan kartu.</li>
-                                <li>Apabila ada kartu yang tidak diinginkan, dapat ditukarkan menggunakan “penukaran
-                                    spesial”. Setiap tim hanya memiliki kesempatan “penukaran spesial” sebanyak 1 kali.
-                                    Kelompok dapat memilih salah satu dari angka maupun simbol yang diinginkan dan
-                                    menggunakan 1 kartu yang tidak diinginkan dan tambahan 1 potongan kartu agar dapat
-                                    diacak.</li>
-                            </ol>
-                        </div>
+                    <h3 class="text-center">Mekanisme Penukaran Kartu</h3>
+                    <div>
+                        <ol>
+                            <li>Potongan kartu dapat ditukarkan pada Menu 'Tukar Kartu'.</li>
+                            <li>Potongan kartu yang diperoleh dapat ditukarkan dengan kartu acak apabila tim menukarkan
+                                dengan
+                                3 potongan kartu. Kartu yang ditukarkan juga dapat dipilih (angka dan simbol) apabila
+                                tim menukarkan dengan
+                                5 potongan kartu.</li>
+                            <li>Apabila ada kartu yang tidak diinginkan, kartu dapat ditukarkan menggunakan “penukaran
+                                spesial”. Setiap tim hanya memiliki kesempatan “penukaran spesial” sebanyak 1 kali.
+                                Tim dapat memilih salah satu dari angka maupun simbol yang diinginkan (contoh: ingin
+                                menukarkan
+                                berdasarkan angka atau ingin menukarkan berdasarkan simbol) dengan menukarkan 1 kartu
+                                utuh yang tidak diinginkan
+                                dan 1 potongan kartu.</li>
+                        </ol>
                     </div>
+                    <h3 class="text-center">Selamat Bermain</h3>
                 </div>
             </div>
         </div>
@@ -282,24 +177,17 @@
     {{-- End Modal Mekanisme --}}
 
     {{-- Modal Konfirmasi Tukar --}}
-    <div class="modal fade" id="tukar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="tukarLabel" aria-hidden="true">
+    <div class="modal fade" id="tukar" tabindex="-1" aria-labelledby="tukarLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="tukarLabel">Tukar Kartu</h5>
+            <div class="modal-content text-center">
+                <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body flex">
-                    <button id="random" class="btn btn-secondary" data-bs-dismiss="modal">Random</button>
-                    <button id="pilih" class="btn btn-secondary" data-bs-toggle="modal"
+                    <h3 class="modal-title mb-5" id="tukarLabel">Tukar Kartu</h3>
+                    <button id="random" class="btn btn-primary" data-bs-dismiss="modal">Random</button>
+                    <button id="pilih" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#choose">Pilih</button>
-                    <button id="spesial" class="btn btn-secondary" data-bs-toggle="modal"
+                    <button id="spesial" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#special">Spesial</button>
-                </div>
-                <div class="modal-footer">
-                    {{-- button cancel --}}
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -362,15 +250,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
-                    <img class="getSrc" src="{{ asset('/asset/img/kartu-bridge-custom-keriting-08.png') }}"
-                        alt="">
                     <h5>Pilih Kartu:</h5>
-                    <select id="selectKartu">
-                        @foreach ($selectKartu as $sk)
-                            <option value="{{ $sk->namaKartu }}">{{ str_replace('_', ' ', $sk->namaKartu) }}
-                            </option>
-                        @endforeach
-                    </select><br><br>
+                    <select id="selectKartu"> </select><br><br>
                     <h5>Pilih Jenis:</h5>
                     <select id="jenis">
                         <option value="angka">Angka</option>
@@ -393,10 +274,19 @@
 
     <div class="fab-container">
         <div class="fab fab-icon-holder">
-            <i class="fas fa-question"></i>
+            <i class="uil uil-question fs-42"></i>
         </div>
 
         <ul class="fab-options">
+            <li>
+                <span class="fab-label">Tukar Kartu</span>
+                <div class="fab-icon-holder">
+                    <i>
+                        <button type="button" id="tukarKartu" style="border: none; background-color: transparent"><i
+                                class="uil uil-exchange fs-24"></i></button>
+                    </i>
+                </div>
+            </li>
             <li>
                 <span class="fab-label">Kartu Terkumpul</span>
                 <div class="fab-icon-holder">
@@ -418,11 +308,7 @@
                     <i>
                         <a href="#" class="" style="color: white" data-bs-toggle="modal"
                             data-bs-target="#modal-03">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
-                            </svg>
+                            <i class="uil uil-info fs-26"></i>
                         </a>
                     </i>
                 </div>
@@ -437,6 +323,7 @@
 
     <script>
         $(document).ready(function() {
+            alert('test');
             $('.owl-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
@@ -460,6 +347,12 @@
 
         let special = localStorage.getItem('special');
         $('#tukarKartu').click(function() {
+            localStorage.removeItem('special');
+            // alert($('#listUtuh').find('.owl-item').length);
+            // console.log($('#listUtuh').find('.owl-item'));
+            // alert($('#listPotongan').find('.owl-item').length);
+            // console.log($('#listPotongan').find('.owl-item'));
+
             $.ajax({
                 type: 'POST',
                 url: "{{ route('pemain.check.potongan') }}",
@@ -524,6 +417,23 @@
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
+                    $('#listUtuh')
+                        .trigger('add.owl.carousel', [
+                            `<div class="item">
+                            <div class="card border-0 shadow ">
+                                <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
+                            </div>
+                            <h6>${data.utuh.namaKartu}</h6>
+                        </div>`
+                        ]).trigger('refresh.owl.carousel');
+
+                    $("#listPotongan").trigger('remove.owl.carousel', [0]).trigger(
+                        'refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [1]).trigger(
+                        'refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [2]).trigger(
+                        'refresh.owl.carousel');
+
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },
@@ -549,6 +459,27 @@
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
+                    $('#listUtuh')
+                        .trigger('add.owl.carousel', [
+                            `<div class="item">
+                            <div class="card border-0 shadow ">
+                                <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
+                            </div>
+                            <h6>${data.utuh.namaKartu}</h6>
+                        </div>`
+                        ]).trigger('refresh.owl.carousel');
+
+                    $("#listPotongan").trigger('remove.owl.carousel', [0]).trigger(
+                        'refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [1]).trigger(
+                        'refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [2]).trigger(
+                        'refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [3]).trigger(
+                        'refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [4]).trigger(
+                        'refresh.owl.carousel');
+
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },
@@ -561,20 +492,36 @@
 
         // kalau konfirmasi spesial diklik
         $('#konfirmasi_spesial').click(function() {
-            localStorage.setItem('special', 'true');
+            // localStorage.setItem('special', 'true');
+            alert($('#selectKartu').val());
             $.ajax({
                 type: 'POST',
                 url: "{{ route('pemain.tukar') }}",
                 data: {
                     '_token': '<?php echo csrf_token(); ?>',
-                    'tipe': 'spesial',
-                    'kartu': $('#selectKartu').val(),
+                    'tipe': 'spesial'
+                    'kartukey': $('#selectKartu').val(),
                     'specialCard': $('#specialCard').val()
                 },
                 success: function(data) {
                     // alert('success');
                     console.log(data.card);
                     let cardName = data.card.name.replace('_', ' ');
+
+                    $('#listUtuh')
+                        .trigger('add.owl.carousel', [
+                            `<div class="item">
+                            <div class="card border-0 shadow ">
+                                <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
+                            </div>
+                            <h6>${data.utuh.namaKartu}</h6>
+                        </div>`
+                        ]).trigger('refresh.owl.carousel');
+
+                    $("#listUtuh").trigger('remove.owl.carousel', [data.key]).trigger('refresh.owl.carousel');
+
+                    $("#listPotongan").trigger('remove.owl.carousel', [0]).trigger(
+                        'refresh.owl.carousel');
 
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
