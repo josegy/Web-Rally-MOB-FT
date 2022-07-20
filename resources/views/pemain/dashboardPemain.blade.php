@@ -434,7 +434,6 @@
     <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('template/assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('template/assets/js/owl.carousel.min.js') }}"></script>
-    
 
     <script>
         $(document).ready(function() {
