@@ -37,7 +37,8 @@ Route::group(
     ['prefix' => 'pemain', 'as' => 'pemain.'],
     function () {
         // Dashboard
-        Route::get('/', 'PemainController@dashboard')->name('dashboard');
+        Route::get('/', 'PemainController@dashboard')->name('dashboardPemain');
+        Route::get('/x', 'PemainController@dashboard1')->name('dashboard');
         Route::post('/changejenis', 'PemainController@changeJenis')->name('change');
         Route::post('/check/potongan', 'KartuController@checkPotongan')->name('check.potongan');
         Route::post('/tukar', 'KartuController@tukar')->name('tukar');
@@ -47,6 +48,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/pemain', function () {
-    return view('pemain.dashboardPemain');
-});

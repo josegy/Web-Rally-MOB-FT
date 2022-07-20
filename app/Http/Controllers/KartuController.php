@@ -126,8 +126,8 @@ class KartuController extends Controller
             $kartu = DB::table('kartu')
                 ->where('name', 'like', '%' . $specialCard . '%')
                 ->get();
-                
-            $count = count($kartu)-1;
+
+            $count = count($kartu) - 1;
             $key = rand(0, $count);
             $card = $kartu[$key];
 
@@ -137,9 +137,35 @@ class KartuController extends Controller
             ]);
         }
 
+        $utuh = DB::table('kartu_pemain as kp')
+            ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
+            ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
+            ->where('pemain_id', '=', 1)
+            ->where('kartu_id', '!=', 25)
+            ->get();
+
+        $potongan = DB::table('kartu_pemain as kp')
+            ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
+            ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
+            ->where('pemain_id', '=', 1)
+            ->where('kartu_id', '=', 25)
+            ->get();
+
+        $listUtuh = '';
+        $listPotongan = '';
+        foreach ($utuh as $u) {
+            $listUtuh .= '<li><h4 style="text-align: center;">' . str_replace('_', ' ', $u->namaKartu) . '</h4><img src="'.asset('/asset/img/' . $u->gambar . '.png').'" alt=""></li>';
+        }
+
+        foreach ($potongan as $p) {
+            $listPotongan .= '<li><h4 style="text-align: center;">' . str_replace('_', ' ', $p->namaKartu) . '</h4><img src="'.asset('/asset/img/' . $p->gambar . '.png').'" alt=""></li>';
+        }
+
         return response()->json(array(
             'success' => true,
-            'card' => $card
+            'card' => $card,
+            'listUtuh' => $listUtuh,
+            'listPotongan' => $listPotongan
         ));
     }
 }
