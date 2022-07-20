@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
+    <script src="../js/app.js"></script>
     {{-- <link rel="preload" href="{{ asset('template/assets/css/fonts/thicccboi.css') }}" as="style" onload="this.rel='stylesheet'"> --}}
 
     {{-- CDN ??? --}}
@@ -431,40 +432,32 @@
 
     <script src="{{ asset('template/assets/js/theme.js') }}"></script>
     <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../../js/app.js"></script>
+    <script src="{{ asset('template/assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('template/assets/js/owl.carousel.min.js') }}"></script>
+    
 
     <script>
-        // $(document).ready(function() {
-
-        //     alert('dar');	
-        // });
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                loop: false,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 3
+                    }
+                }
+            })
+        });
 
         /* Pusher */
-        // window.Echo.channel('penposChannel').listen('.status', (e) => {
-        //     alert('dar');
-        //     console.log(e);
-        // });
-
-        $('.owl-carousel').owlCarousel({
-            loop: false,
-            margin: 10,
-            nav: true,
-            responsive: {
-                0: {
-                    items: 2
-                },
-                600: {
-                    items: 3
-                }
-            }
-        })
+        window.Echo.channel('penposChannel').listen('.status', (e) => {
+            alert('dar');
+            console.log(e);
+        });
 
         let special = localStorage.getItem('special');
         $('#tukarKartu').click(function() {
