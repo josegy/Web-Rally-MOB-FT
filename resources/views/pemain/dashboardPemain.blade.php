@@ -426,29 +426,19 @@
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
-                    $('#listUtuh').empty();
-                    data.utuh.forEach(element => {
-                        $('#listUtuh').append(`
-                        <div class="item">
+                    $('#listUtuh')
+                    .trigger('add.owl.carousel', [
+                        `<div class="item">
                             <div class="card border-0 shadow ">
-                                <img src="{{ asset('/asset/img/${element.gambar}.png') }}"
-                                    class="card-img-top">
+                                <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
                             </div>
-                            <h6>${element.namaKartu}</h6>
-                        </div>`);
-                    });
+                            <h6>${data.utuh.namaKartu}</h6>
+                        </div>`
+                    ]).trigger('refresh.owl.carousel');
 
-                    $('#listPotongan').empty();
-                    data.potongan.forEach(element => {
-                        $('#listPotongan').append(`
-                        <div class="item">
-                            <div class="card border-0 shadow ">
-                                <img src="{{ asset('/asset/img/${element.gambar}.png') }}"
-                                    class="card-img-top kartu-potongan">
-                            </div>
-                            <h6>${element.namaKartu}</h6>
-                        </div>`);
-                    });
+                    $("#listPotongan").trigger('remove.owl.carousel', [0]).trigger('refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [1]).trigger('refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [2]).trigger('refresh.owl.carousel');
 
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');

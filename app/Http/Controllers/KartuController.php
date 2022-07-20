@@ -147,20 +147,13 @@ class KartuController extends Controller
             ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
             ->where('pemain_id', '=', $user->id)
             ->where('kartu_id', '!=', 25)
-            ->get();
-
-        $potongan = DB::table('kartu_pemain as kp')
-            ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
-            ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
-            ->where('pemain_id', '=', $user->id)
-            ->where('kartu_id', '=', 25)
-            ->get();
+            ->orderBy("kp.id", "desc")
+            ->first();
 
         return response()->json(array(
             'success' => true,
             'card' => $card,
-            'utuh' => $utuh,
-            'potongan' => $potongan
+            'utuh' => $utuh
         ));
     }
 }
