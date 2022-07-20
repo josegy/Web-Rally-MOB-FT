@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <h4>Nama Team: {{ Auth::user()->pemain->name }}</h4>
+    <h4>Nama Team: {{ $user->name }}</h4>
     <h3>Kartu</h3>
     <h4>Utuh:</h4>
     <ul id="listUtuh" style="display: flex; list-style: none">
@@ -222,6 +222,8 @@
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
+                    $('#listUtuh').html(data.listUtuh);
+                    $('#listPotongan').html(data.listPotongan);
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },
@@ -247,6 +249,8 @@
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
+                    $('#listUtuh').html(data.listUtuh);
+                    $('#listPotongan').html(data.listPotongan);
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },
@@ -274,6 +278,8 @@
                     console.log(data.card);
                     let cardName = data.card.name.replace('_', ' ');
 
+                    $('#listUtuh').html(data.listUtuh);
+                    $('#listPotongan').html(data.listPotongan);
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },

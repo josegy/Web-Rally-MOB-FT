@@ -10,6 +10,7 @@ class PemainController extends Controller
 {
     function dashboard()
     {
+        $user = Auth::user()->pemain;
         // $kartu_pemain = DB::table('kartu_pemain as kp')
         //     ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
         //     ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
@@ -27,28 +28,29 @@ class PemainController extends Controller
             ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
             ->select(DB::raw('p.name as namaPemain'), DB::raw('k.name as namaKartu'), 'k.is_full', DB::raw('k.picture as gambar'))
             ->where('k.is_full', '=', true)
-            ->where('p.id', '=', 1)
+            ->where('p.id', '=', $user->id)
             ->get();
 
         $utuh = DB::table('kartu_pemain as kp')
             ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
             ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
-            ->where('pemain_id', '=', 1)
+            ->where('pemain_id', '=', $user->id)
             ->where('kartu_id', '!=', 25)
             ->get();
 
         $potongan = DB::table('kartu_pemain as kp')
             ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
             ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
-            ->where('pemain_id', '=', 1)
+            ->where('pemain_id', '=', $user->id)
             ->where('kartu_id', '=', 25)
             ->get();
 
-        return view('pemain.dashboardPemain', compact('kartu', 'selectKartu', 'utuh', 'potongan'));
+        return view('pemain.dashboardPemain', compact('user', 'kartu', 'selectKartu', 'utuh', 'potongan'));
     }
 
     function dashboard1()
     {
+        $user = Auth::user()->pemain;
         // $kartu_pemain = DB::table('kartu_pemain as kp')
         //     ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
         //     ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
@@ -66,24 +68,24 @@ class PemainController extends Controller
             ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
             ->select(DB::raw('p.name as namaPemain'), DB::raw('k.name as namaKartu'), 'k.is_full', DB::raw('k.picture as gambar'))
             ->where('k.is_full', '=', true)
-            ->where('p.id', '=', 1)
+            ->where('p.id', '=', $user->id)
             ->get();
 
         $utuh = DB::table('kartu_pemain as kp')
             ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
             ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
-            ->where('pemain_id', '=', 1)
+            ->where('pemain_id', '=', $user->id)
             ->where('kartu_id', '!=', 25)
             ->get();
 
         $potongan = DB::table('kartu_pemain as kp')
             ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
             ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
-            ->where('pemain_id', '=', 1)
+            ->where('pemain_id', '=', $user->id)
             ->where('kartu_id', '=', 25)
             ->get();
 
-        return view('pemain.clipboardPemain', compact('kartu', 'selectKartu', 'utuh', 'potongan'));
+        return view('pemain.clipboardPemain', compact('user', 'kartu', 'selectKartu', 'utuh', 'potongan'));
     }
 
     function changeJenis(Request $request)

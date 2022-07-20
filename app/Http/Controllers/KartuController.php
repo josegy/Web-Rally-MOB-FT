@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class KartuController extends Controller
 {
     function checkPotongan()
     {
+        $user = Auth::user()->pemain;
+
         $potongan = DB::table('kartu_pemain as kp')
             ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
             ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
@@ -22,7 +25,7 @@ class KartuController extends Controller
 
         $kartu = DB::table('kartu_pemain')
             ->where('kartu_id', '!=', 25)
-            ->where('pemain_id', '=', 1)
+            ->where('pemain_id', '=', $user->id)
             ->get();
 
         $jumlahKartu = count($kartu);
@@ -32,7 +35,7 @@ class KartuController extends Controller
             ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
             ->select(DB::raw('p.name as namaPemain'), DB::raw('k.name as namaKartu'), 'k.is_full', DB::raw('k.picture as gambar'))
             ->where('k.is_full', '=', true)
-            ->where('p.id', '=', 1)
+            ->where('p.id', '=', $user->id)
             ->get();
 
         $html = '';
@@ -50,6 +53,8 @@ class KartuController extends Controller
 
     function tukar(Request $request)
     {
+        $user = Auth::user()->pemain;
+
         $tipe = $request->get('tipe');
 
         // kalau pemain pilih 'random'
@@ -59,7 +64,7 @@ class KartuController extends Controller
                 $idDelete = DB::table('kartu_pemain')
                     ->select(DB::raw('min(id) as id'))
                     ->where('kartu_id', '=', 25)
-                    ->where('pemain_id', '=', 1)
+                    ->where('pemain_id', '=', $user->id)
                     ->get();
 
                 DB::table('kartu_pemain')->where('id', '=', $idDelete[0]->id)->delete();
@@ -68,7 +73,7 @@ class KartuController extends Controller
             $idCard = rand(1, 20);
             DB::table('kartu_pemain')->insert([
                 'kartu_id' => $idCard,
-                'pemain_id' => 1
+                'pemain_id' => $user->id
             ]);
 
             $card = DB::table('kartu')
@@ -83,7 +88,7 @@ class KartuController extends Controller
                 $idDelete = DB::table('kartu_pemain')
                     ->select(DB::raw('min(id) as id'))
                     ->where('kartu_id', '=', 25)
-                    ->where('pemain_id', '=', 1)
+                    ->where('pemain_id', '=', $user->id)
                     ->get();
 
                 DB::table('kartu_pemain')->where('id', '=', $idDelete[0]->id)->delete();
@@ -97,7 +102,7 @@ class KartuController extends Controller
 
             DB::table('kartu_pemain')->insert([
                 'kartu_id' => $card[0]->id,
-                'pemain_id' => 1
+                'pemain_id' => $user->id
             ]);
         }
         // kalau pemain pilih 'spesial'
@@ -106,7 +111,7 @@ class KartuController extends Controller
             $idPotongan = DB::table('kartu_pemain')
                 ->select(DB::raw('min(id) as id'))
                 ->where('kartu_id', '=', 25)
-                ->where('pemain_id', '=', 1)
+                ->where('pemain_id', '=', $user->id)
                 ->get();
 
             DB::table('kartu_pemain')->where('id', '=', $idPotongan[0]->id)->delete();
@@ -116,7 +121,7 @@ class KartuController extends Controller
             $idKartu = DB::table('kartu_pemain as kp')
                 ->join('kartu as k', 'k.id', '=', 'kp.kartu_id')
                 ->where('k.name', 'like', '%' . $namaKartu . '%')
-                ->where('kp.pemain_id', '=', 1)
+                ->where('kp.pemain_id', '=', $user->id)
                 ->get();
 
             DB::table('kartu_pemain')->where('kartu_id', '=', $idKartu[0]->kartu_id)->delete();
@@ -133,39 +138,29 @@ class KartuController extends Controller
 
             DB::table('kartu_pemain')->insert([
                 'kartu_id' => $card->id,
-                'pemain_id' => 1
+                'pemain_id' => $user->id
             ]);
         }
 
         $utuh = DB::table('kartu_pemain as kp')
             ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
             ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
-            ->where('pemain_id', '=', 1)
+            ->where('pemain_id', '=', $user->id)
             ->where('kartu_id', '!=', 25)
             ->get();
 
         $potongan = DB::table('kartu_pemain as kp')
             ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
             ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
-            ->where('pemain_id', '=', 1)
+            ->where('pemain_id', '=', $user->id)
             ->where('kartu_id', '=', 25)
             ->get();
-
-        $listUtuh = '';
-        $listPotongan = '';
-        foreach ($utuh as $u) {
-            $listUtuh .= '<li><h4 style="text-align: center;">' . str_replace('_', ' ', $u->namaKartu) . '</h4><img src="'.asset('/asset/img/' . $u->gambar . '.png').'" alt=""></li>';
-        }
-
-        foreach ($potongan as $p) {
-            $listPotongan .= '<li><h4 style="text-align: center;">' . str_replace('_', ' ', $p->namaKartu) . '</h4><img src="'.asset('/asset/img/' . $p->gambar . '.png').'" alt=""></li>';
-        }
 
         return response()->json(array(
             'success' => true,
             'card' => $card,
-            'listUtuh' => $listUtuh,
-            'listPotongan' => $listPotongan
+            'utuh' => $utuh,
+            'potongan' => $potongan
         ));
     }
 }

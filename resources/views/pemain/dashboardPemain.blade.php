@@ -58,7 +58,7 @@
                             <li class="nav-item dropdown language-select">
                                 <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">{{ Auth::user()->pemain->name }}</a>
+                                    aria-expanded="false">{{ $user->name }}</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <a href="{{ route('logout') }}" class="dropdown-item text-danger"
@@ -98,12 +98,8 @@
             <area target="_blank" alt="Lorong TF" title="Lorong TF" href="https://www.google.com" coords="531,391,11"
                 shape="circle" />
             <area target="_blank" alt="Boulevard" title="Boulevard" href="https://www.google.com" coords="738,390,11"
-                shape="circle" style="width: 10px; height: 10px; background-color:black; border-radius: 10px;"/>
+                shape="circle" style="width: 10px; height: 10px; background-color:black; border-radius: 10px;" />
         </map>
-        <a class="btn btn-primary rounded-pill mt-5" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus"
-            data-bs-placement="right" title="Sample Title" data-bs-content="Top popover">
-            Popover on top
-        </a>
         <button type="button" id="tukarKartu" class="btn btn-primary rounded-pill mt-5" tabindex="0">Redeem
             Card</button>
     </section>
@@ -116,137 +112,30 @@
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-3">
                         <h3>KARTU UTUH</h3>
-                        <ul>
+                        <div id="listUtuh" class="owl-carousel owl-theme mt-2">
                             @for ($x = 0; $x < count($utuh); $x++)
-                                <li>
-                                    <h4>Nama: {{ str_replace('_', ' ', $utuh[$x]->namaKartu) }}</h4>
-                                    <img src="{{ asset('/asset/img/' . $utuh[$x]->gambar . '.png') }}"
-                                        alt="">
-                                </li>
+                                <div class="item">
+                                    <div class="card border-0 shadow">
+                                        <img src="{{ asset('/asset/img/' . $utuh[$x]->gambar . '.png') }}" class="card-img-top">
+                                    </div>
+                                    <h6>{{ str_replace('_', ' ', $utuh[$x]->namaKartu) }}</h6>
+                                </div>
                             @endfor
-                        </ul>
-                        {{-- dipunyaku g muncul kartu e klo pake bawah jadi ku comment --}}
-                        <div class="owl-carousel owl-theme mt-2">
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-keriting-08.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>1</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-12.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>2</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-13.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>3</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-14.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>4</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-09.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>5</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-10.png') }}"
-                                        class="card-img-top">
-                                </div>
-                                <h6>6</h6>
-                            </div>
-                            <!-- item ends -->
                         </div>
                         <hr class="my-8">
                         <h3>KARTU PECAHAN</h3>
-                        <ul>
+                        <div id="listPotongan" class="owl-carousel owl-theme mt-2">
                             @for ($x = 0; $x < count($potongan); $x++)
-                                <li>
-                                    <h4>Nama: {{ str_replace('_', ' ', $potongan[$x]->namaKartu) }}</h4>
-                                    <img src="{{ asset('/asset/img/' . $potongan[$x]->gambar . '.png') }}"
-                                        alt="">
-                                </li>
+                                <div class="item">
+                                    <div class="card border-0 shadow ">
+                                        <img src="{{ asset('/asset/img/' . $potongan[$x]->gambar . '.png') }}"
+                                            class="card-img-top kartu-potongan">
+                                    </div>
+                                    <h6>{{ str_replace('_', ' ', $potongan[$x]->namaKartu) }}</h6>
+                                </div>
                             @endfor
-                        </ul>
-                        {{-- <div class="owl-carousel owl-theme mt-2"> --}}
-                        {{-- <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-06.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>1</h6>
-                            </div>
                             <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-07.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>2</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-08.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>3</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-09.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>4</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-10.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>5</h6>
-                            </div>
-                            <!-- item ends -->
-
-                            <div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('asset/img/kartu-bridge-custom-wajik-11.png') }}"
-                                        class="card-img-top kartu-potongan">
-                                </div>
-                                <h6>6</h6>
-                            </div>
-                            <!-- item ends --> --}}
-                        {{-- </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -362,8 +251,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
-                    <img class="getSrc" src="{{ asset('/asset/img/kartu-bridge-custom-keriting-08.png') }}"
-                        alt="">
                     <h5>Pilih Kartu:</h5>
                     <select id="selectKartu">
                         @foreach ($selectKartu as $sk)
@@ -393,10 +280,25 @@
 
     <div class="fab-container">
         <div class="fab fab-icon-holder">
-            <i class="fas fa-question"></i>
+            <i class="uil uil-question fs-42"></i>
         </div>
 
         <ul class="fab-options">
+            <li>
+                <span class="fab-label">Tukar Kartu</span>
+                <div class="fab-icon-holder">
+                    <i>
+                        <a href="#" class="" style="color: white" data-bs-toggle="modal"
+                            data-bs-target="#modal-02">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-suit-spade-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M7.184 11.246A3.5 3.5 0 0 1 1 9c0-1.602 1.14-2.633 2.66-4.008C4.986 3.792 6.602 2.33 8 0c1.398 2.33 3.014 3.792 4.34 4.992C13.86 6.367 15 7.398 15 9a3.5 3.5 0 0 1-6.184 2.246 19.92 19.92 0 0 0 1.582 2.907c.231.35-.02.847-.438.847H6.04c-.419 0-.67-.497-.438-.847a19.919 19.919 0 0 0 1.582-2.907z" />
+                            </svg>
+                        </a>
+                    </i>
+                </div>
+            </li>
             <li>
                 <span class="fab-label">Kartu Terkumpul</span>
                 <div class="fab-icon-holder">
@@ -434,7 +336,6 @@
     <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('template/assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('template/assets/js/owl.carousel.min.js') }}"></script>
-    
 
     <script>
         $(document).ready(function() {
@@ -525,6 +426,30 @@
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
+                    $('#listUtuh').empty();
+                    data.utuh.forEach(element => {
+                        $('#listUtuh').append(`
+                        <div class="item">
+                            <div class="card border-0 shadow ">
+                                <img src="{{ asset('/asset/img/${element.gambar}.png') }}"
+                                    class="card-img-top">
+                            </div>
+                            <h6>${element.namaKartu}</h6>
+                        </div>`);
+                    });
+
+                    $('#listPotongan').empty();
+                    data.potongan.forEach(element => {
+                        $('#listPotongan').append(`
+                        <div class="item">
+                            <div class="card border-0 shadow ">
+                                <img src="{{ asset('/asset/img/${element.gambar}.png') }}"
+                                    class="card-img-top kartu-potongan">
+                            </div>
+                            <h6>${element.namaKartu}</h6>
+                        </div>`);
+                    });
+
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },
@@ -550,6 +475,8 @@
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
+                    $('#listUtuh').html(data.listUtuh);
+                    $('#listPotongan').html(data.listPotongan);
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },
@@ -577,6 +504,8 @@
                     console.log(data.card);
                     let cardName = data.card.name.replace('_', ' ');
 
+                    $('#listUtuh').html(data.listUtuh);
+                    $('#listPotongan').html(data.listPotongan);
                     $('#detailKartu').text(cardName);
                     $('#notif').modal('show');
                 },
