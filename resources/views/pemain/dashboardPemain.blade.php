@@ -315,7 +315,7 @@
             </li>
         </ul>
     </div>
-    
+
     <script src="{{ asset('template/assets/js/theme.js') }}"></script>
     <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('template/assets/js/jquery-3.6.0.min.js') }}"></script>
@@ -323,6 +323,7 @@
 
     <script>
         $(document).ready(function() {
+            alert('test');
             $('.owl-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
@@ -348,9 +349,9 @@
         $('#tukarKartu').click(function() {
             localStorage.removeItem('special');
             // alert($('#listUtuh').find('.owl-item').length);
-            console.log($('#listUtuh').find('.owl-item'));
+            // console.log($('#listUtuh').find('.owl-item'));
             // alert($('#listPotongan').find('.owl-item').length);
-            console.log($('#listPotongan').find('.owl-item'));
+            // console.log($('#listPotongan').find('.owl-item'));
 
             $.ajax({
                 type: 'POST',
@@ -499,7 +500,7 @@
                 data: {
                     '_token': '<?php echo csrf_token(); ?>',
                     'tipe': 'spesial'
-                    'kartukey': explode[0],
+                    'kartukey': $('#selectKartu').val(),
                     'specialCard': $('#specialCard').val()
                 },
                 success: function(data) {
@@ -507,23 +508,23 @@
                     console.log(data.card);
                     let cardName = data.card.name.replace('_', ' ');
 
-                    // $('#listUtuh')
-                    //     .trigger('add.owl.carousel', [
-                    //         `<div class="item">
-                    //         <div class="card border-0 shadow ">
-                    //             <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
-                    //         </div>
-                    //         <h6>${data.utuh.namaKartu}</h6>
-                    //     </div>`
-                    //     ]).trigger('refresh.owl.carousel');
+                    $('#listUtuh')
+                        .trigger('add.owl.carousel', [
+                            `<div class="item">
+                            <div class="card border-0 shadow ">
+                                <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
+                            </div>
+                            <h6>${data.utuh.namaKartu}</h6>
+                        </div>`
+                        ]).trigger('refresh.owl.carousel');
 
-                    // $("#listUtuh").trigger('remove.owl.carousel', [key]).trigger('refresh.owl.carousel');
+                    $("#listUtuh").trigger('remove.owl.carousel', [data.key]).trigger('refresh.owl.carousel');
 
-                    // $("#listPotongan").trigger('remove.owl.carousel', [0]).trigger(
-                    //     'refresh.owl.carousel');
+                    $("#listPotongan").trigger('remove.owl.carousel', [0]).trigger(
+                        'refresh.owl.carousel');
 
-                    // $('#detailKartu').text(cardName);
-                    // $('#notif').modal('show');
+                    $('#detailKartu').text(cardName);
+                    $('#notif').modal('show');
                 },
                 error: function() {
                     alert('error');

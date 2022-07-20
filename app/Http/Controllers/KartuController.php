@@ -55,6 +55,8 @@ class KartuController extends Controller
         $user = Auth::user()->pemain;
 
         $tipe = $request->get('tipe');
+        $kunci = '';
+        $card = '';
 
         // kalau pemain pilih 'random'
         if ($tipe == 'random') {
@@ -106,6 +108,7 @@ class KartuController extends Controller
         }
         // kalau pemain pilih 'spesial'
         else if ($tipe == 'spesial') {
+            return $tipe;
             // return $tipe;
             // delete 1 potongan
             $idPotongan = DB::table('kartu_pemain')
@@ -121,9 +124,7 @@ class KartuController extends Controller
 
             $explode = explode(';', $kartuKey);
             $namaKartu = $explode[0];
-            $key = $explode[1];
-
-            return $namaKartu;
+            $kunci = $explode[1];
 
             $idKartu = DB::table('kartu_pemain as kp')
                 ->join('kartu as k', 'k.id', '=', 'kp.kartu_id')
@@ -160,7 +161,8 @@ class KartuController extends Controller
         return response()->json(array(
             'success' => true,
             'card' => $card,
-            'utuh' => $utuh
+            'utuh' => $utuh,
+            'key' => $kunci
         ));
     }
 }
