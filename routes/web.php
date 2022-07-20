@@ -18,32 +18,35 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// ROUTE PENPOS
-Route::group(
-    ['prefix' => 'penpos', 'as' => 'penpos.'],
-    function () {
-        // Dashboard
-        Route::get('/', 'Penpos\DashboardController@index')->name('index');
-        Route::post('/cekPosSingle', 'Penpos\DashboardController@cekPosSingle')->name('cekPosSingle');
-        Route::post('/ubahStatusPosBattle', 'Penpos\DashboardController@ubahStatusPosBattle')->name('ubahStatusPosBattle');
-        Route::post('/cekPemainBattle', 'Penpos\DashboardController@cekPemainBattle')->name('cekPemainBattle');
-        Route::post('/resultGame', 'Penpos\DashboardController@resultGame')->name('resultGame');
-        Route::post('/resetPlaying', 'Penpos\DashboardController@resetPlaying')->name('resetPlaying');
-    }
-);
+Route::middleware(['auth'])->group(function(){
+    // ROUTE PENPOS
+    Route::group(
+        ['prefix' => 'penpos', 'as' => 'penpos.'],
+        function () {
+            // Dashboard
+            Route::get('/', 'Penpos\DashboardController@index')->name('index');
+            Route::post('/cekPosSingle', 'Penpos\DashboardController@cekPosSingle')->name('cekPosSingle');
+            Route::post('/ubahStatusPosBattle', 'Penpos\DashboardController@ubahStatusPosBattle')->name('ubahStatusPosBattle');
+            Route::post('/cekPemainBattle', 'Penpos\DashboardController@cekPemainBattle')->name('cekPemainBattle');
+            Route::post('/resultGame', 'Penpos\DashboardController@resultGame')->name('resultGame');
+            Route::post('/resetPlaying', 'Penpos\DashboardController@resetPlaying')->name('resetPlaying');
+        }
+    );
+    
+    // ROUTE PEMAIN
+    Route::group(
+        ['prefix' => 'pemain', 'as' => 'pemain.'],
+        function () {
+            // Dashboard
+            Route::get('/', 'PemainController@dashboard')->name('dashboardPemain');
+            Route::get('/x', 'PemainController@dashboard1')->name('dashboard');
+            Route::post('/changejenis', 'PemainController@changeJenis')->name('change');
+            Route::post('/check/potongan', 'KartuController@checkPotongan')->name('check.potongan');
+            Route::post('/tukar', 'KartuController@tukar')->name('tukar');
+        }
+    );
+});
 
-// ROUTE PEMAIN
-Route::group(
-    ['prefix' => 'pemain', 'as' => 'pemain.'],
-    function () {
-        // Dashboard
-        Route::get('/', 'PemainController@dashboard')->name('dashboardPemain');
-        Route::get('/x', 'PemainController@dashboard1')->name('dashboard');
-        Route::post('/changejenis', 'PemainController@changeJenis')->name('change');
-        Route::post('/check/potongan', 'KartuController@checkPotongan')->name('check.potongan');
-        Route::post('/tukar', 'KartuController@tukar')->name('tukar');
-    }
-);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
