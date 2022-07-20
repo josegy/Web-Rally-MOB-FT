@@ -109,8 +109,8 @@ class DashboardController extends Controller
         $msg = 'Status pos berhasil diubah menjadi penuh. Permainan siap dimulai!';
 
         //pusher
-        // $penposStatus = ['penpos' => $penpos, 'status' => 'PENUH'];
-        // event(new penposStatus($penposStatus));
+        $penposStatus = ['penpos' => $penpos, 'status' => 'PENUH'];
+        event(new penposStatus($penposStatus));
 
         return response()->json(array(
             "success" => true,
@@ -162,8 +162,8 @@ class DashboardController extends Controller
             $msg = 'Status pos berhasil diubah menjadi penuh. Permainan siap dimulai!';
 
             //pusher
-            // $penposStatus = ['penpos' => $penpos, 'status' => 'PENUH'];
-            // event(new penposStatus($penposStatus));
+            $penposStatus = ['penpos' => $penpos, 'status' => 'PENUH'];
+            event(new penposStatus($penposStatus));
         } else {
             $status = 'error';
             $msg = 'Terdapat pemain yang masih belum di validasi';
@@ -227,13 +227,13 @@ class DashboardController extends Controller
         // UBAH status playing jadi 1 karena hendak bermain
         $penpos->pemains()->sync([$pemain->id => ['playing' => 1]], false);
 
-        //pusher
-        // $penposStatus = ['penpos' => $penpos, 'status' => 'MENUNGGU LAWAN'];
-        // event(new penposStatus($penposStatus));
-
+        
         $status = 'success';
         $msg = 'Status pos berhasil diubah menjadi menunggu lawan!';
-
+        //pusher
+        $penposStatus = ['penpos' => $penpos, 'status' => 'MENUNGGU LAWAN'];
+        event(new penposStatus($penposStatus));
+        
         return response()->json(array(
             "success" => true,
             'penpos' => $penpos,
@@ -344,14 +344,14 @@ class DashboardController extends Controller
         $penpos->status = 'KOSONG';
         $penpos->save();
 
-        //pusher
-        // $penposStatus = ['penpos' => $penpos, 'status' => 'KOSONG'];
-        // event(new penposStatus($penposStatus));
-
+        
         $status = 'success';
-
+        
         $all_pemain = $this->getAllPemain();
-
+        //pusher
+        $penposStatus = ['penpos' => $penpos, 'status' => 'KOSONG'];
+        event(new penposStatus($penposStatus));
+        
         return response()->json(array(
             "success" => true,
             'penpos' => $penpos,

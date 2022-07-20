@@ -25,9 +25,9 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->pemain_id != null) {
-            return redirect('pemain');
+            return redirect('/pemain');
         } else {
-            return redirect('penpos');
+            return redirect('/penpos');
         }
         // return view('home');
     }

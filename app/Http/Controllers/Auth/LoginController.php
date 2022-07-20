@@ -27,15 +27,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
-    public function redirectTo()
-    {
-        if (Auth::user()->pemain_id != null) {
-            return redirect('pemain');
-        } else {
-            return redirect('penpos');
-        }
-    }
+    protected $redirectTo = RouteServiceProvider::HOME;
+    // public function redirectTo()
+    // {
+    //     if (Auth::user()->pemain_id != null) {
+    //         return redirect('/pemain');
+    //     } else {
+    //         return redirect('/penpos');
+    //     }
+    // }
 
     /**
      * Create a new controller instance.

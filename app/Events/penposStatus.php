@@ -14,10 +14,10 @@ class penposStatus implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $status;
-    public function __construct($status)
+    public $penposStatus;
+    public function __construct($penposStatus)
     {
-        $this->status=$status;
+        $this->penposStatus=$penposStatus;
     }
 
     public function broadcastOn()
@@ -26,6 +26,6 @@ class penposStatus implements ShouldBroadcast
     }
 
     public function broadcastAs(){
-        return 'status';
+        return 'penposStatus';
     }
 }
