@@ -499,7 +499,7 @@
                 url: "{{ route('pemain.tukar') }}",
                 data: {
                     '_token': '<?php echo csrf_token(); ?>',
-                    'tipe': 'spesial'
+                    'tipe': 'spesial',
                     'kartukey': $('#selectKartu').val(),
                     'specialCard': $('#specialCard').val()
                 },
