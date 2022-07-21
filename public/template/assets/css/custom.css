@@ -115,3 +115,27 @@ h1 {
 	object-fit: cover;
 	object-position: 0 0;
 }
+
+/* Login */
+.logo {
+    height: 300px;
+    width: 300px;
+}
+
+.text-mob {
+    color: #242a68;
+}
+
+.card-pad{
+	padding: 5% 7% 7% 7%;
+}
+
+.color-border{
+	border-color: #242a68;
+}
+
+.btn-masuk{
+	background-color: #242a68;
+    border-color: #242a68;
+    color: #fff;
+}
