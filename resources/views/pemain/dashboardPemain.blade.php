@@ -9,7 +9,7 @@
     <meta name="keywords"
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
-    <title>MOB FT 2022 Rally</title>
+    <title>MOB FT 2022 - Rally</title>
     <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMob.png') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
@@ -37,7 +37,7 @@
     <div class="content-wrapper">
         {{-- Navbar --}}
         <header class="wrapper bg-soft-primary">
-            <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-5">
+            <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-3">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
                         <a href="#">
@@ -45,14 +45,14 @@
                                 srcset="./assets/img/logo-dark@2x.png 2x" alt="" />
                         </a>
                     </div>
-                    <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
+                    {{-- <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                         <div class="offcanvas-header d-lg-none">
                             <a href="#"><img src="./assets/img/logo-light.png"
                                     srcset="./assets/img/logo-light@2x.png 2x" alt="" /></a>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="navbar-other w-100 d-flex ms-auto">
                         <ul class="navbar-nav flex-row align-items-center ms-auto justify-content-end">
                             <li class="nav-item dropdown language-select">
@@ -79,30 +79,47 @@
         {{-- End Navbar --}}
     </div>
 
-    <section class="wrapper bg-soft-primary text-center" style="overflow: auto">
-        <h2 class="fs-44">MAP RALLY</h2>
-        <img src="{{ asset('asset/img/FakultasTeknik(Isometric)-01.png') }}" alt="Map" usemap="#image-map"
-            width="1200" />
+    <section class="wrapper bg-soft-primary pb-3">
+        <div class="container">
+            <h2 class="fs-44 text-center">MAP RALLY</h2>
+    
+            <div class="row">
+                <div class="col-md-8" style="overflow: auto">
+                    <img src="{{ asset('asset/img/FakultasTeknik(Isometric)-02.png') }}" alt="Rally Map" usemap="#image-map" />
 
-        {{-- <map name="image-map">
-		<area class="btn btn-circle btn-purple uil uil-map-marker" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" title="TA" data-bs-content="Top popover" coords="647,618,11" shape="circle"/>
-		<area class="btn btn-circle btn-purple uil uil-map-marker" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" title="Sample Title" data-bs-content="Top popover" coords="332,517,11" shape="circle"/>
-		<area class="btn btn-circle btn-purple uil uil-map-marker" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" title="Sample Title" data-bs-content="Top popover" coords="531,391,11" shape="circle"/>
-		<area class="btn btn-circle btn-purple uil uil-map-marker" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top" title="Sample Title" data-bs-content="Top popover" coords="738,390,11" shape="circle"/>
-		</map> --}}
-
-        <map name="image-map">
-            <area target="_blank" alt="Tugu Teknik" title="Tugu Teknik" href="https://www.google.com"
-                coords="647,618,11" shape="circle" />
-            <area target="_blank" alt="PAJ" title="PAJ" href="https://www.google.com" coords="332,517,11"
-                shape="circle" />
-            <area target="_blank" alt="Lorong TF" title="Lorong TF" href="https://www.google.com" coords="531,391,11"
-                shape="circle" />
-            <area target="_blank" alt="Boulevard" title="Boulevard" href="https://www.google.com" coords="738,390,11"
-                shape="circle" style="width: 10px; height: 10px; background-color:black; border-radius: 10px;" />
-        </map>
-        {{-- <button type="button" id="tukarKartu" class="btn btn-primary rounded-pill mt-5" tabindex="0">Redeem
-            Card</button> --}}
+                    <map name="image-map">
+                        <area id="1" alt="TF 2.3" title="TF 2.3" shape="circle" coords="371,289,11" href="" />
+                        <area id="2" alt="Sebelah TG" title="Sebelah TG" href="" coords="542,217,11" shape="circle" />
+                        <area id="3" alt="TF Dekat Keluwih" title="TF Dekat Keluwih" href="" coords="408,266,11" shape="circle" />
+                        <area id="4" alt="Kelas Gedung TB (1.1 C)" title="Kelas Gedung TB (1.1 C)" href="" coords="442,349,11" shape="circle" />
+                        <area id="5" alt="Taman TF" title="Taman TF" href="" coords="366,318,11" shape="circle" />
+                        <area id="6" alt="TE Lantai 1" title="TE Lantai 1" href="" coords="438,274,11" shape="circle" />
+                        <area id="7" alt="Jembatan TF dan TE" title="Jembatan TF dan TE" href="" coords="395,248,11" shape="circle" />
+                        <area id="8" alt="Antara Boulevard dan Gaztek" title="Antara Boulevard dan Gaztek" href="" coords="450,286,11" shape="circle" />
+                        <area id="9" alt="Depan TU" title="Depan TU" href="" coords="372,388,11" shape="circle" />
+                        <area id="10" alt="TG Lantai 1" title="TG Lantai 1" href="" coords="430,178,11" shape="circle" />
+                        <area id="11" alt="TF 2.1 A" title="TF 2.1 A" href="" coords="319,320,11" shape="circle" />
+                        <area id="12" alt="Depan Lab Desain Kerja dan Ergonomi" title="Depan Lab Desain Kerja dan Ergonomi" href="" coords="544,343,11" shape="circle" />
+                        <area id="13" alt="Sebelah TF 2.3" title="Sebelah TF 2.3" href="" coords="404,278,11" shape="circle" />
+                        <area id="14" alt="Jembatan ke Farmasi" title="Jembatan ke Farmasi" href="" coords="516,347,11" shape="circle" />
+                        <area id="15" alt="Antara TE dan Keluwih" title="Antara TE dan Keluwih" href="" coords="394,266,11" shape="circle" />
+                        <area id="16" alt="TF Lantai 1 (Depan PAJ TI)" title="TF Lantai 1 (Depan PAJ TI)" href="" coords="287,338,11" shape="circle" />
+                        <area id="17" alt="Jalan Antara TA dan TF" title="Jalan Antara TA dan TF" href="" coords="331,357,11" shape="circle" />
+                        <area id="18" alt="Jembatan TA dan TF" title="Jembatan TA dan TF" href="" coords="337,341,11" shape="circle" />
+                        <area id="19" alt="Depan BEM FT" title="Depan BEM FT" href="" coords="250,365,11" shape="circle" />
+                        <area id="20" alt="Depan TA" title="Depan TA" href="" coords="378,406,11" shape="circle" />
+                    </map>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">Informasi</h3>
+                    <p class="text-dark" id="info-rally">
+                        Nama Pos: <br>
+                        Lokasi Pos: <br>
+                        Kartu yang didapatkan:
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
 
     {{-- Modal Kartu --}}
@@ -183,10 +200,10 @@
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h3 class="modal-title mb-5" id="tukarLabel">Tukar Kartu</h3>
-                    <button id="random" class="btn btn-primary" data-bs-dismiss="modal">Random</button>
-                    <button id="pilih" class="btn btn-primary" data-bs-toggle="modal"
+                    <button id="random" class="btn btn-primary mb-2" data-bs-dismiss="modal">Random</button>
+                    <button id="pilih" class="btn btn-primary mb-2" data-bs-toggle="modal"
                         data-bs-target="#choose">Pilih</button>
-                    <button id="spesial" class="btn btn-primary" data-bs-toggle="modal"
+                    <button id="spesial" class="btn btn-primary mb-2" data-bs-toggle="modal"
                         data-bs-target="#special">Spesial</button>
                 </div>
             </div>
@@ -218,23 +235,25 @@
         aria-labelledby="chooseLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <!-- <div class="modal-header">
                     <h5 class="modal-title" id="chooseLabel">Choose</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body flex">
-                    <select id="chooseCard">
+                </div> -->
+
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h2 class="modal-title text-center mb-5" id="chooseLabel">Pilih</h2>
+
+                    <select id="chooseCard" class="form-select">
                         @for ($y = 0; $y < count($kartu); $y++)
                             <option value="{{ $kartu[$y]->namaKartu }}">
                                 {{ str_replace('_', ' ', $kartu[$y]->namaKartu) }}</option>
                         @endfor
                     </select>
-
-                </div>
-                <div class="modal-footer">
-                    {{-- button confirm --}}
-                    <button id="konfirmasi_pilihan" type="button" class="btn btn-success"
-                        data-bs-dismiss="modal">Confirm</button>
+                    <div class="mt-3 text-end">
+                        <button id="konfirmasi_pilihan" type="button" class="btn btn-success"
+                        data-bs-dismiss="modal">Konfirmasi</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,29 +264,38 @@
         aria-labelledby="specialLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="specialLabel">Choose</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body flex">
-                    <h5>Pilih Kartu:</h5>
-                    <select id="selectKartu"> </select><br><br>
+                    <!-- <h3 class="text-center">Choose</h3> -->
+                    <h2 class="modal-title text-center mb-5" id="specialLabel">Pilih</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <h5>Pilih Kartu Utuh:</h5>
+                    <select id="selectKartu" class="form-select">
+                        <!-- kosong -->
+                    </select><br><br>
                     <h5>Pilih Jenis:</h5>
-                    <select id="jenis">
-                        <option value="angka">Angka</option>
-                        <option value="simbol">Simbol</option>
-                    </select>
-                    <select id="specialCard">
-                        @for ($z = 6; $z <= 10; $z++)
-                            <option value="{{ $z }}">{{ $z }}</option>
-                        @endfor
-                    </select>
+                    <div class="col-auto">
+                        <select id="jenis" class="form-select mb-3">
+                            <option value="angka">Angka</option>
+                            <option value="simbol">Simbol</option>
+                        </select>
+                        <select id="specialCard" class="form-select">
+                            @for ($z = 6; $z <= 10; $z++)
+                                <option value="{{ $z }}">{{ $z }}</option>
+                            @endfor
+                        </select>
+                    </div>
+
+                    <div class="text-end">
+                        <button id="konfirmasi_spesial" type="button" class="btn btn-success mt-3"
+                        data-bs-dismiss="modal">Konfirmasi</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     {{-- button confirm --}}
                     <button id="konfirmasi_spesial" type="button" class="btn btn-success"
                         data-bs-dismiss="modal">Confirm</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -323,7 +351,7 @@
 
     <script>
         $(document).ready(function() {
-            alert('test');
+            // alert('test');
             $('.owl-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
@@ -550,6 +578,15 @@
                 }
             })
         })
+
+        $("#1").on("click", function(e) {
+           e.preventDefault();
+           $('#info-rally').html(
+                `Nama Pos: 123<br>
+                Lokasi Pos: 123<br>
+                Kartu yang didapatkan: 1`
+           );
+        });
     </script>
 </body>
 

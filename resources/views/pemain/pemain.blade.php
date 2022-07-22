@@ -44,14 +44,14 @@
                                 srcset="./assets/img/logo-dark@2x.png 2x" alt="" />
                         </a>
                     </div>
-                    <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
+                    {{-- <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                         <div class="offcanvas-header d-lg-none">
                             <a href="#"><img src="./assets/img/logo-light.png"
                                     srcset="./assets/img/logo-light@2x.png 2x" alt="" /></a>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="navbar-other w-100 d-flex ms-auto">
                         <ul class="navbar-nav flex-row align-items-center ms-auto justify-content-end">
                             <li class="nav-item dropdown language-select">
