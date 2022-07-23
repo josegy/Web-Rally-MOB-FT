@@ -82,32 +82,54 @@
     <section class="wrapper bg-soft-primary pb-3">
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
-    
+
             <div class="row">
                 <div class="col-md-8" style="overflow: auto">
-                    <img src="{{ asset('asset/img/FakultasTeknik(Isometric)-02.png') }}" alt="Rally Map" usemap="#image-map" />
+                    <img src="{{ asset('asset/img/FakultasTeknik(Isometric)-02.png') }}" alt="Rally Map"
+                        usemap="#image-map" />
 
                     <map name="image-map">
-                        <area id="1" alt="TF 2.3" title="TF 2.3" shape="circle" coords="371,289,11" href="" />
-                        <area id="2" alt="Sebelah TG" title="Sebelah TG" href="" coords="542,217,11" shape="circle" />
-                        <area id="3" alt="TF Dekat Keluwih" title="TF Dekat Keluwih" href="" coords="408,266,11" shape="circle" />
-                        <area id="4" alt="Kelas Gedung TB (1.1 C)" title="Kelas Gedung TB (1.1 C)" href="" coords="442,349,11" shape="circle" />
-                        <area id="5" alt="Taman TF" title="Taman TF" href="" coords="366,318,11" shape="circle" />
-                        <area id="6" alt="TE Lantai 1" title="TE Lantai 1" href="" coords="438,274,11" shape="circle" />
-                        <area id="7" alt="Jembatan TF dan TE" title="Jembatan TF dan TE" href="" coords="395,248,11" shape="circle" />
-                        <area id="8" alt="Antara Boulevard dan Gaztek" title="Antara Boulevard dan Gaztek" href="" coords="450,286,11" shape="circle" />
-                        <area id="9" alt="Depan TU" title="Depan TU" href="" coords="372,388,11" shape="circle" />
-                        <area id="10" alt="TG Lantai 1" title="TG Lantai 1" href="" coords="430,178,11" shape="circle" />
-                        <area id="11" alt="TF 2.1 A" title="TF 2.1 A" href="" coords="319,320,11" shape="circle" />
-                        <area id="12" alt="Depan Lab Desain Kerja dan Ergonomi" title="Depan Lab Desain Kerja dan Ergonomi" href="" coords="544,343,11" shape="circle" />
-                        <area id="13" alt="Sebelah TF 2.3" title="Sebelah TF 2.3" href="" coords="404,278,11" shape="circle" />
-                        <area id="14" alt="Jembatan ke Farmasi" title="Jembatan ke Farmasi" href="" coords="516,347,11" shape="circle" />
-                        <area id="15" alt="Antara TE dan Keluwih" title="Antara TE dan Keluwih" href="" coords="394,266,11" shape="circle" />
-                        <area id="16" alt="TF Lantai 1 (Depan PAJ TI)" title="TF Lantai 1 (Depan PAJ TI)" href="" coords="287,338,11" shape="circle" />
-                        <area id="17" alt="Jalan Antara TA dan TF" title="Jalan Antara TA dan TF" href="" coords="331,357,11" shape="circle" />
-                        <area id="18" alt="Jembatan TA dan TF" title="Jembatan TA dan TF" href="" coords="337,341,11" shape="circle" />
-                        <area id="19" alt="Depan BEM FT" title="Depan BEM FT" href="" coords="250,365,11" shape="circle" />
-                        <area id="20" alt="Depan TA" title="Depan TA" href="" coords="378,406,11" shape="circle" />
+                        <area id="1" alt="TF 2.3" title="TF 2.3" shape="circle" coords="371,289,11"
+                            href="" />
+                        <area id="2" alt="Sebelah TG" title="Sebelah TG" href="" coords="542,217,11"
+                            shape="circle" />
+                        <area id="3" alt="TF Dekat Keluwih" title="TF Dekat Keluwih" href=""
+                            coords="408,266,11" shape="circle" />
+                        <area id="4" alt="Kelas Gedung TB (1.1 C)" title="Kelas Gedung TB (1.1 C)"
+                            href="" coords="442,349,11" shape="circle" />
+                        <area id="5" alt="Taman TF" title="Taman TF" href="" coords="366,318,11"
+                            shape="circle" />
+                        <area id="6" alt="TE Lantai 1" title="TE Lantai 1" href=""
+                            coords="438,274,11" shape="circle" />
+                        <area id="7" alt="Jembatan TF dan TE" title="Jembatan TF dan TE" href=""
+                            coords="395,248,11" shape="circle" />
+                        <area id="8" alt="Antara Boulevard dan Gaztek" title="Antara Boulevard dan Gaztek"
+                            href="" coords="450,286,11" shape="circle" />
+                        <area id="9" alt="Depan TU" title="Depan TU" href="" coords="372,388,11"
+                            shape="circle" />
+                        <area id="10" alt="TG Lantai 1" title="TG Lantai 1" href=""
+                            coords="430,178,11" shape="circle" />
+                        <area id="11" alt="TF 2.1 A" title="TF 2.1 A" href="" coords="319,320,11"
+                            shape="circle" />
+                        <area id="12" alt="Depan Lab Desain Kerja dan Ergonomi"
+                            title="Depan Lab Desain Kerja dan Ergonomi" href="" coords="544,343,11"
+                            shape="circle" />
+                        <area id="13" alt="Sebelah TF 2.3" title="Sebelah TF 2.3" href=""
+                            coords="404,278,11" shape="circle" />
+                        <area id="14" alt="Jembatan ke Farmasi" title="Jembatan ke Farmasi" href=""
+                            coords="516,347,11" shape="circle" />
+                        <area id="15" alt="Antara TE dan Keluwih" title="Antara TE dan Keluwih"
+                            href="" coords="394,266,11" shape="circle" />
+                        <area id="16" alt="TF Lantai 1 (Depan PAJ TI)" title="TF Lantai 1 (Depan PAJ TI)"
+                            href="" coords="287,338,11" shape="circle" />
+                        <area id="17" alt="Jalan Antara TA dan TF" title="Jalan Antara TA dan TF"
+                            href="" coords="331,357,11" shape="circle" />
+                        <area id="18" alt="Jembatan TA dan TF" title="Jembatan TA dan TF" href=""
+                            coords="337,341,11" shape="circle" />
+                        <area id="19" alt="Depan BEM FT" title="Depan BEM FT" href=""
+                            coords="250,365,11" shape="circle" />
+                        <area id="20" alt="Depan TA" title="Depan TA" href="" coords="378,406,11"
+                            shape="circle" />
                     </map>
                 </div>
                 <div class="col-md-4">
@@ -252,7 +274,7 @@
                     </select>
                     <div class="mt-3 text-end">
                         <button id="konfirmasi_pilihan" type="button" class="btn btn-success"
-                        data-bs-dismiss="modal">Konfirmasi</button>
+                            data-bs-dismiss="modal">Konfirmasi</button>
                     </div>
                 </div>
             </div>
@@ -288,14 +310,9 @@
 
                     <div class="text-end">
                         <button id="konfirmasi_spesial" type="button" class="btn btn-success mt-3"
-                        data-bs-dismiss="modal">Konfirmasi</button>
+                            data-bs-dismiss="modal">Konfirmasi</button>
                     </div>
                 </div>
-                <!-- <div class="modal-footer">
-                    {{-- button confirm --}}
-                    <button id="konfirmasi_spesial" type="button" class="btn btn-success"
-                        data-bs-dismiss="modal">Confirm</button>
-                </div> -->
             </div>
         </div>
     </div>
@@ -351,7 +368,8 @@
 
     <script>
         $(document).ready(function() {
-            // alert('test');
+            // localStorage.removeItem('special');
+            
             $('.owl-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
@@ -375,12 +393,6 @@
 
         let special = localStorage.getItem('special');
         $('#tukarKartu').click(function() {
-            localStorage.removeItem('special');
-            // alert($('#listUtuh').find('.owl-item').length);
-            // console.log($('#listUtuh').find('.owl-item'));
-            // alert($('#listPotongan').find('.owl-item').length);
-            // console.log($('#listPotongan').find('.owl-item'));
-
             $.ajax({
                 type: 'POST',
                 url: "{{ route('pemain.check.potongan') }}",
@@ -442,6 +454,7 @@
                 },
                 success: function(data) {
                     // alert('success');
+                    console.log(data.utuh);
                     let cardName = data.card[0].name.replace('_', ' ');
                     console.log(cardName);
 
@@ -451,7 +464,7 @@
                             <div class="card border-0 shadow ">
                                 <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
                             </div>
-                            <h6>${data.utuh.namaKartu}</h6>
+                            <h6>${cardName}</h6>
                         </div>`
                         ]).trigger('refresh.owl.carousel');
 
@@ -484,7 +497,8 @@
                 },
                 success: function(data) {
                     // alert('success');
-                    let cardName = data.card[0].name.replace('_', ' ');
+                    console.log(data.utuh);
+                    let cardName = data.utuh.namaKartu.replace('_', ' ');
                     console.log(cardName);
 
                     $('#listUtuh')
@@ -493,7 +507,7 @@
                             <div class="card border-0 shadow ">
                                 <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
                             </div>
-                            <h6>${data.utuh.namaKartu}</h6>
+                            <h6>${cardName}</h6>
                         </div>`
                         ]).trigger('refresh.owl.carousel');
 
@@ -520,8 +534,7 @@
 
         // kalau konfirmasi spesial diklik
         $('#konfirmasi_spesial').click(function() {
-            // localStorage.setItem('special', 'true');
-            alert($('#selectKartu').val());
+            localStorage.setItem('special', 'true');
             $.ajax({
                 type: 'POST',
                 url: "{{ route('pemain.tukar') }}",
@@ -533,8 +546,9 @@
                 },
                 success: function(data) {
                     // alert('success');
-                    console.log(data.card);
-                    let cardName = data.card.name.replace('_', ' ');
+                    console.log(data.utuh);
+                    let cardName = data.utuh.namaKartu.replace('_', ' ');
+                    console.log(cardName);
 
                     $('#listUtuh')
                         .trigger('add.owl.carousel', [
@@ -542,11 +556,12 @@
                             <div class="card border-0 shadow ">
                                 <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
                             </div>
-                            <h6>${data.utuh.namaKartu}</h6>
+                            <h6>${cardName}</h6>
                         </div>`
                         ]).trigger('refresh.owl.carousel');
 
-                    $("#listUtuh").trigger('remove.owl.carousel', [data.key]).trigger('refresh.owl.carousel');
+                    $("#listUtuh").trigger('remove.owl.carousel', [data.key]).trigger(
+                        'refresh.owl.carousel');
 
                     $("#listPotongan").trigger('remove.owl.carousel', [0]).trigger(
                         'refresh.owl.carousel');
@@ -580,12 +595,12 @@
         })
 
         $("#1").on("click", function(e) {
-           e.preventDefault();
-           $('#info-rally').html(
+            e.preventDefault();
+            $('#info-rally').html(
                 `Nama Pos: 123<br>
                 Lokasi Pos: 123<br>
                 Kartu yang didapatkan: 1`
-           );
+            );
         });
     </script>
 </body>

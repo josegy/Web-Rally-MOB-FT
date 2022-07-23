@@ -39,7 +39,7 @@ class KartuController extends Controller
 
         $html = '';
         for ($s = 0; $s < count($utuh); $s++) {
-            $html .= '<option value="' . $utuh[$s]->namaKartu . ';'.$s.'">' . str_replace('_', ' ', $utuh[$s]->namaKartu) . '</option>';
+            $html .= '<option value="' . $utuh[$s]->namaKartu . ';' . $s . '">' . str_replace('_', ' ', $utuh[$s]->namaKartu) . '</option>';
         }
 
         return response()->json(array(
@@ -108,7 +108,6 @@ class KartuController extends Controller
         }
         // kalau pemain pilih 'spesial'
         else if ($tipe == 'spesial') {
-            return $tipe;
             // return $tipe;
             // delete 1 potongan
             $idPotongan = DB::table('kartu_pemain')
@@ -117,7 +116,7 @@ class KartuController extends Controller
                 ->where('pemain_id', '=', $user->id)
                 ->get();
 
-            // DB::table('kartu_pemain')->where('id', '=', $idPotongan[0]->id)->delete();
+            DB::table('kartu_pemain')->where('id', '=', $idPotongan[0]->id)->delete();
 
             // delete 1 kartu
             $kartuKey = $request->get('kartukey');
@@ -132,7 +131,7 @@ class KartuController extends Controller
                 ->where('kp.pemain_id', '=', $user->id)
                 ->get();
 
-            // DB::table('kartu_pemain')->where('kartu_id', '=', $idKartu[0]->kartu_id)->delete();
+            DB::table('kartu_pemain')->where('kartu_id', '=', $idKartu[0]->kartu_id)->delete();
 
             $specialCard = $request->get('specialCard');
 
@@ -144,10 +143,10 @@ class KartuController extends Controller
             $key = rand(0, $count);
             $card = $kartu[$key];
 
-            // DB::table('kartu_pemain')->insert([
-            //     'kartu_id' => $card->id,
-            //     'pemain_id' => $user->id
-            // ]);
+            DB::table('kartu_pemain')->insert([
+                'kartu_id' => $card->id,
+                'pemain_id' => $user->id
+            ]);
         }
 
         $utuh = DB::table('kartu_pemain as kp')
