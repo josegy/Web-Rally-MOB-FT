@@ -310,8 +310,7 @@ class DashboardController extends Controller
                 $pemain1->kartus()->attach($kartuMenang->id);
                 $pemain2->kartus()->attach($kartuKalah->id);
 
-                $msg = 'Pemain ' . $pemain1->name . ' memenangkan pos ' . $penpos->name . '\n';
-                $msg += 'Pemain ' . $pemain2->name . ' gagal memenangkan pos ' . $penpos->name;
+                $msg = 'Pemain ' . $pemain1->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain2->name . ' gagal memenangkan pos ' . $penpos->name;
             }
             //Kalau Battle Seri keduanya dpt 1 potongan
             else if ($status_game == "Seri") {
@@ -325,8 +324,7 @@ class DashboardController extends Controller
                 $pemain1->kartus()->attach($kartuKalah->id);
                 $pemain2->kartus()->attach($kartuMenang->id);
 
-                $msg = 'Pemain ' . $pemain2->name . ' memenangkan pos ' . $penpos->name . '\n';
-                $msg += 'Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
+                $msg = 'Pemain ' . $pemain2->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
             }
             $pemain2->save();
             // UBAH status playing jadi 0 karena sudah selesai bermain
