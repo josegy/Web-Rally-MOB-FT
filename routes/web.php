@@ -19,12 +19,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware(['auth'])->group(function(){
+    // cuma untuk halaman awal
+    Route::get('/', 'HomeController@index')->name('home');
+
     // ROUTE PENPOS
     Route::group(
         ['prefix' => 'penpos', 'as' => 'penpos.'],
         function () {
             // Dashboard
-            Route::get('/', 'Penpos\DashboardController@index')->name('index');
+            Route::get('/', 'Penpos\DashboardController@index')->middleware('can:isPenpos')->name('index');
             Route::post('/cekPosSingle', 'Penpos\DashboardController@cekPosSingle')->name('cekPosSingle');
             Route::post('/ubahStatusPosBattle', 'Penpos\DashboardController@ubahStatusPosBattle')->name('ubahStatusPosBattle');
             Route::post('/cekPemainBattle', 'Penpos\DashboardController@cekPemainBattle')->name('cekPemainBattle');
@@ -32,13 +35,13 @@ Route::middleware(['auth'])->group(function(){
             Route::post('/resetPlaying', 'Penpos\DashboardController@resetPlaying')->name('resetPlaying');
         }
     );
-    
+
     // ROUTE PEMAIN
     Route::group(
         ['prefix' => 'pemain', 'as' => 'pemain.'],
         function () {
             // Dashboard
-            Route::get('/', 'PemainController@dashboard')->name('dashboardPemain');
+            Route::get('/', 'PemainController@dashboard')->middleware('can:isPemain')->name('dashboardPemain');
             Route::get('/x', 'PemainController@dashboard1')->name('dashboard');
             Route::post('/changejenis', 'PemainController@changeJenis')->name('change');
             Route::post('/check/potongan', 'KartuController@checkPotongan')->name('check.potongan');

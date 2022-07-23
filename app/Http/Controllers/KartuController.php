@@ -10,6 +10,7 @@ class KartuController extends Controller
 {
     function checkPotongan()
     {
+        $this->authorize('isPemain');
         $user = Auth::user()->pemain;
 
         $potongan = DB::table('kartu_pemain as kp')
@@ -52,6 +53,7 @@ class KartuController extends Controller
 
     function tukar(Request $request)
     {
+        $this->authorize('isPemain');
         $user = Auth::user()->pemain;
 
         $tipe = $request->get('tipe');

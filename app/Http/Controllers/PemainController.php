@@ -37,11 +37,14 @@ class PemainController extends Controller
             ->where('kartu_id', '=', 25)
             ->get();
 
-        return view('pemain.dashboardPemain', compact('user', 'kartu', 'utuh', 'potongan'));
+        $statusPenpos = DB::table('penpos')->get();
+
+        return view('pemain.dashboardPemain', compact('user', 'kartu', 'utuh', 'potongan','statusPenpos'));
     }
 
     function dashboard1()
     {
+        $this->authorize('isPemain');
         $user = Auth::user()->pemain;
         // $kartu_pemain = DB::table('kartu_pemain as kp')
         //     ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
@@ -82,6 +85,7 @@ class PemainController extends Controller
 
     function changeJenis(Request $request)
     {
+        $this->authorize('isPemain');
         $jenis = $request->get('jenis');
 
         if ($jenis == 'angka') {

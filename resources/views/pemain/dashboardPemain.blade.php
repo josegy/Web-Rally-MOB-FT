@@ -90,54 +90,67 @@
 
                     <map name="image-map">
                         <area id="1" alt="TF 2.3" title="TF 2.3" shape="circle" coords="371,289,11"
-                            href="" />
+                            href="" class='penpos' />
                         <area id="2" alt="Sebelah TG" title="Sebelah TG" href="" coords="542,217,11"
-                            shape="circle" />
+                            shape="circle" class='penpos' />
                         <area id="3" alt="TF Dekat Keluwih" title="TF Dekat Keluwih" href=""
-                            coords="408,266,11" shape="circle" />
+                            coords="408,266,11" shape="circle"  class='penpos'/>
                         <area id="4" alt="Kelas Gedung TB (1.1 C)" title="Kelas Gedung TB (1.1 C)"
-                            href="" coords="442,349,11" shape="circle" />
+                            href="" coords="442,349,11" shape="circle"  class='penpos'/>
                         <area id="5" alt="Taman TF" title="Taman TF" href="" coords="366,318,11"
-                            shape="circle" />
+                            shape="circle" class='penpos' />
                         <area id="6" alt="TE Lantai 1" title="TE Lantai 1" href=""
-                            coords="438,274,11" shape="circle" />
+                            coords="438,274,11" shape="circle" class='penpos' />
                         <area id="7" alt="Jembatan TF dan TE" title="Jembatan TF dan TE" href=""
-                            coords="395,248,11" shape="circle" />
+                            coords="395,248,11" shape="circle" class='penpos' />
                         <area id="8" alt="Antara Boulevard dan Gaztek" title="Antara Boulevard dan Gaztek"
-                            href="" coords="450,286,11" shape="circle" />
+                            href="" coords="450,286,11" shape="circle" class='penpos' />
                         <area id="9" alt="Depan TU" title="Depan TU" href="" coords="372,388,11"
-                            shape="circle" />
+                            shape="circle" class='penpos' />
                         <area id="10" alt="TG Lantai 1" title="TG Lantai 1" href=""
-                            coords="430,178,11" shape="circle" />
+                            coords="430,178,11" shape="circle"  class='penpos'/>
                         <area id="11" alt="TF 2.1 A" title="TF 2.1 A" href="" coords="319,320,11"
-                            shape="circle" />
+                            shape="circle"  class='penpos'/>
                         <area id="12" alt="Depan Lab Desain Kerja dan Ergonomi"
                             title="Depan Lab Desain Kerja dan Ergonomi" href="" coords="544,343,11"
-                            shape="circle" />
+                            shape="circle" class='penpos'/>
                         <area id="13" alt="Sebelah TF 2.3" title="Sebelah TF 2.3" href=""
-                            coords="404,278,11" shape="circle" />
+                            coords="404,278,11" shape="circle"  class='penpos'/>
                         <area id="14" alt="Jembatan ke Farmasi" title="Jembatan ke Farmasi" href=""
-                            coords="516,347,11" shape="circle" />
+                            coords="516,347,11" shape="circle" class='penpos'/>
                         <area id="15" alt="Antara TE dan Keluwih" title="Antara TE dan Keluwih"
-                            href="" coords="394,266,11" shape="circle" />
+                            href="" coords="394,266,11" shape="circle" class='penpos'/>
                         <area id="16" alt="TF Lantai 1 (Depan PAJ TI)" title="TF Lantai 1 (Depan PAJ TI)"
-                            href="" coords="287,338,11" shape="circle" />
+                            href="" coords="287,338,11" shape="circle" class='penpos'/>
                         <area id="17" alt="Jalan Antara TA dan TF" title="Jalan Antara TA dan TF"
-                            href="" coords="331,357,11" shape="circle" />
+                            href="" coords="331,357,11" shape="circle" class='penpos'/>
                         <area id="18" alt="Jembatan TA dan TF" title="Jembatan TA dan TF" href=""
-                            coords="337,341,11" shape="circle" />
+                            coords="337,341,11" shape="circle" class='penpos'/>
                         <area id="19" alt="Depan BEM FT" title="Depan BEM FT" href=""
-                            coords="250,365,11" shape="circle" />
+                            coords="250,365,11" shape="circle" class='penpos'/>
                         <area id="20" alt="Depan TA" title="Depan TA" href="" coords="378,406,11"
-                            shape="circle" />
+                            shape="circle" class='penpos'/>
                     </map>
                 </div>
                 <div class="col-md-4">
                     <h3 class="text-center">Informasi</h3>
                     <p class="text-dark" id="info-rally">
-                        Nama Pos: <br>
-                        Lokasi Pos: <br>
-                        Kartu yang didapatkan:
+                        <div id='ket-0' class='info-penpos'>
+                            Nama Pos: <br>
+                            Lokasi Pos: <br>
+                            Status: <br>
+                            Kartu yang didapatkan:
+                        </div>
+                        <?php $nomer = 1; ?>
+                        @foreach ($statusPenpos as $sp )
+                            <div id='ket-{{$nomer}}' style='display:none' class='info-penpos'>
+                                Nama Pos: {{$sp->name}}<br>
+                                Lokasi Pos: {{$sp->lokasi}}<br>
+                                Status: <span id='status-{{$nomer}}'>{{$sp->status}}</span><br>
+                                Kartu yang didapatkan: {{$sp->kartu}}
+                            </div>
+                            <?php $nomer++ ?>
+                        @endforeach
                     </p>
                 </div>
             </div>
@@ -369,7 +382,7 @@
     <script>
         $(document).ready(function() {
             // localStorage.removeItem('special');
-            
+
             $('.owl-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
@@ -386,9 +399,10 @@
         });
 
         /* Pusher */
-        window.Echo.channel('penposChannel').listen('.status', (e) => {
-            alert('dar');
-            console.log(e);
+        window.Echo.channel('penposChannel').listen('.penposStatus', (e) => {
+            // alert(e.id)
+            $('#status-'+e.penposStatus.penpos.id).html(e.penposStatus.status)
+            console.log(e.penposStatus.status);
         });
 
         let special = localStorage.getItem('special');
@@ -594,13 +608,12 @@
             })
         })
 
-        $("#1").on("click", function(e) {
+        $(".penpos").on("click", function(e) {
             e.preventDefault();
-            $('#info-rally').html(
-                `Nama Pos: 123<br>
-                Lokasi Pos: 123<br>
-                Kartu yang didapatkan: 1`
-            );
+            let id = $(this).attr('id')
+            $('.info-penpos').hide();
+            $('#ket-'+id).css("display", "block");
+
         });
     </script>
 </body>

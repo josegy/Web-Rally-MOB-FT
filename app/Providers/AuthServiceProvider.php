@@ -25,6 +25,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('isPemain', function($user) {
+            if($user->pemain_id != null){
+                return $user->pemain_id;
+            }
+        });
+
+        Gate::define('isPenpos', function($user) {
+            if($user->penpos_id != null){
+                return $user->penpos_id;
+            }
+        });
     }
 }
