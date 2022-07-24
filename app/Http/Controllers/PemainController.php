@@ -11,12 +11,6 @@ class PemainController extends Controller
     function dashboard()
     {
         $user = Auth::user()->pemain;
-        // $kartu_pemain = DB::table('kartu_pemain as kp')
-        //     ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
-        //     ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
-        //     ->select(DB::raw('p.name as namaPemain'), DB::raw('k.name as namaKartu'), 'k.is_full', DB::raw('k.picture as gambar'))
-        //     ->where('p.id', '=', 1)
-        //     ->get();
 
         $kartu = DB::table('kartu')
             ->select(DB::raw('name as namaKartu'))
@@ -39,7 +33,31 @@ class PemainController extends Controller
 
         $statusPenpos = DB::table('penpos')->get();
 
-        return view('pemain.dashboardPemain', compact('user', 'kartu', 'utuh', 'potongan','statusPenpos'));
+        return view('pemain.dashboardPemain', compact('user', 'kartu', 'utuh', 'potongan', 'statusPenpos'));
+    }
+
+    function kartu()
+    {
+        $user = Auth::user()->pemain;
+
+        $utuh = DB::table('kartu_pemain as kp')
+            ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
+            ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
+            ->where('pemain_id', '=', $user->id)
+            ->where('kartu_id', '!=', 25)
+            ->get();
+
+        $potongan = DB::table('kartu_pemain as kp')
+            ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
+            ->select(DB::raw('k.name as namaKartu'), DB::raw('k.picture as gambar'))
+            ->where('pemain_id', '=', $user->id)
+            ->where('kartu_id', '=', 25)
+            ->get();
+
+        return response()->json(array(
+            'utuh' => $utuh,
+            'potongan' => $potongan
+        ));
     }
 
     function dashboard1()

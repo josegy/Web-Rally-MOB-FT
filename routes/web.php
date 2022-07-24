@@ -41,8 +41,10 @@ Route::middleware(['auth'])->group(function(){
         ['prefix' => 'pemain', 'as' => 'pemain.'],
         function () {
             // Dashboard
-            Route::get('/', 'PemainController@dashboard')->middleware('can:isPemain')->name('dashboardPemain');
             Route::get('/x', 'PemainController@dashboard1')->name('dashboard');
+
+            Route::get('/', 'PemainController@dashboard')->middleware('can:isPemain')->name('dashboardPemain');
+            Route::post('/kartu', 'PemainController@kartu')->name('kartu');
             Route::post('/changejenis', 'PemainController@changeJenis')->name('change');
             Route::post('/check/potongan', 'KartuController@checkPotongan')->name('check.potongan');
             Route::post('/tukar', 'KartuController@tukar')->name('tukar');
