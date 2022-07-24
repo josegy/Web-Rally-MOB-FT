@@ -145,9 +145,19 @@ h1 {
     border-color: #3941a7;
 }
 
+.card-status {
+    width: 50%;
+}
+
 @media screen and (max-width: 1135px) {
     .logo {
         height: auto;
         width: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-status {
+        width: 100%;
     }
 }

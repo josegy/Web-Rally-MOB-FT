@@ -10,7 +10,7 @@
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
     <title>MOB FT 2022 Rally</title>
-    <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMob.png') }}">
+    <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMOB.png') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">

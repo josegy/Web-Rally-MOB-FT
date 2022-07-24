@@ -5,7 +5,7 @@
     <div class="card p-4" style="border: 1px solid #242a68">
         <div class="row g-0 text-center align-items-center">
             <div class="col-md-4">
-                <img src="{{ asset('template/assets/img/logoMob.png') }}" class="img-fluid logo">
+                <img src="{{ asset('template/assets/img/logoMOB.png') }}" class="img-fluid logo">
             </div>
             <div class="col-md-8">
                 <div class="card-body">

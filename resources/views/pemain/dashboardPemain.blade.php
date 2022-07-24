@@ -10,7 +10,7 @@
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
     <title>MOB FT 2022 - Rally</title>
-    <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMob.png') }}">
+    <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMOB.png') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
@@ -74,61 +74,37 @@
     <section class="wrapper bg-soft-primary pb-3">
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
-
-            <div class="row">
-                <div class="col-md-8" style="overflow: auto">
-                    <img src="{{ asset('asset/img/peta-isometric-01(crop).png') }}" alt="Rally Map"
-                        usemap="#image-map" />
-
-                    <map name="image-map">
-                        <area id="1" class='penpos' target="" alt="TF 2.3" title="TF 2.3" href=""
-                            coords="527,408,9" shape="circle">
-                        <area id="2" class='penpos' target="" alt="Sebelah TG" title="Sebelah TG"
-                            href="" coords="809,286,9" shape="circle">
-                        <area id="3" class='penpos' target="" alt="TF Dekat Keluwih"
-                            title="TF Dekat Keluwih" href="" coords="588,368,9" shape="circle">
-                        <area id="4" class='penpos' target="" alt="Kelas Gedung TB (1.1 C)"
-                            title="Kelas Gedung TB (1.1 C)" href="" coords="643,507,9" shape="circle">
-                        <area id="5" class='penpos' target="" alt="Taman TF" title="Taman TF"
-                            href="" coords="517,455,9" shape="circle">
-                        <area id="6" class='penpos' target="" alt="TE Lantai 1" title="TE Lantai 1"
-                            href="" coords="637,381,9" shape="circle">
-                        <area id="7" class='penpos' target="" alt="Jembatan TF dan TE"
-                            title="Jembatan TF dan TE" href="" coords="565,338,9" shape="circle">
-                        <area id="8" class='penpos' target="" alt="Antara Boulevard dan Gaztek"
-                            title="Antara Boulevard dan Gaztek" href="" coords="656,401,9" shape="circle">
-                        <area id="9" class='penpos' target="" alt="Depan TU" title="Depan TU"
-                            href="" coords="528,572,9" shape="circle">
-                        <area id="10" class='penpos' target="" alt="TG Lantai 1" title="TG Lantai 1"
-                            href="" coords="624,226,9" shape="circle">
-                        <area id="11" class='penpos' target="" alt="TF 2.1 A" title="TF 2.1 A"
-                            href="" coords="441,460,9" shape="circle">
-                        <area id="12" class='penpos' target="" alt="Depan Lab Desain Kerja dan Ergonomi"
-                            title="Depan Lab Desain Kerja dan Ergonomi" href="" coords="811,496,9"
-                            shape="circle">
-                        <area id="13" class='penpos' target="" alt="Sebelah TF 2.3"
-                            title="Sebelah TF 2.3" href="" coords="581,389,9" shape="circle">
-                        <area id="14" class='penpos' target="" alt="Jembatan ke Farmasi"
-                            title="Jembatan ke Farmasi" href="" coords="766,502,9" shape="circle">
-                        <area id="15" class='penpos' target="" alt="Antara TE dan Keluwih"
-                            title="Antara TE dan Keluwih" href="" coords="564,370,9" shape="circle">
-                        <area id="16" class='penpos' target="" alt="TF Lantai 1 (Depan PAJ TI)"
-                            title="TF Lantai 1 (Depan PAJ TI)" href="" coords="389,488,9" shape="circle">
-                        <area id="17" class='penpos' target="" alt="Jalan Antara TA dan TF"
-                            title="Jalan Antara TA dan TF" href="" coords="458,521,9" shape="circle">
-                        <area id="18" class='penpos' target="" alt="Jembatan TA dan TF"
-                            title="Jembatan TA dan TF" href="" coords="470,491,9" shape="circle">
-                        <area id="19" class='penpos' target="" alt="Depan BEM FT" title="Depan BEM FT"
-                            href="" coords="328,532,9" shape="circle">
-                        <area id="20" class='penpos' target="" alt="Depan TA" title="Depan TA"
-                            href="" coords="536,600,9" shape="circle">
-                    </map>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="text-center">Informasi Pos</h3>
-                            <p class="text-dark" id="info-rally">
+            <div style="overflow: auto; padding-bottom: 5rem;">
+                <img src="{{ asset('asset/img/peta-isometric-01(crop).png') }}" alt="Rally Map" usemap="#image-map" />
+                
+                <map name="image-map">
+                    <area id="1" class='penpos' target="" alt="TF 2.3" title="TF 2.3" href="" coords="527,408,9" shape="circle">
+                    <area id="2" class='penpos' target="" alt="Sebelah TG" title="Sebelah TG" href="" coords="809,286,9" shape="circle">
+                    <area id="3" class='penpos' target="" alt="TF Dekat Keluwih" title="TF Dekat Keluwih" href="" coords="588,368,9" shape="circle">
+                    <area id="4" class='penpos' target="" alt="Kelas Gedung TB (1.1 C)" title="Kelas Gedung TB (1.1 C)" href="" coords="643,507,9" shape="circle">
+                    <area id="5" class='penpos' target="" alt="Taman TF" title="Taman TF" href="" coords="517,455,9" shape="circle">
+                    <area id="6" class='penpos' target="" alt="TE Lantai 1" title="TE Lantai 1" href="" coords="637,381,9" shape="circle">
+                    <area id="7" class='penpos' target="" alt="Jembatan TF dan TE" title="Jembatan TF dan TE" href="" coords="565,338,9" shape="circle">
+                    <area id="8" class='penpos' target="" alt="Antara Boulevard dan Gaztek" title="Antara Boulevard dan Gaztek" href="" coords="656,401,9" shape="circle">
+                    <area id="9" class='penpos' target="" alt="Depan TU" title="Depan TU" href="" coords="528,572,9" shape="circle">
+                    <area id="10" class='penpos' target="" alt="TG Lantai 1" title="TG Lantai 1" href="" coords="624,226,9" shape="circle">
+                    <area id="11" class='penpos' target="" alt="TF 2.1 A" title="TF 2.1 A" href="" coords="441,460,9" shape="circle">
+                    <area id="12" class='penpos' target="" alt="Depan Lab Desain Kerja dan Ergonomi" title="Depan Lab Desain Kerja dan Ergonomi" href="" coords="811,496,9" shape="circle">
+                    <area id="13" class='penpos' target="" alt="Sebelah TF 2.3" title="Sebelah TF 2.3" href="" coords="581,389,9" shape="circle">
+                    <area id="14" class='penpos' target="" alt="Jembatan ke Farmasi" title="Jembatan ke Farmasi" href="" coords="766,502,9" shape="circle">
+                    <area id="15" class='penpos' target="" alt="Antara TE dan Keluwih" title="Antara TE dan Keluwih" href="" coords="564,370,9" shape="circle">
+                    <area id="16" class='penpos' target="" alt="TF Lantai 1 (Depan PAJ TI)" title="TF Lantai 1 (Depan PAJ TI)" href="" coords="389,488,9" shape="circle">
+                    <area id="17" class='penpos' target="" alt="Jalan Antara TA dan TF" title="Jalan Antara TA dan TF" href="" coords="458,521,9" shape="circle">
+                    <area id="18" class='penpos' target="" alt="Jembatan TA dan TF" title="Jembatan TA dan TF" href="" coords="470,491,9" shape="circle">
+                    <area id="19" class='penpos' target="" alt="Depan BEM FT" title="Depan BEM FT" href="" coords="328,532,9" shape="circle">
+                    <area id="20" class='penpos' target="" alt="Depan TA" title="Depan TA" href="" coords="536,600,9" shape="circle">
+                </map>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="card card-status" style="position: fixed; bottom:0;">
+                    <div class="card-body">
+                        <h3 class="text-center">Informasi Pos</h3>
+                        <p class="text-dark" id="info-rally">
                             <div id='ket-0' class='info-penpos'>
                                 <b>Nama:</b> <br>
                                 <b>Lokasi:</b> <br>
@@ -136,18 +112,16 @@
                                 <b>Kartu yang didapatkan:</b>
                             </div>
                             <?php $nomer = 1; ?>
-                            @foreach ($statusPenpos as $sp)
-                                <div id='ket-{{ $nomer }}' style='display:none' class='info-penpos'>
-                                    <b>Nama:</b> {{ $sp->name }}<br>
-                                    <b>Lokasi:</b> {{ $sp->lokasi }}<br>
-                                    <b>Status:</b> <span
-                                        id='status-{{ $nomer }}'>{{ $sp->status }}</span><br>
-                                    <b>Kartu yang didapatkan:</b> {{ $sp->kartu }}
+                            @foreach ($statusPenpos as $sp )
+                                <div id='ket-{{$nomer}}' style='display:none' class='info-penpos'>
+                                    <b>Nama:</b> {{$sp->name}}<br>
+                                    <b>Lokasi:</b> {{$sp->lokasi}}<br>
+                                    <b>Status:</b> <span id='status-{{$nomer}}'>{{$sp->status}}</span><br>
+                                    <b>Kartu yang didapatkan:</b> {{$sp->kartu}}
                                 </div>
-                                <?php $nomer++; ?>
+                                <?php $nomer++ ?>
                             @endforeach
-                            </p>
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -163,7 +137,7 @@
                     <div class="text-center mb-3">
                         <h3>Kartu Utuh</h3>
                         <div id="listUtuh" class="owl-carousel owl-theme mt-2">
-                            {{-- @for ($x = 0; $x < count($utuh); $x++)
+                            @for ($x = 0; $x < count($utuh); $x++)
                                 <div class="item">
                                     <div class="card border-0 shadow">
                                         <img src="{{ asset('/asset/img/' . $utuh[$x]->gambar . '.png') }}"
@@ -171,7 +145,7 @@
                                     </div>
                                     <h6>{{ str_replace('_', ' ', $utuh[$x]->namaKartu) }}</h6>
                                 </div>
-                            @endfor --}}
+                            @endfor
                         </div>
                         <hr class="my-8">
                         <h3>Kartu Pecahan</h3>
@@ -338,7 +312,7 @@
                 <span class="fab-label">Kartu Terkumpul</span>
                 <div class="fab-icon-holder">
                     <i>
-                        <a id="modal_02" href="#" class="" style="color: white" data-bs-toggle="modal"
+                        <a href="#" class="" style="color: white" data-bs-toggle="modal"
                             data-bs-target="#modal-02">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-suit-spade-fill" viewBox="0 0 16 16">
@@ -370,6 +344,8 @@
 
     <script>
         $(document).ready(function() {
+            // localStorage.removeItem('special');
+
             $('.owl-carousel').owlCarousel({
                 loop: false,
                 margin: 10,
@@ -388,39 +364,9 @@
         /* Pusher */
         window.Echo.channel('penposChannel').listen('.penposStatus', (e) => {
             // alert(e.id)
-            $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status)
+            $('#status-'+e.penposStatus.penpos.id).html(e.penposStatus.status)
             console.log(e.penposStatus.status);
         });
-
-        $('#modal_02').click(function() {
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('pemain.kartu') }}",
-                data: {
-                    '_token': '<?php echo csrf_token(); ?>'
-                },
-                success: function(data) {
-                    alert('success');
-
-                    $.each(data.utuh, function(key, value) {
-                        alert(key.' '.value);
-                        $('#listUtuh')
-                            .trigger('add.owl.carousel', [
-                                `<div class="item">
-                                    <div class="card border-0 shadow ">
-                                        <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
-                                    </div>
-                                    <h6>${data.utuh.namaKartu.replace('_', ' ')}</h6>
-                                </div>`
-                            ]).trigger('refresh.owl.carousel');
-                    })
-
-                },
-                error: function() {
-                    // alert('error');
-                }
-            })
-        })
 
         let special = localStorage.getItem('special');
         $('#tukarKartu').click(function() {
@@ -566,7 +512,6 @@
         // kalau konfirmasi spesial diklik
         $('#konfirmasi_spesial').click(function() {
             localStorage.setItem('special', 'true');
-            console.log(localStorage.getItem('special'));
             $.ajax({
                 type: 'POST',
                 url: "{{ route('pemain.tukar') }}",
@@ -585,11 +530,11 @@
                     $('#listUtuh')
                         .trigger('add.owl.carousel', [
                             `<div class="item">
-                                <div class="card border-0 shadow ">
-                                    <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
-                                </div>
-                                <h6>${cardName}</h6>
-                            </div>`
+                            <div class="card border-0 shadow ">
+                                <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
+                            </div>
+                            <h6>${cardName}</h6>
+                        </div>`
                         ]).trigger('refresh.owl.carousel');
 
                     $("#listUtuh").trigger('remove.owl.carousel', [data.key]).trigger(
@@ -630,7 +575,7 @@
             e.preventDefault();
             let id = $(this).attr('id')
             $('.info-penpos').hide();
-            $('#ket-' + id).css("display", "block");
+            $('#ket-'+id).css("display", "block");
 
         });
     </script>

@@ -9,7 +9,7 @@
   <meta name="author" content="elemis">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <title>MOB FT 2022 Rally - Penpos</title>
-  <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMob.png') }}">
+  <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMOB.png') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
@@ -23,7 +23,7 @@
           <div class="container flex-lg-row flex-nowrap align-items-center">
             <div class="navbar-brand w-100">
               <a href="#">
-                <img src="{{ asset('template/assets/img/logo-dark.png ')}}" srcset="./assets/img/logo-dark@2x.png 2x" alt="" />
+                <h2 class="m-0">MOB FT 2022</h2>
               </a>
             </div>
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -66,75 +66,6 @@
   <script src="{{ asset('template/assets/js/theme.js') }}"></script>
   <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
   @yield('penpos_script')
-  <script>
-    // function cekPosSingle() {
-    //   $('#cekPos').attr('disabled', true);
-    //     $.ajax({
-    //       type: 'POST',
-    //       url: "{{ route('penpos.cekPosSingle') }}",
-    //       data:{
-    //           '_token': '<?php echo csrf_token(); ?>',
-    //           'pemain1_id': $('#pemain_id').val(),
-    //       },
-    //       success: function (data) {
-    //         if (data.status != "error"){
-    //           //Update status pos di dashboard
-    //           $('#status_pos').html(data.penpos.status);
-    //           //Hapus disabled pada button menang/kalah
-    //           $('#btn_menang').attr('disabled',false);
-    //           $('#btn_kalah').attr('disabled',false);
-              
-    //           // Kunci dropdown listnya 
-    //           $('#pemain_id').attr('disabled', true);
-    //         }
-    //         else{
-    //           alert(data.msg);
-    //           $('#cekPos').attr('disabled', false);
-    //         }
-    //       }
-    //   });
-    // }
-
-    // function resultGame($hasil) {
-    //   let pemain_click = $('#pemain_id').val();
-
-    //   $.ajax({
-    //       type: 'POST',
-    //       url: "{{ route('penpos.resultGame') }}",
-    //       data:{
-    //           '_token': '<?php echo csrf_token(); ?>',
-    //           'pemain1_id': pemain_click,
-    //           'status_game': $hasil,
-    //       },
-    //       success: function (data) {
-    //         if (data.status != "error"){
-    //           //Update dropdown box nya
-    //           var option_pemain = `<option value="" hidden selected>-- Pilih Nama Pemain --</option>`;
-    //           $.each(data.all_pemain, (key, pemain) => {
-    //             option_pemain += `<option value=${pemain.id}>${pemain.name}</option>`;
-    //           });
-    //           $('#pemain_id').html(option_pemain);
-
-    //           // Buka kunci drop downnya
-    //           $('#pemain_id').attr('disabled', false);
-              
-    //           //Kunci button menang kalah
-    //           $('#btn_menang').attr('disabled',true);
-    //           $('#btn_kalah').attr('disabled',true);
-
-    //           //Perbaruhi status penposnya
-    //           $('#status_pos').html(data.penpos.status);
-    //         }
-    //         else{
-    //           alert(data.msg);
-    //         }
-    //         // Buka kunci pada button cek
-    //         $('#cekPos').attr('disabled', false);
-    //       }
-    //   });
-
-    // }
-    </script>
 </body>
 
 </html>
