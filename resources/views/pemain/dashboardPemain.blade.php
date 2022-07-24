@@ -158,29 +158,12 @@
                     <div class="text-center mb-3">
                         <h3>Kartu Utuh</h3>
                         <div id="listUtuh" class="owl-carousel owl-theme mt-2">
-                            @for ($x = 0; $x < count($utuh); $x++)
-                                <div class="item">
-                                    <div class="card border-0 shadow">
-                                        <img src="{{ asset('/asset/img/' . $utuh[$x]->gambar . '.png') }}"
-                                            class="card-img-top">
-                                    </div>
-                                    <h6>{{ str_replace('_', ' ', $utuh[$x]->namaKartu) }}</h6>
-                                </div>
-                            @endfor
+                            {{-- kosong --}}
                         </div>
                         <hr class="my-8">
                         <h3>Kartu Pecahan</h3>
                         <div id="listPotongan" class="owl-carousel owl-theme mt-2">
-                            @for ($x = 0; $x < count($potongan); $x++)
-                                <div class="item">
-                                    <div class="card border-0 shadow ">
-                                        <img src="{{ asset('/asset/img/' . $potongan[$x]->gambar . '.png') }}"
-                                            class="card-img-top kartu-potongan">
-                                    </div>
-                                    <h6>{{ str_replace('_', ' ', $potongan[$x]->namaKartu) }}</h6>
-                                </div>
-                            @endfor
-                            <!-- item ends -->
+                            {{-- kosong --}}
                         </div>
                     </div>
                 </div>
@@ -333,7 +316,7 @@
                 <span class="fab-label">Kartu Terkumpul</span>
                 <div class="fab-icon-holder">
                     <i>
-                        <a href="#" class="" style="color: white" data-bs-toggle="modal"
+                        <a id="modal_02" href="#" class="" style="color: white" data-bs-toggle="modal"
                             data-bs-target="#modal-02">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-suit-spade-fill" viewBox="0 0 16 16">
@@ -397,18 +380,28 @@
                     '_token': '<?php echo csrf_token(); ?>'
                 },
                 success: function(data) {
-                    alert('success');
+                    // alert('success');
 
                     $.each(data.utuh, function(key, value) {
-                        alert(key.
-                            ' '.value);
                         $('#listUtuh')
                             .trigger('add.owl.carousel', [
                                 `<div class="item">
                                     <div class="card border-0 shadow ">
-                                        <img src="{{ asset('/asset/img/${data.utuh.gambar}.png') }}" class="card-img-top">
+                                        <img src="{{ asset('/asset/img/${data.utuh[key].gambar}.png') }}" class="card-img-top">
                                     </div>
-                                    <h6>${data.utuh.namaKartu.replace('_', ' ')}</h6>
+                                    <h6>${data.utuh[key].namaKartu.replace('_', ' ')}</h6>
+                                </div>`
+                            ]).trigger('refresh.owl.carousel');
+                    })
+
+                    $.each(data.potongan, function(key, value) {
+                        $('#listPotongan')
+                            .trigger('add.owl.carousel', [
+                                `<div class="item">
+                                    <div class="card border-0 shadow ">
+                                        <img src="{{ asset('/asset/img/${data.potongan[key].gambar}.png') }}" class="card-img-top kartu-potongan">
+                                    </div>
+                                    <h6>${data.potongan[key].namaKartu.replace('_', ' ')}</h6>
                                 </div>`
                             ]).trigger('refresh.owl.carousel');
                     })
