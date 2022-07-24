@@ -29,7 +29,7 @@
             <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-3">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
-                        <a href="#">
+                        <a href="#" class="text-mob" style="text-decoration: none;">
                             <h2 class="m-0">MOB FT 2022</h2>
                         </a>
                     </div>
