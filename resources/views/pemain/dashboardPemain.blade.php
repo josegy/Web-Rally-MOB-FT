@@ -383,6 +383,11 @@
                     // alert('success');
 
                     $.each(data.utuh, function(key, value) {
+                        $("#listUtuh").trigger('remove.owl.carousel', [key]).trigger(
+                            'refresh.owl.carousel');
+                    })
+
+                    $.each(data.utuh, function(key, value) {
                         $('#listUtuh')
                             .trigger('add.owl.carousel', [
                                 `<div class="item">
@@ -392,6 +397,11 @@
                                     <h6>${data.utuh[key].namaKartu.replace('_', ' ')}</h6>
                                 </div>`
                             ]).trigger('refresh.owl.carousel');
+                    })
+
+                    $.each(data.potongan, function(key, value) {
+                        $("#listPotongan").trigger('remove.owl.carousel', [key]).trigger(
+                            'refresh.owl.carousel');
                     })
 
                     $.each(data.potongan, function(key, value) {
