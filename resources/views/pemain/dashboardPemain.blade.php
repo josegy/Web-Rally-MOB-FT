@@ -383,10 +383,6 @@
                     // alert('success');
 
                     $.each(data.utuh, function(key, value) {
-<<<<<<< HEAD
-=======
-                        // alert(key.' '.value);
->>>>>>> a9700ac2779018572f8d2c714d56306d12433cc5
                         $('#listUtuh')
                             .trigger('add.owl.carousel', [
                                 `<div class="item">
