@@ -386,7 +386,7 @@
         window.Echo.channel('penposChannel').listen('.penposStatus', (e) => {
             // alert(e.id)
             $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status)
-            console.log(e.penposStatus.status);
+
         });
 
         $('#modal_02').click(function() {
@@ -400,8 +400,7 @@
                     alert('success');
 
                     $.each(data.utuh, function(key, value) {
-                        alert(key.
-                            ' '.value);
+                        // alert(key.' '.value);
                         $('#listUtuh')
                             .trigger('add.owl.carousel', [
                                 `<div class="item">
@@ -565,6 +564,7 @@
         // kalau konfirmasi spesial diklik
         $('#konfirmasi_spesial').click(function() {
             localStorage.setItem('special', 'true');
+            console.log(localStorage.getItem('special'));
             $.ajax({
                 type: 'POST',
                 url: "{{ route('pemain.tukar') }}",
