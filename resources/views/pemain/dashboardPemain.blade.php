@@ -128,6 +128,7 @@
                         <p class="text-dark" id="info-rally">
                         <div id='ket-0' class='info-penpos'>
                             <b>Nama:</b> <br>
+                            <b>Tipe:</b> <br>
                             <b>Lokasi:</b> <br>
                             <b>Status:</b> <br>
                             <b>Kartu yang didapatkan:</b>
@@ -136,9 +137,29 @@
                         @foreach ($statusPenpos as $sp)
                             <div id='ket-{{ $nomer }}' style='display:none' class='info-penpos'>
                                 <b>Nama:</b> {{ $sp->name }}<br>
+                                <b>Tipe:</b> {{ $sp->type }}<br>
                                 <b>Lokasi:</b> {{ $sp->lokasi }}<br>
-                                <b>Status:</b> <span id='status-{{ $nomer }}'>{{ $sp->status }}</span><br>
-                                <b>Kartu yang didapatkan:</b> {{ $sp->kartu }}
+                                <b>Status:</b> 
+                                @if ($sp->status == "KOSONG")
+                                    <span class="fs-14 badge bg-pale-green text-green rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
+                                @elseif ($sp->status == "PENUH")
+                                    <span class="fs-14 badge bg-pale-red text-red rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
+                                @else
+                                    <span class="fs-14 badge bg-pale-yellow text-yellow rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
+                                @endif
+                                <br>
+                                <b>Kartu yang didapatkan:</b> 
+                                @if ($sp->kartu == "wajik")
+                                <span class="text-red fs-20">♦</span>
+                                @elseif ($sp->kartu == "keriting")
+                                <span class="text-dark fs-20">♣</span>
+                                @elseif ($sp->kartu == "love")
+                                <span class="text-red fs-20">♥</span>
+                                @elseif ($sp->kartu == "waru")
+                                <span class="text-dark fs-20">♠</span>
+                                @else
+                                {{ $sp->kartu }}
+                                @endif
                             </div>
                             <?php $nomer++; ?>
                         @endforeach
@@ -368,8 +389,15 @@
         /* Pusher */
         window.Echo.channel('penposChannel').listen('.penposStatus', (e) => {
             // alert(e.id)
-            $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status)
-
+            if(e.penposStatus.status == 'KOSONG'){
+                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass('fs-14 badge bg-pale-red text-red rounded-pill').removeClass('fs-14 badge bg-pale-yellow text-yellow rounded-pill').addClass('fs-14 badge bg-pale-green text-green rounded-pill');
+            }
+            else if(e.penposStatus.status == 'PENUH'){
+                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass('fs-14 badge bg-pale-green text-green rounded-pill').removeClass('fs-14 badge bg-pale-yellow text-yellow rounded-pill').addClass('fs-14 badge bg-pale-red text-red rounded-pill');
+            }
+            else {
+                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass('fs-14 badge bg-pale-red text-red rounded-pill').addClass('fs-14 badge bg-pale-yellow text-yellow rounded-pill');
+            }
         });
 
         $('#modal_02').click(function() {
