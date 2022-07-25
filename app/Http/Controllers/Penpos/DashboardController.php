@@ -55,6 +55,14 @@ class DashboardController extends Controller
         return $all_pemain_playing;
     }
 
+    public function getAllPemainNonPlaying(){
+        $this->authorize('isPenpos');
+        // Ambil penpos yang sedang login
+        $penpos = Auth::user()->penpos;
+        $all_pemain_playing = $penpos->pemains()->where('is_done', 0)->where('playing',0)->get();
+        return $all_pemain_playing;
+    }
+
     //FUCNTION UNTUK CEK APAKAH PEMAIN PERNAH BERMAIN DI PENPOS SINGLE?
     public function cekPosSingle(Request $request)
     {
@@ -231,7 +239,7 @@ class DashboardController extends Controller
 
         // UBAH status playing jadi 1 karena hendak bermain
         $penpos->pemains()->sync([$pemain->id => ['playing' => 1]], false);
-
+        $pemainNonPlaying = $this->getAllPemainNonPlaying();
 
         $status = 'success';
         $msg = 'Status pos berhasil diubah menjadi menunggu lawan!';
@@ -244,6 +252,7 @@ class DashboardController extends Controller
             'penpos' => $penpos,
             'status' => $status,
             'msg' => $msg,
+            'pemainNonPlaying' => $pemainNonPlaying,
         ), 200);
     }
 
@@ -422,7 +431,7 @@ class DashboardController extends Controller
         $penpos->pemains()->sync([$pemain->id => ['playing' => 0]], false);
 
         // Ambil data all_pemain dan all_pemain_playing
-        $all_pemain = $this->getAllPemain();
+        $all_pemain = $this->getAllPemainNonPlaying();
         $all_pemain_playing = $this->getAllPemainPlaying();
         $total = count($all_pemain_playing);
         // Perbaruhi penposnya

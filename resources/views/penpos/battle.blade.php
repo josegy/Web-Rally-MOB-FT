@@ -247,6 +247,21 @@
             
             // Set validasi
             $('#cekPemain'+ $pemain).attr('validasi', 1);
+
+            // Cek dropdownnya sudah ke lock atau blm
+            // Ambil 
+            var validasipemain1 = $('#cekPemain1').attr('validasi');
+            var validasipemain2 = $('#cekPemain2').attr('validasi');
+            var option_pemain = `<option value="" selected>-- Pilih Nama Pemain --</option>`;
+            $.each(data.pemainNonPlaying, (key, pemain_nonplaying) => {
+              option_pemain += `<option value=${pemain_nonplaying.id}>${pemain_nonplaying.name}</option>`;
+            });
+            if(validasipemain1 != '1'){
+              $('#pemain1_id').html(option_pemain);
+            }
+            else if(validasipemain2 != '1'){
+              $('#pemain2_id').html(option_pemain);
+            }
           }
           else{
             alert(data.msg);
