@@ -64,37 +64,41 @@
         {{-- End Navbar --}}
     </div>
 
-    <div class="px-4">
-        <table id="tabel" class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Nama Pos</th>
-                    <th>Nama Tim</th>
-                    <th>Status</th>
-                    <th>Jam Ditambah</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Pos 1</td>
-                    <td>Tim 1</td>
-                    <td>Menang</td>
-                    <td>21.30</td>
-                </tr>
-                <tr>
-                    <td>Pos 2</td>
-                    <td>Tim 2</td>
-                    <td>Kalah</td>
-                    <td>19.30</td>
-                </tr>
-                <tr>
-                    <td>Pos 3</td>
-                    <td>Tim 3</td>
-                    <td>Seri</td>
-                    <td>22.30</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container pt-10 pt-md-14">
+      <div class="card">
+          <div class="card-body">
+            <table id="tabel" class="table table-striped" style="width:100%">
+              <thead>
+                  <tr>
+                      <th>Nama Pos</th>
+                      <th>Nama Tim</th>
+                      <th>Status</th>
+                      <th>Jam Ditambah</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Pos 1</td>
+                      <td>Tim 1</td>
+                      <td>Menang</td>
+                      <td>21.30</td>
+                  </tr>
+                  <tr>
+                      <td>Pos 2</td>
+                      <td>Tim 2</td>
+                      <td>Kalah</td>
+                      <td>19.30</td>
+                  </tr>
+                  <tr>
+                      <td>Pos 3</td>
+                      <td>Tim 3</td>
+                      <td>Seri</td>
+                      <td>22.30</td>
+                  </tr>
+              </tbody>
+          </table>
+          </div>
+      </div>
     </div>
 
     <footer class="bg-grape text-white mt-5 mt-md-16">

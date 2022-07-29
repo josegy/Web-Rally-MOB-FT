@@ -38,6 +38,7 @@
                   <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                   <ul class="dropdown-menu">
                     <li class="nav-item">
+                      <a href="#" class="dropdown-item">History</a>
                       <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
     
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
