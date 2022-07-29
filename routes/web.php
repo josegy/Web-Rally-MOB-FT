@@ -56,3 +56,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/history', function () {
+    return view('penpos.history');
+});
+
