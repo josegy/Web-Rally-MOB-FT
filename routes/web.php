@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
     // cuma untuk halaman awal
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
 
     // ROUTE PENPOS
     Route::group(
@@ -40,8 +40,9 @@ Route::middleware(['auth'])->group(function(){
     Route::group(
         ['prefix' => 'pemain', 'as' => 'pemain.'],
         function () {
-            // Dashboard
+            // Start Buat Testing
             Route::get('/x', 'PemainController@dashboard1')->name('dashboard');
+            // End Buat Testing
 
             Route::get('/', 'PemainController@dashboard')->middleware('can:isPemain')->name('dashboardPemain');
             Route::post('/kartu', 'PemainController@kartu')->name('kartu');
@@ -54,9 +55,14 @@ Route::middleware(['auth'])->group(function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Dealer
+Route::get('/clipboardDealer', 'DealerController@dealer')->name('dealer');
+Route::post('/dealer/change', 'DealerController@tukar')->name('dealer.change');
+Route::get('/dealer', function () {
+    return view('dealer.dashboardDealer');
+});
+
 
 Route::get('/history', function () {
     return view('penpos.history');
 });
-
