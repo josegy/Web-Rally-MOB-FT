@@ -80,6 +80,8 @@
                     <div class="col-auto">
                         <h3>Nama Tim : </h3>
                     </div>
+
+                    {{-- Select Nama Tim --}}
                     <div class="col-auto">
                         <select class="form-select" name="namaTim" id="">
                             <option value="tim1">Tim 1</option>
@@ -94,6 +96,8 @@
                     <div class="col-auto">
                         <h3>Kartu Dimiliki : </h3>
                     </div>
+                    
+                    {{-- Carousel Tampil Kartu --}}
                     <div class="col-auto">
                         <div id="listUtuh" class="owl-carousel owl-theme">
                             <div class="form-check">
@@ -118,6 +122,54 @@
                 </div>
                 <div class="row align-items-center mt-2">
                     <button class="btn btn-primary">HAPUS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Konfirmasi Hapus --}}
+    <div class="modal fade" id="notif" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="notifLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Konfirmasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body flex">
+                    Apakah Dealers Yakin Menghapus Kartu :
+                    <ul>
+                        <li>Kartu Wajik 11</li>
+                        <li>Kartu Wajik 12</li>
+                        <li>Kartu Wajik 13</li>
+                        <li>Kartu Wajik 14</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Hapus</button>
+                    <button type="button" class="btn btn-dangers" data-bs-dismiss="modal">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Notif Tukar --}}
+    <div class="modal fade" id="notifHapus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="notifLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Notif</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body flex">
+                    {{-- Muncul notif hapus/batal kartu disini --}}
+
+                    {{-- <span id="hasilHapus"><h4>Kartu <b>BERHASIL</b> Dihapus</h4></span>
+                    <span id="hasilHapus"><h4>Kartu <b>BATAL</b> Dihapus</h4></span> --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK!</button>
                 </div>
             </div>
         </div>
