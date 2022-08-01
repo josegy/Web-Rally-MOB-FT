@@ -66,3 +66,7 @@ Route::get('/dealer', function () {
 Route::get('/history', function () {
     return view('penpos.history');
 });
+
+Route::get('/dealers', function () {
+    return view('penpos.dealers');
+});
