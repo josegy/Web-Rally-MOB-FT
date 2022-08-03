@@ -59,6 +59,10 @@ Auth::routes();
 Route::get('/dealer', 'DealerController@dealer')->name('dealer');
 Route::post('/dealer/change', 'DealerController@tukar')->name('dealer.change');
 
+//route ed
+Route::get('/ed','EdController@index')->name('ed');
+Route::post('/ed/edit','EdController@edit')->name('ed-edit');
+
 
 Route::get('/history', function () {
     return view('penpos.history');
