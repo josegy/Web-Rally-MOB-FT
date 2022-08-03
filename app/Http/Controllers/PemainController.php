@@ -33,7 +33,7 @@ class PemainController extends Controller
 
         $statusPenpos = DB::table('penpos')->get();
 
-        return view('pemain.dashboardPemain', compact('user', 'kartu', 'utuh', 'potongan', 'statusPenpos'));
+        return view('pemain.pemain', compact('user', 'kartu', 'utuh', 'potongan', 'statusPenpos'));
     }
 
     function kartu()
@@ -64,12 +64,6 @@ class PemainController extends Controller
     {
         $this->authorize('isPemain');
         $user = Auth::user()->pemain;
-        // $kartu_pemain = DB::table('kartu_pemain as kp')
-        //     ->join('kartu as k', 'kp.kartu_id', '=', 'k.id')
-        //     ->join('pemain as p', 'kp.pemain_id', '=', 'p.id')
-        //     ->select(DB::raw('p.name as namaPemain'), DB::raw('k.name as namaKartu'), 'k.is_full', DB::raw('k.picture as gambar'))
-        //     ->where('p.id', '=', 1)
-        //     ->get();
 
         $kartu = DB::table('kartu')
             ->select(DB::raw('name as namaKartu'))

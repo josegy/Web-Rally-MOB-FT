@@ -56,11 +56,8 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 // Dealer
-Route::get('/clipboardDealer', 'DealerController@dealer')->name('dealer');
+Route::get('/dealer', 'DealerController@dealer')->name('dealer');
 Route::post('/dealer/change', 'DealerController@tukar')->name('dealer.change');
-Route::get('/dealer', function () {
-    return view('dealer.dashboardDealer');
-});
 
 
 Route::get('/history', function () {

@@ -19,7 +19,7 @@ class DealerController extends Controller
             ->where('kp.kartu_id', '!=', 25)
             ->get();
 
-        return view('dealer.clipboardDealer', compact('pemain', 'kartu'));
+        return view('dealer.dealer', compact('pemain', 'kartu'));
     }
 
     function change(Request $request)

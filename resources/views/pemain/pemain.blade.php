@@ -436,7 +436,7 @@
                         $('#listPotongan')
                             .trigger('add.owl.carousel', [
                                 `<div class="item">
-                                    <div class="card border-0 shadow ">
+                                    <div class="card border-0 shadow">
                                         <img src="{{ asset('/asset/img/${data.potongan[key].gambar}.png') }}" class="card-img-top kartu-potongan">
                                     </div>
                                     <h6>${data.potongan[key].namaKartu.replace('_', ' ')}</h6>
