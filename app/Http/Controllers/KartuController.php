@@ -46,10 +46,10 @@ class KartuController extends Controller
 
         //cek waktu buka penukaran special
         $time = DB::table('ed')->get();
-        $now =  date('H:i', strtotime(Carbon::now()));
+        $now =  strtotime(Carbon::now());
         $special = 'tutup';
 
-        if(($now>= $time[0]->start) && ($now <=$time[0]->end)){
+        if(($now >= strtotime($time[0]->start)) && ($now <= strtotime($time[0]->end))){
             $special = 'buka';
         }
 
@@ -59,7 +59,7 @@ class KartuController extends Controller
             'jumlahPotongan' => $jumlahPotongan,
             'jumlahKartu' => $jumlahKartu,
             'selectKartu' => $html,
-            'special' => $special   
+            'special' => $special
         ));
     }
 

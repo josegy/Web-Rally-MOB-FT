@@ -138,7 +138,7 @@
                                 <b>Nama:</b> {{ $sp->name }}<br>
                                 <b>Tipe:</b> {{ $sp->type }}<br>
                                 <b>Lokasi:</b> {{ $sp->lokasi }}<br>
-                                <b>Status:</b> 
+                                <b>Status:</b>
                                 @if ($sp->status == "KOSONG")
                                     <span class="fs-14 badge bg-pale-green text-green rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
                                 @elseif ($sp->status == "PENUH")
@@ -147,7 +147,7 @@
                                     <span class="fs-14 badge bg-pale-yellow text-yellow rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
                                 @endif
                                 <br>
-                                <b>Kartu yang didapatkan:</b> 
+                                <b>Kartu yang didapatkan:</b>
                                 @if ($sp->kartu == "wajik")
                                 <span class="text-red fs-20">♦</span>
                                 @elseif ($sp->kartu == "keriting")
@@ -214,12 +214,12 @@
                                 spesial”. Setiap tim hanya memiliki kesempatan “penukaran spesial” sebanyak 1 kali.
                                 Tim dapat memilih salah satu dari angka maupun simbol yang diinginkan (contoh: ingin
                                 menukarkan berdasarkan angka atau ingin menukarkan berdasarkan simbol) dengan menukarkan 1 kartu
-                                utuh yang tidak diinginkan dan 1 potongan kartu. "Penukaran spesial" hanya akan dibuka pada jam tertentu, 
+                                utuh yang tidak diinginkan dan 1 potongan kartu. "Penukaran spesial" hanya akan dibuka pada jam tertentu,
                                 jadi pastikan para <i>Survivors</i> memperhatikan jam tersebut.
                             </li>
                             <li>
-                                Penukaran kartu menjadi <i>Royale</i> dapat dilakukan di <i>Dealers Table</i> ketika sesi <i>Rally Games</i> berlangsung 
-                                dan tutup setelah sesi <i>Rally Games</i> usai. 
+                                Penukaran kartu menjadi <i>Royale</i> dapat dilakukan di <i>Dealers Table</i> ketika sesi <i>Rally Games</i> berlangsung
+                                dan tutup setelah sesi <i>Rally Games</i> usai.
                                 <br><br>Terdapat beberapa syarat yang harus dipenuhi oleh <i>Survivors</i> sebelum menukarkan
                                 kartu menjadi <i>Royale</i>, yaitu:<br>
                                 • Kartu harus berjumlah lebih dari 6 kartu. <br>
@@ -483,9 +483,15 @@
                     // console.log(jumlahPotongan);
                     // console.log(jumlahKartu);
                     console.log('special '+ data.special);
-                    
+                    $('#spesial').prop('disabled', false);
+
 
                     $('#selectKartu').html(data.selectKartu);
+
+                    if(data.special == 'tutup'){
+                        console.log('masuk special');
+                        $('#spesial').prop('disabled', true);
+                    }
 
                     if (jumlahPotongan < 1) {
                         $('#spesial').prop('disabled', true);
@@ -494,7 +500,8 @@
                         console.log('masuk 1');
 
                     } else if (jumlahPotongan < 3) {
-                        if ((jumlahKartu < 1 || special == 'true') && data.special == 'buka') {
+                        if ((jumlahKartu < 1 || special == 'true') && data.special == 'tutup') {
+
                             $('#spesial').prop('disabled', true);
                         }
                         $('#random').prop('disabled', true);
@@ -509,7 +516,7 @@
                         console.log('masuk 5');
                     }
 
-                    if (jumlahKartu < 1 || special == 'true') {
+                    if ((jumlahKartu < 1 || special == 'true') && data.special == 'tutup') {
                         $('#spesial').prop('disabled', true);
                     }
 
