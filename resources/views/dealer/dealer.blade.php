@@ -22,7 +22,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {{-- CDN Owl Carousel --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
         integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -85,8 +86,8 @@
 
                     {{-- Select Nama Tim --}}
                     <div class="col-auto">
-                        <select class="form-select" name="teamName" id="">
-                            <option value="" hidden>-- Pilih Nama Pemain --</option>
+                        <select class="form-select" name="teamName" id="teamName">
+                            <option value="pilih" hidden>-- Pilih Nama Pemain --</option>
                             @for ($x = 0; $x < count($pemain); $x++)
                                 <option value="{{ $pemain[$x]->id }}">{{ str_replace('_', ' ', $pemain[$x]->name) }}
                                 </option>
@@ -105,38 +106,22 @@
                     {{-- Carousel Tampil Kartu --}}
                     <div class="col">
                         <div id="listUtuh" class="owl-carousel owl-theme">
-                            <div class="item">
-                                <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
-                                    class="card-img-top">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="flexCheckDefault">
-                                Kartu Wajik 11
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
-                                    class="card-img-top">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                Kartu Wajik 11
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
-                                    class="card-img-top">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="flexCheckDefault">
-                                Kartu Wajik 11
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
-                                    class="card-img-top">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                Kartu Wajik 11
-                            </div>
+                            {{-- @for ($x = 0; $x < count($kartu); $x++)
+                                <div class="item">
+                                    <img src="{{ asset('/asset/img/' . $kartu[$x]->gambar . '.png') }}"
+                                        class="card-img-top">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                        id="flexCheckDefault">
+                                    {{ str_replace('_', ' ', $kartu[$x]->namaKartu) }}
+                                </div>
+                            @endfor --}}
                         </div>
                     </div>
                 </div>
                 <div class="card-footer mt-3">
                     <div class="row align-items-center">
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#confirmHapus" style="background-color: red; color: white">HAPUS</button>
+                        <button id="btnHapus" class="btn" data-bs-toggle="modal" data-bs-target="#confirmHapus"
+                            style="background-color: red; color: white">HAPUS</button>
                     </div>
                 </div>
             </div>
@@ -154,15 +139,13 @@
                 </div>
                 <div class="modal-body flex">
                     Apakah Anda Yakin Ingin Menghapus Kartu :
-                    <ul>
-                        <li>Kartu Wajik 11</li>
-                        <li>Kartu Wajik 12</li>
-                        <li>Kartu Wajik 13</li>
-                        <li>Kartu Wajik 14</li>
+                    <ul id="listHapus">
+                        {{-- kosong --}}
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Hapus</button>
+                    <button id="konfirmasiHapus" type="button" class="btn btn-success"
+                        data-bs-dismiss="modal">Hapus</button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
                 </div>
             </div>
@@ -179,10 +162,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
-                    {{-- Muncul notif hapus/batal kartu disini --}}
-
-                    {{-- <span id="hasilHapus"><h4>Kartu <b>BERHASIL</b> Dihapus</h4></span>
-                    <span id="hasilHapus"><h4>Kartu <b>BATAL</b> Dihapus</h4></span> --}}
+                    <span id="hasilHapus"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK!</button>
@@ -229,46 +209,85 @@
                 success: function(data) {
                     // alert('success');
 
-                    $('#listUtuh').empty();
+                    let panjang = $('.item').length;
+                    for (let i = 0; i < panjang; i++) {
+                        $("#listUtuh").trigger('remove.owl.carousel', [i]).trigger(
+                            'refresh.owl.carousel');
+                    }
+
                     $.each(data.utuh, function(key, value) {
-                        $('#listUtuh').append(
-                            `<img src="{{ asset('/asset/img/${data.utuh[key].gambar}.png') }}" class="card-img-top">`
-                        );
+                        $('#listUtuh')
+                            .trigger('add.owl.carousel', [
+                                `<div class="item">
+                                    <img src="{{ asset('/asset/img/${data.utuh[key].gambar}.png') }}"
+                                    class="card-img-top">
+                                    <input class="form-check-input" type="checkbox" value="${data.utuh[key].namaKartu}" id="check_${key}">
+                                    ${data.utuh[key].namaKartu.replace('_', ' ')}
+                                    </div>`
+                            ]).trigger('refresh.owl.carousel');
                     })
+                },
+                error: function() {
+                    alert('error');
+                }
+            })
+        })
 
-                    // $.each(data.utuh, function(key, value) {
-                    //     $("#listUtuh").trigger('remove.owl.carousel', [key]).trigger(
-                    //         'refresh.owl.carousel');
-                    // })
+        let arrCard = [];
+        $('#btnHapus').click(function() {
+            arrCard = [];
+            $('#listHapus').empty();
+            
+            let panjang = $('.item').length;
+            for (let x = 0; x < panjang; x++) {
+                let isChecked = $('#check_' + x).prop('checked');
+                if (isChecked) {
+                    arrCard.push($('#check_' + x).prop('value'));
+                    $('#listHapus').append(`<li>Kartu ${$('#check_' + x).prop('value').replace('_',' ')}</li>`);
+                }
+            }
+        })
 
-                    // $.each(data.utuh, function(key, value) {
-                    //     $('#listUtuh')
-                    //         .trigger('add.owl.carousel', [
-                    //             `<div class="item">
-                //             <div class="card border-0 shadow ">
-                //                 <img src="{{ asset('/asset/img/${data.utuh[key].gambar}.png') }}" class="card-img-top">
-                //             </div>
-                //             <h6>${data.utuh[key].namaKartu.replace('_', ' ')}</h6>
-                //         </div>`
-                    //         ]).trigger('refresh.owl.carousel');
-                    // })
+        $('#konfirmasiHapus').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('dealer.hapus') }}",
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>',
+                    'teamID': $('#teamName').val(),
+                    'arrCard': arrCard
+                },
+                success: function(data) {
+                    // alert('success');
+                    if (data.msg == 'Mohon pilih team terlebih dahulu!!!') {
+                        $('#hasilHapus').html(data.msg);
 
-                    // $.each(data.potongan, function(key, value) {
-                    //     $("#listPotongan").trigger('remove.owl.carousel', [key]).trigger(
-                    //         'refresh.owl.carousel');
-                    // })
+                    } else if (data.msg == 'Kartu berhasil dihapus!') {
+                        $('#hasilHapus').html(`Kartu <b>BERHASIL</b> dihapus`);
 
-                    // $.each(data.potongan, function(key, value) {
-                    //     $('#listPotongan')
-                    //         .trigger('add.owl.carousel', [
-                    //             `<div class="item">
-                //                 <div class="card border-0 shadow ">
-                //                     <img src="{{ asset('/asset/img/${data.potongan[key].gambar}.png') }}" class="card-img-top kartu-potongan">
-                //                 </div>
-                //                 <h6>${data.potongan[key].namaKartu.replace('_', ' ')}</h6>
-                //             </div>`
-                    //         ]).trigger('refresh.owl.carousel');
-                    // })
+                    } else {
+                        $('#hasilHapus').html(`Maaf ada kesalahan teknis`);
+                    }
+
+                    $('#notifHapus').modal('show');
+
+                    let panjang = $('.item').length;
+                    for (let i = 0; i < panjang; i++) {
+                        $("#listUtuh").trigger('remove.owl.carousel', [i]).trigger(
+                            'refresh.owl.carousel');
+                    }
+
+                    $.each(data.kartu, function(key, value) {
+                        $('#listUtuh')
+                            .trigger('add.owl.carousel', [
+                                `<div class="item">
+                                    <img src="{{ asset('/asset/img/${data.kartu[key].gambar}.png') }}"
+                                        class="card-img-top">
+                                    <input class="form-check-input" type="checkbox" value="${data.kartu[key].namaKartu}" id="check_${key}">
+                                    ${data.kartu[key].namaKartu.replace('_', ' ')}
+                                </div>`
+                            ]).trigger('refresh.owl.carousel');
+                    })
                 },
                 error: function() {
                     alert('error');

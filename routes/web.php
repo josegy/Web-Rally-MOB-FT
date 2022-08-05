@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
     // cuma untuk halaman awal
     Route::get('/home', 'HomeController@index')->name('home');
 
-    // ROUTE PENPOS
+    // Route Penpos
     Route::group(
         ['prefix' => 'penpos', 'as' => 'penpos.'],
         function () {
@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
         }
     );
 
-    // ROUTE PEMAIN
+    // Route Pemain
     Route::group(
         ['prefix' => 'pemain', 'as' => 'pemain.'],
         function () {
@@ -51,17 +51,28 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/tukar', 'KartuController@tukar')->name('tukar');
         }
     );
+
+    // Route Dealer
+    Route::group(
+        ['prefix' => 'dealer', 'as' => 'dealer.'],
+        function () {
+            // Route::get('/', 'DealerController@dealer')->name('index');
+            // Route::post('/change', 'DealerController@change')->name('change');
+            // Route::post('/hapus', 'DealerController@hapus')->name('hapus');
+        }
+    );
 });
 
 Auth::routes();
 
-// Dealer
+// Dealer 
 Route::get('/dealer', 'DealerController@dealer')->name('dealer');
-Route::post('/dealer/change', 'DealerController@tukar')->name('dealer.change');
+Route::post('/dealer/change', 'DealerController@change')->name('dealer.change');
+Route::post('/dealer/hapus', 'DealerController@hapus')->name('dealer.hapus');
 
 //route ed
-Route::get('/ed','EdController@index')->name('ed');
-Route::post('/ed/edit','EdController@edit')->name('ed-edit');
+Route::get('/ed', 'EdController@index')->name('ed');
+Route::post('/ed/edit', 'EdController@edit')->name('ed-edit');
 
 
 Route::get('/history', function () {

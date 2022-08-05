@@ -36,5 +36,11 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->penpos_id;
             }
         });
+
+        Gate::define('isDealer', function($user){
+            if($user->pemain_id == null && $user->penpos_id == null){
+                return $user;
+            }
+        });
     }
 }

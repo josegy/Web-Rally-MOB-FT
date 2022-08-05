@@ -141,11 +141,12 @@ class KartuController extends Controller
 
             $idKartu = DB::table('kartu_pemain as kp')
                 ->join('kartu as k', 'k.id', '=', 'kp.kartu_id')
+                ->select(DB::raw('kp.id as id'))
                 ->where('k.name', 'like', '%' . $namaKartu . '%')
                 ->where('kp.pemain_id', '=', $user->id)
                 ->get();
 
-            DB::table('kartu_pemain')->where('kartu_id', '=', $idKartu[0]->kartu_id)->delete();
+            DB::table('kartu_pemain')->where('kartu_id', '=', $idKartu[0]->id)->delete();
 
             $specialCard = $request->get('specialCard');
 

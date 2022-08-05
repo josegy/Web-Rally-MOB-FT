@@ -424,6 +424,7 @@
                 },
                 success: function(data) {
                     // alert('success');
+                    
                     var i = 1
                     $.each(data.utuh, function(key, value) {
                         $("#listUtuh").trigger('remove.owl.carousel', [key]).trigger(
