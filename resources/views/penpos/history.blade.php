@@ -43,7 +43,7 @@
                     <ul class="navbar-nav flex-row align-items-center ms-auto justify-content-end">
                       <li class="nav-item dropdown language-select">
                         {{-- <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a> --}}
-                        <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nama</a>
+                        <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$penpos->name}}</a>
                         
                         <ul class="dropdown-menu">
                           <li class="nav-item">
@@ -77,6 +77,16 @@
                   </tr>
               </thead>
               <tbody>
+                  @if (count($historyPenpos) != 0)
+                  @foreach ($historyPenpos as $history)
+                    <tr>
+                      <td>{{$penpos->name}}</td>
+                      <td>Tim {{$history->pivot->pemain_id}}</td>
+                      <td>{{$history->pivot->result}}</td>
+                      <td>{{$history->pivot->waktu}}</td>
+                    </tr>
+                  @endforeach  
+                  @endif
                   <tr>
                       <td>Pos 1</td>
                       <td>Tim 1</td>

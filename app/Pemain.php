@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pemain extends Model
 {
     public $timestamps = false;
-    protected $table='pemain';
+    protected $table = 'pemain';
 
     public function kartus()
     {
@@ -17,6 +17,6 @@ class Pemain extends Model
     public function penpos()
     {
         return $this->belongsToMany(Penpos::class, 'penpos_pemain', 'pemain_id', 'penpos_id')
-            ->withPivot(['is_done','playing']);
+            ->withPivot(['is_done', 'playing', 'waktu', 'result']);
     }
 }

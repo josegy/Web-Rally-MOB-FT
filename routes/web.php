@@ -33,6 +33,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/cekPemainBattle', 'Penpos\DashboardController@cekPemainBattle')->name('cekPemainBattle');
             Route::post('/resultGame', 'Penpos\DashboardController@resultGame')->name('resultGame');
             Route::post('/resetPlaying', 'Penpos\DashboardController@resetPlaying')->name('resetPlaying');
+
+            // History Penpos
+            Route::get('/history', 'Penpos\DashboardController@history')->middleware('can:isPenpos')->name('history');
         }
     );
 
