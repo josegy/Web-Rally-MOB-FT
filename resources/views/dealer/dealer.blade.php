@@ -136,8 +136,7 @@
                 </div>
                 <div class="card-footer mt-3">
                     <div class="row align-items-center">
-                        <button class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#confirmHapus">HAPUS</button>
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#confirmHapus" style="background-color: red; color: white">HAPUS</button>
                     </div>
                 </div>
             </div>

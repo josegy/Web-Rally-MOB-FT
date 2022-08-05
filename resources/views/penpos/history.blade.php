@@ -97,7 +97,7 @@
                   </tr>
               </tbody>
           </table>
-          </div>
+        </div>
       </div>
     </div>
 
@@ -111,13 +111,7 @@
     <script src="{{ asset('template/assets/js/theme.js') }}"></script>
     <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('template/assets/js/jquery-3.6.0.min.js') }}"></script>
-
-    {{-- <script src="{{ asset('template/assets/js/dataTables.bootstrap5.min.js') }}"></script> --}}
-    <script src="{{ asset('template/assets/js/jquery.dataTables.min.js') }}"></script>
-
-    {{-- <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> --}}
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js"></script>
+      
 
     <script>
         $(document).ready(function() {
