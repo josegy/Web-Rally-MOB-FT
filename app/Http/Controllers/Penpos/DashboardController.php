@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Events\penposStatus;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 
 class DashboardController extends Controller
@@ -29,10 +30,32 @@ class DashboardController extends Controller
         // $penpos->save();
 
         if ($penpos->type == "Single") {
-            return view('penpos.single', compact('all_pemain', 'penpos','all_pemain_playing'));
+            return view('penpos.single', compact('all_pemain', 'penpos', 'all_pemain_playing'));
         } else if ($penpos->type == "Battle") {
-            return view('penpos.battle', compact('all_pemain', 'penpos','all_pemain_playing'));
+            return view('penpos.battle', compact('all_pemain', 'penpos', 'all_pemain_playing'));
         }
+    }
+
+    public function history()
+    {
+        // Ambil penpos
+        $penpos = Auth::user()->penpos;
+
+        // Ambil data history pemain_penpos
+        $historyPenpos = $penpos->pemains()->where('is_done',1)->orderBy('waktu', 'DESC')->get();
+        // dd($historyPenpos);
+
+        // Attach data pemain_id di historyPenpos
+        $index = 0;
+        foreach($historyPenpos as $history){
+            $pemainA = Pemain::find($history->pivot->pemain_id);
+            $historyPenpos[$index]->namaPemain = $pemainA->name;
+            $waktu = date( 'H:i', strtotime($history->pivot->waktu));
+            $historyPenpos[$index]->waktuDapat = $waktu;
+            $index++;    
+        }
+        
+        return view('penpos.history', compact('penpos', 'historyPenpos'));
     }
 
     // Buat dapatin semua pemain yang belum pernah bermain di pos
@@ -51,15 +74,16 @@ class DashboardController extends Controller
         $this->authorize('isPenpos');
         // Ambil penpos yang sedang login
         $penpos = Auth::user()->penpos;
-        $all_pemain_playing = $penpos->pemains()->where('is_done', 0)->where('playing',1)->get();
+        $all_pemain_playing = $penpos->pemains()->where('is_done', 0)->where('playing', 1)->get();
         return $all_pemain_playing;
     }
 
-    public function getAllPemainNonPlaying(){
+    public function getAllPemainNonPlaying()
+    {
         $this->authorize('isPenpos');
         // Ambil penpos yang sedang login
         $penpos = Auth::user()->penpos;
-        $all_pemain_playing = $penpos->pemains()->where('is_done', 0)->where('playing',0)->get();
+        $all_pemain_playing = $penpos->pemains()->where('is_done', 0)->where('playing', 0)->get();
         return $all_pemain_playing;
     }
 
@@ -265,6 +289,10 @@ class DashboardController extends Controller
         // Ambil penpos yang login
         $penpos = Auth::user()->penpos;
 
+        // Ambil waktu sekarang
+        $timeNow = Carbon::now();
+        // dd($timeNow->toDateTimeString());
+
         // Ambil data dari AJAX
         $status_game = $request['status_game'];
         $pemain1 = Pemain::find($request['pemain1_id']);
@@ -305,11 +333,19 @@ class DashboardController extends Controller
             //Kalau Single Menang dpt 1 utuh
             if ($status_game == "Menang") {
                 $pemain1->kartus()->attach($kartuMenang->id);
+
+                // UBAH status permainan pemain_penpos menjadi Menang
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Menang"]], false);
+
                 $msg = 'Pemain ' . $pemain1->name . ' memenangkan pos ' . $penpos->name;
             }
             //Kalau Single Kalah dpt 1 potongan
             else if ($status_game == "Kalah") {
                 $pemain1->kartus()->attach($kartuKalah->id);
+
+                // UBAH status permainan pemain_penpos menjadi Kalah
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Kalah"]], false);
+
                 $msg = 'Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
             }
             // UBAH status playing jadi 0 karena sudah selesai bermain
@@ -317,6 +353,9 @@ class DashboardController extends Controller
 
             // UBAH Status pemain_penpos menjadi done (1)
             $penpos->pemains()->sync([$pemain1->id => ['is_done' => 1]], false);
+
+            // Update waktu di database
+            $penpos->pemains()->sync([$pemain1->id => ['waktu' => $timeNow->toDateTimeString()]], false);
         } else if ($penpos->type == "Battle") {
             //Ambil pemain2
             $pemain2 = Pemain::find($request['pemain2_id']);
@@ -325,6 +364,10 @@ class DashboardController extends Controller
                 $pemain1->kartus()->attach($kartuMenang->id);
                 $pemain2->kartus()->attach($kartuKalah->id);
 
+                // UBAH status permainan pemain_penpos menjadi Menang / Kalah
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Menang dari ".$pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Kalah dari ".$pemain1->name]], false);
+
                 $msg = 'Pemain ' . $pemain1->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain2->name . ' gagal memenangkan pos ' . $penpos->name;
             }
             //Kalau Battle Seri keduanya dpt 1 potongan
@@ -332,12 +375,20 @@ class DashboardController extends Controller
                 $pemain1->kartus()->attach($kartuKalah->id);
                 $pemain2->kartus()->attach($kartuKalah->id);
 
+                // UBAH status permainan pemain_penpos menjadi Seri
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Seri dari ".$pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Seri dari ".$pemain1->name]], false);
+
                 $msg = 'Pemain ' . $pemain1->name . ' dan ' . $pemain2->name . ' mendapatkan hasil seri pada pos ' . $penpos->name;
             }
             //Kalau Battle Kalah, yang menang dpt 1 utuh, yang kalah 1 potongan
             else if ($status_game == "Kalah") {
                 $pemain1->kartus()->attach($kartuKalah->id);
                 $pemain2->kartus()->attach($kartuMenang->id);
+
+                // UBAH status permainan pemain_penpos menjadi Menang / Kalah
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Kalah dari ".$pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Menang dari ".$pemain1->name]], false);
 
                 $msg = 'Pemain ' . $pemain2->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
             }
@@ -349,6 +400,10 @@ class DashboardController extends Controller
             // UBAH Status pemain_penpos menjadi done (1)
             $penpos->pemains()->sync([$pemain1->id => ['is_done' => 1]], false);
             $penpos->pemains()->sync([$pemain2->id => ['is_done' => 1]], false);
+
+            // Update waktu di database
+            $penpos->pemains()->sync([$pemain1->id => ['waktu' => $timeNow->toDateTimeString()]], false);
+            $penpos->pemains()->sync([$pemain2->id => ['waktu' => $timeNow->toDateTimeString()]], false);
         }
 
         $pemain1->save();
@@ -407,18 +462,18 @@ class DashboardController extends Controller
             $totalValidasi = $request['totalValidasi'];
             // CEK totalValidasi
             // kalau 0 dan 0 berarti dua-duanya reset
-            if($totalValidasi == "11"){
+            if ($totalValidasi == "11") {
                 $penpos->status = 'MENUNGGU LAWAN';
 
-                  //pusher
+                //pusher
                 $penposStatus = ['penpos' => $penpos, 'status' => 'MENUNGGU LAWAN'];
                 event(new penposStatus($penposStatus));
             }
             // Kasus kalau salah satu minta reset tapi yang satunya tetap
-            else if ($totalValidasi == "01" || $totalValidasi == "10"){
+            else if ($totalValidasi == "01" || $totalValidasi == "10") {
                 $penpos->status = 'KOSONG';
 
-                  //pusher
+                //pusher
                 $penposStatus = ['penpos' => $penpos, 'status' => 'KOSONG'];
                 event(new penposStatus($penposStatus));
             }
