@@ -8,7 +8,7 @@
   <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
   <meta name="author" content="elemis">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <title>MOB FT 2022 Rally - Penpos</title>
+  <title>@yield('judul')MOB FT 2022 Rally - Penpos</title>
   <link rel="shortcut icon" href="{{ asset('template/assets/img/logoMOB.png') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
@@ -18,39 +18,32 @@
 <body>
   <div class="content-wrapper">
     {{-- Navbar --}}
-    <header class="wrapper bg-soft-primary">
-      <nav class="navbar navbar-expand-lg center-nav transparent navbar-light pt-5">
-          <div class="container flex-lg-row flex-nowrap align-items-center">
-            <div class="navbar-brand w-100">
-              <a href="#">
-                <h2 class="m-0">MOB FT 2022</h2>
-              </a>
-            </div>
-            <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
-              <div class="offcanvas-header d-lg-none">
-                <a href="#"><img src="./assets/img/logo-light.png" srcset="./assets/img/logo-light@2x.png 2x" alt="" /></a>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-            </div>
-            <div class="navbar-other w-100 d-flex ms-auto">
-              <ul class="navbar-nav flex-row align-items-center ms-auto justify-content-end">
-                <li class="nav-item dropdown language-select">
-                  <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-item">
-                      <a href="#" class="dropdown-item">History</a>
-                      <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
-    
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                      </form>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
+    <header class="wrapper sticky-top navbar-stick">
+      <nav class="navbar navbar-expand-lg classic navbar-light py-3">
+        <div class="container flex-lg-row flex-nowrap align-items-center">
+          <div class="navbar-brand w-100">
+            <a href="#">
+              <img src="{{ asset('asset/img/MOB FT 2022.svg') }}" alt="" />
+            </a>
           </div>
-        </nav>
+          <div class="navbar-other w-100 d-flex ms-md-auto">
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <li class="nav-item dropdown language-select">
+                <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item">
+                    <a href="#" class="dropdown-item">History</a>
+                    <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                    </form>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     {{-- End Navbar --}}
   

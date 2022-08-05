@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use Carbon\Carbon;
 
 class KartuController extends Controller
 {
@@ -43,11 +44,22 @@ class KartuController extends Controller
             $html .= '<option value="' . $utuh[$s]->namaKartu . ';' . $s . '">' . str_replace('_', ' ', $utuh[$s]->namaKartu) . '</option>';
         }
 
+        //cek waktu buka penukaran special
+        $time = DB::table('ed')->get();
+        $now =  date('H:i', strtotime(Carbon::now()));
+        $special = 'tutup';
+
+        if(($now>= $time[0]->start) && ($now <=$time[0]->end)){
+            $special = 'buka';
+        }
+
+
         return response()->json(array(
             'potongan' => $potongan,
             'jumlahPotongan' => $jumlahPotongan,
             'jumlahKartu' => $jumlahKartu,
-            'selectKartu' => $html
+            'selectKartu' => $html,
+            'special' => $special   
         ));
     }
 

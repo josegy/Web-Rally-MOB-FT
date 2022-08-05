@@ -161,3 +161,9 @@ h1 {
         width: 100%;
     }
 }
+
+.nav-mob {
+    background-color: #fff;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}

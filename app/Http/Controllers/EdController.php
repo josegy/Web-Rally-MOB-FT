@@ -9,7 +9,7 @@ class EdController extends Controller
 {
     function index(){
         $data = DB::table('ed')->get();
-        return view('penpos.ed', compact('data'));
+        return view('dealer.ed', compact('data'));
     }
 
     function edit(Request $request){

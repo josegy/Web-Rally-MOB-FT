@@ -41,8 +41,7 @@
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
                         <a href="#">
-                            <h2 class="m-0">MOB FT 2022</h2>
-                            {{-- <img src="{{ asset('asset/img/font-mobft-01.png ') }}" alt="" /> --}}
+                            <img src="{{ asset('asset/img/MOB FT 2022.svg') }}" alt="" />
                         </a>
                     </div>
                     <div class="navbar-other w-100 d-flex ms-auto">
@@ -74,7 +73,7 @@
     <section class="wrapper bg-soft-primary pb-3">
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
-            <div style="overflow: auto; padding-bottom: 5rem;">
+            <div style="overflow: auto; padding-bottom: 10rem;">
                 <img src="{{ asset('asset/img/peta-isometric-01(crop).png') }}" alt="Rally Map" usemap="#image-map" />
 
                 <map name="image-map">
@@ -200,21 +199,37 @@
                 <div class="modal-body">
                     <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h3 class="text-center">Mekanisme Penukaran Kartu</h3>
-                    <div>
+                    <div style="color: #000">
                         <ol>
-                            <li>Potongan kartu dapat ditukarkan pada Menu 'Tukar Kartu'.</li>
-                            <li>Potongan kartu yang diperoleh dapat ditukarkan dengan kartu acak apabila tim menukarkan
-                                dengan
-                                3 potongan kartu. Kartu yang ditukarkan juga dapat dipilih (angka dan simbol) apabila
-                                tim menukarkan dengan
-                                5 potongan kartu.</li>
-                            <li>Apabila ada kartu yang tidak diinginkan, kartu dapat ditukarkan menggunakan “penukaran
+                            <li>
+                                Potongan kartu dapat ditukarkan pada Menu 'Tukar Kartu'.
+                            </li>
+                            <li>
+                                Potongan kartu yang diperoleh dapat ditukarkan dengan kartu acak apabila tim menukarkan
+                                dengan 3 potongan kartu. Kartu yang ditukarkan juga dapat dipilih (angka dan simbol) apabila
+                                tim menukarkan dengan 5 potongan kartu.
+                            </li>
+                            <li>
+                                Apabila ada kartu yang tidak diinginkan, kartu dapat ditukarkan menggunakan “penukaran
                                 spesial”. Setiap tim hanya memiliki kesempatan “penukaran spesial” sebanyak 1 kali.
                                 Tim dapat memilih salah satu dari angka maupun simbol yang diinginkan (contoh: ingin
-                                menukarkan
-                                berdasarkan angka atau ingin menukarkan berdasarkan simbol) dengan menukarkan 1 kartu
-                                utuh yang tidak diinginkan
-                                dan 1 potongan kartu.</li>
+                                menukarkan berdasarkan angka atau ingin menukarkan berdasarkan simbol) dengan menukarkan 1 kartu
+                                utuh yang tidak diinginkan dan 1 potongan kartu. "Penukaran spesial" hanya akan dibuka pada jam tertentu, 
+                                jadi pastikan para <i>Survivors</i> memperhatikan jam tersebut.
+                            </li>
+                            <li>
+                                Penukaran kartu menjadi <i>Royale</i> dapat dilakukan di <i>Dealers Table</i> ketika sesi <i>Rally Games</i> berlangsung 
+                                dan tutup setelah sesi <i>Rally Games</i> usai. 
+                                <br><br>Terdapat beberapa syarat yang harus dipenuhi oleh <i>Survivors</i> sebelum menukarkan
+                                kartu menjadi <i>Royale</i>, yaitu:<br>
+                                • Kartu harus berjumlah lebih dari 6 kartu. <br>
+                                • Kartu harus terdiri atas 4 simbol kartu <i>(clubs (♣), diamonds (♦), hearts (♥), and spades (♠))</i>.<br>
+                                • Kartu harus terbentuk menjadi salah satu kombinasi kartu di bawah ini: <br>
+                                    - <i>Four of Kind</i>, yaitu rangkaian kartu yang terdiri atas 4 angka sama. <br>
+                                    - <i>Full House</i>, yaitu rangkaian kartu terdiri atas 3 kartu angka sama dan 2 kartu angka sama.  <br>
+                                    - <i>Straight (bukan straight flush)</i>, yaitu rangkaian 5 kartu dengan angka yang berurutan.<br>
+                                    - <i>Two Pair</i>, yaitu rangkaian kartu yang terdiri atas 2 pasang kartu yang memiliki angka yang sama.<br>
+                            </li>
                         </ol>
                     </div>
                     <h3 class="text-center">Selamat Bermain</h3>
@@ -409,7 +424,7 @@
                 },
                 success: function(data) {
                     // alert('success');
-
+                    var i = 1
                     $.each(data.utuh, function(key, value) {
                         $("#listUtuh").trigger('remove.owl.carousel', [key]).trigger(
                             'refresh.owl.carousel');
@@ -439,9 +454,10 @@
                                     <div class="card border-0 shadow">
                                         <img src="{{ asset('/asset/img/${data.potongan[key].gambar}.png') }}" class="card-img-top kartu-potongan">
                                     </div>
-                                    <h6>${data.potongan[key].namaKartu.replace('_', ' ')}</h6>
+                                    <h6>${data.potongan[key].namaKartu.replace('_', ' ')}-${i}</h6>
                                 </div>`
                             ]).trigger('refresh.owl.carousel');
+                        i++;
                     })
 
                 },
@@ -464,8 +480,10 @@
                     // alert('success');
                     let jumlahPotongan = data.jumlahPotongan;
                     let jumlahKartu = data.jumlahKartu;
-                    console.log(jumlahPotongan);
-                    console.log(jumlahKartu);
+                    // console.log(jumlahPotongan);
+                    // console.log(jumlahKartu);
+                    console.log('special '+ data.special);
+                    
 
                     $('#selectKartu').html(data.selectKartu);
 
@@ -476,7 +494,7 @@
                         console.log('masuk 1');
 
                     } else if (jumlahPotongan < 3) {
-                        if (jumlahKartu < 1 || special == 'true') {
+                        if ((jumlahKartu < 1 || special == 'true') && data.special == 'buka') {
                             $('#spesial').prop('disabled', true);
                         }
                         $('#random').prop('disabled', true);

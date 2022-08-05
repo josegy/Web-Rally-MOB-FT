@@ -17,13 +17,12 @@
     <script src="../js/app.js"></script>
 
     {{-- CDN Owl Carousel --}}
-    <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
         integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {{-- CDN Owl Carousel --}}
-    <link rel="stylesheet"
-        src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
         integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -36,7 +35,7 @@
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
                         <a href="#">
-                            <h2 class="m-0">MOB FT 2022</h2>
+                            <img src="{{ asset('asset/img/MOB FT 2022.svg') }}" alt="" />
                         </a>
                     </div>
                     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -76,10 +75,10 @@
     <div class="container pt-10 pt-md-14">
         <div class="card">
             <div class="card-header">
-                <h1>HAPUS KARTU</h1>
+                <h1 style="text-align: center">HAPUS KARTU</h1>
             </div>
             <div class="card-body">
-                <div class="row align-items-center">
+                <div class="row align-items-center justify-content-center">
                     <div class="col-auto">
                         <h3>Nama Tim : </h3>
                     </div>
@@ -87,6 +86,7 @@
                     {{-- Select Nama Tim --}}
                     <div class="col-auto">
                         <select class="form-select" name="teamName" id="">
+                            <option value="" hidden>-- Pilih Nama Pemain --</option>
                             @for ($x = 0; $x < count($pemain); $x++)
                                 <option value="{{ $pemain[$x]->id }}">{{ str_replace('_', ' ', $pemain[$x]->name) }}
                                 </option>
@@ -94,41 +94,51 @@
                         </select>
                     </div>
                 </div>
-                <div class="row align-item-center">
-                    <div class="col-auto">
-                        <h3>Kartu Dimiliki : </h3>
+            </div>
+            <div class="card-body border-top border-1">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-auto mb-4">
+                        <h2>KARTU DIMILIKI</h2>
                     </div>
-
+                </div>
+                <div class="row align-items-center justify-content-center mb-6">
                     {{-- Carousel Tampil Kartu --}}
-                    <div class="col-auto">
+                    <div class="col">
                         <div id="listUtuh" class="owl-carousel owl-theme">
-                            <div class="form-check">
-                                <div class="item">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">Kartu Wajik 11</label>
-                                    <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
-                                        class="card-img-top">
-                                </div>
-                            </div>
                             <div class="item">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">Kartu Wajik 11</label>
                                 <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
                                     class="card-img-top">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="flexCheckDefault">
+                                Kartu Wajik 11
                             </div>
                             <div class="item">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">Kartu Wajik 11</label>
                                 <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
                                     class="card-img-top">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                Kartu Wajik 11
+                            </div>
+                            <div class="item">
+                                <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
+                                    class="card-img-top">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="flexCheckDefault">
+                                Kartu Wajik 11
+                            </div>
+                            <div class="item">
+                                <img src="{{ asset('/asset/img/kartu-bridge-custom-wajik-11.png') }}"
+                                    class="card-img-top">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                Kartu Wajik 11
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center mt-2">
-                    <button class="btn btn-primary" data-bs-toggle="modal"
+                <div class="card-footer mt-3">
+                    <div class="row align-items-center">
+                        <button class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#confirmHapus">HAPUS</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -204,7 +214,7 @@
                     items: 2
                 },
                 600: {
-                    items: 3
+                    items: 4
                 }
             }
         });

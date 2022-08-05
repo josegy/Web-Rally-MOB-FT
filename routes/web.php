@@ -69,5 +69,5 @@ Route::get('/history', function () {
 });
 
 Route::get('/dealers', function () {
-    return view('penpos.dealers');
+    return view('dealer.dealer');
 });

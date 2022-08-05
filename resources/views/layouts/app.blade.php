@@ -31,7 +31,8 @@
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
                         <a href="#" class="text-mob" style="text-decoration: none;">
-                            <h2 class="m-0">MOB FT 2022</h2>
+                            <img class="img-fluid" src="{{ asset('asset/img/MOB FT 2022.svg ') }}"
+                                srcset="./assets/img/logo-dark@2x.png 2x" alt="" />
                         </a>
                     </div>
                 </div>
