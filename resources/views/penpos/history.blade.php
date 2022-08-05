@@ -81,9 +81,9 @@
                   @foreach ($historyPenpos as $history)
                     <tr>
                       <td>{{$penpos->name}}</td>
-                      <td>Tim {{$history->pivot->pemain_id}}</td>
+                      <td>{{$history->namaPemain}}</td>
                       <td>{{$history->pivot->result}}</td>
-                      <td>{{$history->pivot->waktu}}</td>
+                      <td>{{$history->waktuDapat}}</td>
                     </tr>
                   @endforeach  
                   @endif

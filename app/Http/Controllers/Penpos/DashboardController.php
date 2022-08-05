@@ -42,8 +42,19 @@ class DashboardController extends Controller
         $penpos = Auth::user()->penpos;
 
         // Ambil data history pemain_penpos
-        $historyPenpos = $penpos->pemains()->where('is_done',1)->get();
-        // dd($historyPenpos[0]->pivot);
+        $historyPenpos = $penpos->pemains()->where('is_done',1)->orderBy('waktu', 'DESC')->get();
+        // dd($historyPenpos);
+
+        // Attach data pemain_id di historyPenpos
+        $index = 0;
+        foreach($historyPenpos as $history){
+            $pemainA = Pemain::find($history->pivot->pemain_id);
+            $historyPenpos[$index]->namaPemain = $pemainA->name;
+            $waktu = date( 'H:i', strtotime($history->pivot->waktu));
+            $historyPenpos[$index]->waktuDapat = $waktu;
+            $index++;    
+        }
+        
         return view('penpos.history', compact('penpos', 'historyPenpos'));
     }
 
@@ -354,8 +365,8 @@ class DashboardController extends Controller
                 $pemain2->kartus()->attach($kartuKalah->id);
 
                 // UBAH status permainan pemain_penpos menjadi Menang / Kalah
-                $penpos->pemains()->sync([$pemain1->id => ['result' => "Menang"]], false);
-                $penpos->pemains()->sync([$pemain2->id => ['result' => "Kalah"]], false);
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Menang dari ".$pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Kalah dari ".$pemain1->name]], false);
 
                 $msg = 'Pemain ' . $pemain1->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain2->name . ' gagal memenangkan pos ' . $penpos->name;
             }
@@ -365,8 +376,8 @@ class DashboardController extends Controller
                 $pemain2->kartus()->attach($kartuKalah->id);
 
                 // UBAH status permainan pemain_penpos menjadi Seri
-                $penpos->pemains()->sync([$pemain1->id => ['result' => "Seri"]], false);
-                $penpos->pemains()->sync([$pemain2->id => ['result' => "Seri"]], false);
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Seri dari ".$pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Seri dari ".$pemain1->name]], false);
 
                 $msg = 'Pemain ' . $pemain1->name . ' dan ' . $pemain2->name . ' mendapatkan hasil seri pada pos ' . $penpos->name;
             }
@@ -376,8 +387,8 @@ class DashboardController extends Controller
                 $pemain2->kartus()->attach($kartuMenang->id);
 
                 // UBAH status permainan pemain_penpos menjadi Menang / Kalah
-                $penpos->pemains()->sync([$pemain1->id => ['result' => "Kalah"]], false);
-                $penpos->pemains()->sync([$pemain2->id => ['result' => "Menang"]], false);
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Kalah dari ".$pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Menang dari ".$pemain1->name]], false);
 
                 $msg = 'Pemain ' . $pemain2->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
             }
