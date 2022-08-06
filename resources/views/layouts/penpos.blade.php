@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ asset('template/assets/css/plugins.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
+  @yield('cdn')
 </head>
 
 <body>
