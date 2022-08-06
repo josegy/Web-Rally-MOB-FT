@@ -1,30 +1,36 @@
 @extends('layouts.penpos')
 @section('penpos_content')
-@if (session('status'))
-            <div class="alert alert-custom alert-light-success fade show mb-5" role="alert" style="width:100%; Max-height:5em;">
-                <div class="alert-icon"><i class="flaticon2-check-mark"></i></div>
-                <div class="alert-text" style="font-size:125%;">{{session('status')}}</div>
-                <div class="alert-close">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"><i class="ki ki-close"></i></span>
-                    </button>
-                </div>
+    @if (session('status'))
+        <div class="alert alert-custom alert-light-success fade show mb-5" role="alert" style="width:100%; Max-height:5em;">
+            <div class="alert-icon"><i class="flaticon2-check-mark"></i></div>
+            <div class="alert-text" style="font-size:125%;">{{ session('status') }}</div>
+            <div class="alert-close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                </button>
             </div>
-            @endif
+        </div>
+    @endif
     <div class="container pt-10 pt-md-14">
         <div class='card'>
             <div class="card-header">
                 <h1>ATUR WAKTU</h1>
             </div>
             <div class='card-body'>
-                <form action="{{route('ed-edit')}}" method='post'>
+                <form action="{{ route('ed-edit') }}" method='post'>
                     @csrf
                     <div>
-                        <label for=""><h3>Waktu Mulai</h3></label>
-                        <input type="time" class='form-control' id='start' name='start' value='{{$data[0]->start}}'>
+                        <label for="">
+                            <h3>Waktu Mulai</h3>
+                        </label>
+                        <input type="time" class='form-control' id='start' name='start'
+                            value='{{ $data[0]->start }}'>
                         <br>
-                        <label for=""><h3>Waktu Selesai</h3></label>
-                        <input type="time" class='form-control' id='end' name='end' value='{{$data[0]->end}}'>
+                        <label for="">
+                            <h3>Waktu Selesai</h3>
+                        </label>
+                        <input type="time" class='form-control' id='end' name='end'
+                            value='{{ $data[0]->end }}'>
                     </div>
                     <br>
                     <div class="text-end">
@@ -37,7 +43,7 @@
 
     {{-- Modal Konfirmasi Hapus --}}
     <div class="modal fade" id="confirmSimpan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="notifLabel" aria-hidden="true">
+        aria-labelledby="notifLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -73,5 +79,4 @@
             </div>
         </div>
     </div>
-
 @endsection

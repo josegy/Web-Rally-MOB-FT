@@ -237,7 +237,7 @@
         $('#btnHapus').click(function() {
             arrCard = [];
             $('#listHapus').empty();
-            
+
             let panjang = $('.item').length;
             for (let x = 0; x < panjang; x++) {
                 let isChecked = $('#check_' + x).prop('checked');

@@ -139,25 +139,28 @@
                                 <b>Tipe:</b> {{ $sp->type }}<br>
                                 <b>Lokasi:</b> {{ $sp->lokasi }}<br>
                                 <b>Status:</b>
-                                @if ($sp->status == "KOSONG")
-                                    <span class="fs-14 badge bg-pale-green text-green rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
-                                @elseif ($sp->status == "PENUH")
-                                    <span class="fs-14 badge bg-pale-red text-red rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
+                                @if ($sp->status == 'KOSONG')
+                                    <span class="fs-14 badge bg-pale-green text-green rounded-pill"
+                                        id='status-{{ $nomer }}'>{{ $sp->status }}</span>
+                                @elseif ($sp->status == 'PENUH')
+                                    <span class="fs-14 badge bg-pale-red text-red rounded-pill"
+                                        id='status-{{ $nomer }}'>{{ $sp->status }}</span>
                                 @else
-                                    <span class="fs-14 badge bg-pale-yellow text-yellow rounded-pill" id='status-{{ $nomer }}'>{{ $sp->status }}</span>
+                                    <span class="fs-14 badge bg-pale-yellow text-yellow rounded-pill"
+                                        id='status-{{ $nomer }}'>{{ $sp->status }}</span>
                                 @endif
                                 <br>
                                 <b>Kartu yang didapatkan:</b>
-                                @if ($sp->kartu == "wajik")
-                                <span class="text-red fs-20">♦</span>
-                                @elseif ($sp->kartu == "keriting")
-                                <span class="text-dark fs-20">♣</span>
-                                @elseif ($sp->kartu == "love")
-                                <span class="text-red fs-20">♥</span>
-                                @elseif ($sp->kartu == "waru")
-                                <span class="text-dark fs-20">♠</span>
+                                @if ($sp->kartu == 'wajik')
+                                    <span class="text-red fs-20">♦</span>
+                                @elseif ($sp->kartu == 'keriting')
+                                    <span class="text-dark fs-20">♣</span>
+                                @elseif ($sp->kartu == 'love')
+                                    <span class="text-red fs-20">♥</span>
+                                @elseif ($sp->kartu == 'waru')
+                                    <span class="text-dark fs-20">♠</span>
                                 @else
-                                {{ $sp->kartu }}
+                                    {{ $sp->kartu }}
                                 @endif
                             </div>
                             <?php $nomer++; ?>
@@ -206,29 +209,38 @@
                             </li>
                             <li>
                                 Potongan kartu yang diperoleh dapat ditukarkan dengan kartu acak apabila tim menukarkan
-                                dengan 3 potongan kartu. Kartu yang ditukarkan juga dapat dipilih (angka dan simbol) apabila
+                                dengan 3 potongan kartu. Kartu yang ditukarkan juga dapat dipilih (angka dan simbol)
+                                apabila
                                 tim menukarkan dengan 5 potongan kartu.
                             </li>
                             <li>
                                 Apabila ada kartu yang tidak diinginkan, kartu dapat ditukarkan menggunakan “penukaran
                                 spesial”. Setiap tim hanya memiliki kesempatan “penukaran spesial” sebanyak 1 kali.
                                 Tim dapat memilih salah satu dari angka maupun simbol yang diinginkan (contoh: ingin
-                                menukarkan berdasarkan angka atau ingin menukarkan berdasarkan simbol) dengan menukarkan 1 kartu
-                                utuh yang tidak diinginkan dan 1 potongan kartu. "Penukaran spesial" hanya akan dibuka pada jam tertentu,
+                                menukarkan berdasarkan angka atau ingin menukarkan berdasarkan simbol) dengan menukarkan
+                                1 kartu
+                                utuh yang tidak diinginkan dan 1 potongan kartu. "Penukaran spesial" hanya akan dibuka
+                                pada jam tertentu,
                                 jadi pastikan para <i>Survivors</i> memperhatikan jam tersebut.
                             </li>
                             <li>
-                                Penukaran kartu menjadi <i>Royale</i> dapat dilakukan di <i>Dealers Table</i> ketika sesi <i>Rally Games</i> berlangsung
+                                Penukaran kartu menjadi <i>Royale</i> dapat dilakukan di <i>Dealers Table</i> ketika
+                                sesi <i>Rally Games</i> berlangsung
                                 dan tutup setelah sesi <i>Rally Games</i> usai.
-                                <br><br>Terdapat beberapa syarat yang harus dipenuhi oleh <i>Survivors</i> sebelum menukarkan
+                                <br><br>Terdapat beberapa syarat yang harus dipenuhi oleh <i>Survivors</i> sebelum
+                                menukarkan
                                 kartu menjadi <i>Royale</i>, yaitu:<br>
                                 • Kartu harus berjumlah lebih dari 6 kartu. <br>
-                                • Kartu harus terdiri atas 4 simbol kartu <i>(clubs (♣), diamonds (♦), hearts (♥), and spades (♠))</i>.<br>
+                                • Kartu harus terdiri atas 4 simbol kartu <i>(clubs (♣), diamonds (♦), hearts (♥), and
+                                    spades (♠))</i>.<br>
                                 • Kartu harus terbentuk menjadi salah satu kombinasi kartu di bawah ini: <br>
-                                    - <i>Four of Kind</i>, yaitu rangkaian kartu yang terdiri atas 4 angka sama. <br>
-                                    - <i>Full House</i>, yaitu rangkaian kartu terdiri atas 3 kartu angka sama dan 2 kartu angka sama.  <br>
-                                    - <i>Straight (bukan straight flush)</i>, yaitu rangkaian 5 kartu dengan angka yang berurutan.<br>
-                                    - <i>Two Pair</i>, yaitu rangkaian kartu yang terdiri atas 2 pasang kartu yang memiliki angka yang sama.<br>
+                                - <i>Four of Kind</i>, yaitu rangkaian kartu yang terdiri atas 4 angka sama. <br>
+                                - <i>Full House</i>, yaitu rangkaian kartu terdiri atas 3 kartu angka sama dan 2 kartu
+                                angka sama. <br>
+                                - <i>Straight (bukan straight flush)</i>, yaitu rangkaian 5 kartu dengan angka yang
+                                berurutan.<br>
+                                - <i>Two Pair</i>, yaitu rangkaian kartu yang terdiri atas 2 pasang kartu yang memiliki
+                                angka yang sama.<br>
                             </li>
                         </ol>
                     </div>
@@ -404,14 +416,20 @@
         /* Pusher */
         window.Echo.channel('penposChannel').listen('.penposStatus', (e) => {
             // alert(e.id)
-            if(e.penposStatus.status == 'KOSONG'){
-                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass('fs-14 badge bg-pale-red text-red rounded-pill').removeClass('fs-14 badge bg-pale-yellow text-yellow rounded-pill').addClass('fs-14 badge bg-pale-green text-green rounded-pill');
-            }
-            else if(e.penposStatus.status == 'PENUH'){
-                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass('fs-14 badge bg-pale-green text-green rounded-pill').removeClass('fs-14 badge bg-pale-yellow text-yellow rounded-pill').addClass('fs-14 badge bg-pale-red text-red rounded-pill');
-            }
-            else {
-                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass('fs-14 badge bg-pale-red text-red rounded-pill').addClass('fs-14 badge bg-pale-yellow text-yellow rounded-pill');
+            if (e.penposStatus.status == 'KOSONG') {
+                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass(
+                    'fs-14 badge bg-pale-red text-red rounded-pill').removeClass(
+                    'fs-14 badge bg-pale-yellow text-yellow rounded-pill').addClass(
+                    'fs-14 badge bg-pale-green text-green rounded-pill');
+            } else if (e.penposStatus.status == 'PENUH') {
+                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass(
+                    'fs-14 badge bg-pale-green text-green rounded-pill').removeClass(
+                    'fs-14 badge bg-pale-yellow text-yellow rounded-pill').addClass(
+                    'fs-14 badge bg-pale-red text-red rounded-pill');
+            } else {
+                $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass(
+                    'fs-14 badge bg-pale-red text-red rounded-pill').addClass(
+                    'fs-14 badge bg-pale-yellow text-yellow rounded-pill');
             }
         });
 
@@ -424,7 +442,7 @@
                 },
                 success: function(data) {
                     // alert('success');
-                    
+
                     var i = 1
                     $.each(data.utuh, function(key, value) {
                         $("#listUtuh").trigger('remove.owl.carousel', [key]).trigger(
@@ -483,13 +501,13 @@
                     let jumlahKartu = data.jumlahKartu;
                     // console.log(jumlahPotongan);
                     // console.log(jumlahKartu);
-                    console.log('special '+ data.special);
+                    console.log('special ' + data.special);
                     $('#spesial').prop('disabled', false);
 
 
                     $('#selectKartu').html(data.selectKartu);
 
-                    if(data.special == 'tutup'){
+                    if (data.special == 'tutup') {
                         console.log('masuk special');
                         $('#spesial').prop('disabled', true);
                     }

@@ -49,7 +49,7 @@ class KartuController extends Controller
         $now =  strtotime(Carbon::now());
         $special = 'tutup';
 
-        if(($now >= strtotime($time[0]->start)) && ($now <= strtotime($time[0]->end))){
+        if (($now >= strtotime($time[0]->start)) && ($now <= strtotime($time[0]->end))) {
             $special = 'buka';
         }
 
@@ -95,6 +95,11 @@ class KartuController extends Controller
                 ->select('name')
                 ->where('id', '=', $idCard)
                 ->get();
+
+            DB::table('history_tukar')->insert([
+                'pemain_id' => $user->id,
+                'type' => $tipe
+            ]);
         }
         // kalau pemain pilih 'pilih'
         else if ($tipe == 'pilih') {
@@ -118,6 +123,11 @@ class KartuController extends Controller
             DB::table('kartu_pemain')->insert([
                 'kartu_id' => $card[0]->id,
                 'pemain_id' => $user->id
+            ]);
+
+            DB::table('history_tukar')->insert([
+                'pemain_id' => $user->id,
+                'type' => $tipe
             ]);
         }
         // kalau pemain pilih 'spesial'
@@ -161,6 +171,11 @@ class KartuController extends Controller
             DB::table('kartu_pemain')->insert([
                 'kartu_id' => $card->id,
                 'pemain_id' => $user->id
+            ]);
+
+            DB::table('history_tukar')->insert([
+                'pemain_id' => $user->id,
+                'type' => $tipe
             ]);
         }
 
