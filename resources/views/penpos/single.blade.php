@@ -1,4 +1,17 @@
 @extends('layouts.penpos')
+
+@section('style')
+    <style>
+        #halHistory{
+            color: #343F52;
+        }
+
+        #halUtama, #halHistory:hover{
+            color: #5179DF;
+        }
+    </style>
+@endsection
+
 @section('penpos_content')
     <section class="wrapper bg-soft-primary">
         <div class="container pt-10 pt-md-14 text-center">
@@ -72,7 +85,29 @@
             </div>
         </div>
     </section>
+
+    {{-- Modal Konfirmasi Menang/Seri/Kalah --}}
+    <div class="modal fade" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="notifLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Konfirmasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body flex">
+                    {{-- Contoh Menang: Apakah anda yakin Tim 1 Menang dari Tim 2? --}}
+                    {{-- Contoh Kalah: Apakah anda yakin Tim 1 Kalah dari Tim 2? --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal">Konfirmasi</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
 @section('penpos_script')
     <script>
         function cekPosSingle() {

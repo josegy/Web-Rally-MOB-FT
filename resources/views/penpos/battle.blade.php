@@ -1,4 +1,17 @@
 @extends('layouts.penpos')
+
+@section('style')
+    <style>
+        #halHistory{
+            color: #343F52;
+        }
+
+        #halUtama, #halHistory:hover{
+            color: #5179DF;
+        }
+    </style>
+@endsection
+
 @section('penpos_content')
     <section class="wrapper bg-soft-primary">
         <div class="container pt-10 pt-md-14 text-center">
@@ -74,51 +87,7 @@
                             id="btnSubmit">Submit</button>
                     </div>
                     <hr class="my-8">
-                    {{-- <div class="row">
-                <div class="col-md-4 text-end pt-2">
-                    <label> <h3>Nama Tim 1 :</h3></label>
-                </div>
-                <div class="col-md-5">
-                  <select name="namaTim" id="pemain1_id" class="form-select" required>
-                    <option value="" hidden>-- Pilih Nama Pemain --</option>
-                    @foreach ($all_pemain as $pemain)
-                        <option value="{{ $pemain->id }}">
-                            {{ $pemain->name }}
-                        </option>
-                    @endforeach
-                </select>
-                </div>
-                <div class="col-md-3 text-start">
-                    <form action="">
-                        <button type="button" class="btn btn-success" id='cekPemain1' validasi="0" onclick='cekPosBattle(1)'>Check</button>
-                    </form>
-                </div>
-            </div> --}}
 
-                    {{-- <div class="col-md-6">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 text-end pt-2">
-                            <label> <h3>Nama Tim 2 :</h3></label>
-                        </div>
-                        <div class="col-md-5">
-                          <select name="namaTim" id="pemain2_id" class="form-select" required>
-                            <option value="" hidden>-- Pilih Nama Pemain --</option>
-                            @foreach ($all_pemain as $pemain)
-                                <option value="{{ $pemain->id }}">
-                                    {{ $pemain->name }}
-                                </option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <div class="col-md-3 text-start">
-                            <form action="">
-                                <button type="button" class="btn btn-success" validasi="0" id='cekPemain2' onclick='cekPosBattle(2)'>Check</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
                     <div>
                         <form action="" method="GET">
                             <button type="button" class="btn btn-success mb-2" id="btnMenang" disabled
@@ -163,7 +132,30 @@
             </div>
         </div>
     </section>
+
+    {{-- Modal Konfirmasi Menang/Seri/Kalah --}}
+    <div class="modal fade" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="notifLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Konfirmasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body flex">
+                    {{-- Contoh Menang: Apakah anda yakin Tim 1 Menang dari Tim 2 --}}
+                    {{-- Contoh Seri: Apakah anda yakin Tim 1 Seri dengan Tim 2 --}}
+                    {{-- Contoh Kalah: Apakah anda yakin Tim 1 Kalah dari Tim 2 --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal">Konfirmasi</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
 @section('penpos_script')
     <script>
         function updateStatus() {

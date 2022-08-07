@@ -60,8 +60,7 @@
                 </div>
                 <div class="card-footer mt-3">
                     <div class="row align-items-center">
-                        <button id="btnHapus" class="btn" data-bs-toggle="modal" data-bs-target="#confirmHapus"
-                            style="background-color: red; color: white">HAPUS</button>
+                        <button id="btnHapus" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmHapus">HAPUS</button>
                     </div>
                 </div>
             </div>
@@ -84,9 +83,8 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button id="konfirmasiHapus" type="button" class="btn btn-success"
-                        data-bs-dismiss="modal">Hapus</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button id="konfirmasiHapus" type="button" class="btn btn-danger" data-bs-dismiss="modal">Hapus</button>
                 </div>
             </div>
         </div>
@@ -110,13 +108,6 @@
             </div>
         </div>
     </div>
-
-    <footer class="bg-grape text-white mt-5 mt-md-16">
-        <div class="container text-center py-5 fs-18">
-            <p>Developed by Information Technology Department MOB FT 2022</p>
-            <p>© 2022 MOB FT 2022. All Rights Reserved.</p>
-        </div>
-    </footer>
 
     <script src="{{ asset('template/assets/js/theme.js') }}"></script>
     <script src="{{ asset('template/assets/js/plugins.js') }}"></script>
