@@ -56,9 +56,9 @@
                     <div>
                         <form action="" method="GET">
                             <button type="button" class="btn btn-green" id="btn_menang" disabled
-                                onclick="resultGame('Menang')">Menang</button>
+                                onclick="showModal('Menang')">Menang</button>
                             <button type="button" class="btn btn-danger" id="btn_kalah" disabled
-                                onclick="resultGame('Kalah')">Kalah</button>
+                                onclick="showModal('Kalah')">Kalah</button>
                         </form>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
     </section>
 
     {{-- Modal Konfirmasi Menang/Seri/Kalah --}}
-    <div class="modal fade" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="modal_confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="notifLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -96,12 +96,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
+                  <h5 id="modal_message"></h5>
                     {{-- Contoh Menang: Apakah anda yakin Tim 1 Menang dari Tim 2? --}}
                     {{-- Contoh Kalah: Apakah anda yakin Tim 1 Kalah dari Tim 2? --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal">Konfirmasi</button>
+                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="">Konfirmasi</button>
                 </div>
             </div>
         </div>
@@ -247,6 +248,21 @@
                 }
             });
 
+        }
+
+        function showModal(result){
+          var msg_modal = "";
+          
+          if(result == "Menang"){
+            msg_modal = "Apakah anda yakin Tim Menang?";
+            $('#konfirmasi').attr("onclick","resultGame('Menang')");
+          }
+          else if (result == "Kalah"){
+            msg_modal = "Apakah anda yakin Tim Kalah?";
+            $('#konfirmasi').attr("onclick","resultGame('Kalah')");
+          }
+          $('#modal_message').html(msg_modal);
+          $('#modal_confirm').modal('show');
         }
     </script>
 @endsection

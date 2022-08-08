@@ -42,19 +42,19 @@ class DashboardController extends Controller
         $penpos = Auth::user()->penpos;
 
         // Ambil data history pemain_penpos
-        $historyPenpos = $penpos->pemains()->where('is_done',1)->orderBy('waktu', 'DESC')->get();
+        $historyPenpos = $penpos->pemains()->where('is_done', 1)->orderBy('waktu', 'DESC')->get();
         // dd($historyPenpos);
 
         // Attach data pemain_id di historyPenpos
         $index = 0;
-        foreach($historyPenpos as $history){
+        foreach ($historyPenpos as $history) {
             $pemainA = Pemain::find($history->pivot->pemain_id);
             $historyPenpos[$index]->namaPemain = $pemainA->name;
-            $waktu = date( 'H:i', strtotime($history->pivot->waktu));
+            $waktu = date('H:i', strtotime($history->pivot->waktu));
             $historyPenpos[$index]->waktuDapat = $waktu;
-            $index++;    
+            $index++;
         }
-        
+
         return view('penpos.history', compact('penpos', 'historyPenpos'));
     }
 
@@ -264,6 +264,8 @@ class DashboardController extends Controller
         // UBAH status playing jadi 1 karena hendak bermain
         $penpos->pemains()->sync([$pemain->id => ['playing' => 1]], false);
         $pemainNonPlaying = $this->getAllPemainNonPlaying();
+        $all_pemain_playing = $this->getAllPemainPlaying();
+        $total = count($all_pemain_playing);
 
         $status = 'success';
         $msg = 'Status pos berhasil diubah menjadi menunggu lawan!';
@@ -277,6 +279,8 @@ class DashboardController extends Controller
             'status' => $status,
             'msg' => $msg,
             'pemainNonPlaying' => $pemainNonPlaying,
+            'all_pemain_playing' => $all_pemain_playing,
+            'total' => $total
         ), 200);
     }
 
@@ -365,8 +369,8 @@ class DashboardController extends Controller
                 $pemain2->kartus()->attach($kartuKalah->id);
 
                 // UBAH status permainan pemain_penpos menjadi Menang / Kalah
-                $penpos->pemains()->sync([$pemain1->id => ['result' => "Menang dari ".$pemain2->name]], false);
-                $penpos->pemains()->sync([$pemain2->id => ['result' => "Kalah dari ".$pemain1->name]], false);
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Menang dari " . $pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Kalah dari " . $pemain1->name]], false);
 
                 $msg = 'Pemain ' . $pemain1->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain2->name . ' gagal memenangkan pos ' . $penpos->name;
             }
@@ -376,8 +380,8 @@ class DashboardController extends Controller
                 $pemain2->kartus()->attach($kartuKalah->id);
 
                 // UBAH status permainan pemain_penpos menjadi Seri
-                $penpos->pemains()->sync([$pemain1->id => ['result' => "Seri dari ".$pemain2->name]], false);
-                $penpos->pemains()->sync([$pemain2->id => ['result' => "Seri dari ".$pemain1->name]], false);
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Seri dari " . $pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Seri dari " . $pemain1->name]], false);
 
                 $msg = 'Pemain ' . $pemain1->name . ' dan ' . $pemain2->name . ' mendapatkan hasil seri pada pos ' . $penpos->name;
             }
@@ -387,8 +391,8 @@ class DashboardController extends Controller
                 $pemain2->kartus()->attach($kartuMenang->id);
 
                 // UBAH status permainan pemain_penpos menjadi Menang / Kalah
-                $penpos->pemains()->sync([$pemain1->id => ['result' => "Kalah dari ".$pemain2->name]], false);
-                $penpos->pemains()->sync([$pemain2->id => ['result' => "Menang dari ".$pemain1->name]], false);
+                $penpos->pemains()->sync([$pemain1->id => ['result' => "Kalah dari " . $pemain2->name]], false);
+                $penpos->pemains()->sync([$pemain2->id => ['result' => "Menang dari " . $pemain1->name]], false);
 
                 $msg = 'Pemain ' . $pemain2->name . ' memenangkan pos ' . $penpos->name . ' dan Pemain ' . $pemain1->name . ' gagal memenangkan pos ' . $penpos->name;
             }

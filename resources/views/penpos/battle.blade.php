@@ -91,11 +91,11 @@
                     <div>
                         <form action="" method="GET">
                             <button type="button" class="btn btn-success mb-2" id="btnMenang" disabled
-                                onclick="resultGame('Menang')">Menang</button>
+                                onclick="showModal('Menang')">Menang</button>
                             <button type="button" class="btn btn-yellow mb-2" id="btnSeri" disabled
-                                onclick="resultGame('Seri')">Seri</button>
+                                onclick="showModal('Seri')">Seri</button>
                             <button type="button" class="btn btn-danger mb-2" id="btnKalah" disabled
-                                onclick="resultGame('Kalah')">Kalah</button>
+                                onclick="showModal('Kalah')">Kalah</button>
                         </form>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
     </section>
 
     {{-- Modal Konfirmasi Menang/Seri/Kalah --}}
-    <div class="modal fade" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="modal_confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="notifLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -143,13 +143,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
+                  <h5 id="modal_message"></h5>
                     {{-- Contoh Menang: Apakah anda yakin Tim 1 Menang dari Tim 2 --}}
                     {{-- Contoh Seri: Apakah anda yakin Tim 1 Seri dengan Tim 2 --}}
                     {{-- Contoh Kalah: Apakah anda yakin Tim 1 Kalah dari Tim 2 --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal">Konfirmasi</button>
+                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="">Konfirmasi</button>
                 </div>
             </div>
         </div>
@@ -247,7 +248,17 @@
                         // Ambil 
                         var validasipemain1 = $('#cekPemain1').attr('validasi');
                         var validasipemain2 = $('#cekPemain2').attr('validasi');
-                        var option_pemain = `<option value="" selected>-- Pilih Nama Pemain --</option>`;
+                        var option_pemain = "";
+                        // CEK apakah masih ada yang playing?
+                        if (data.total != 0) {
+                            option_pemain +=
+                                `<option value="" selected>-- Pilih Nama Pemain Playing --</option>`;
+                            $.each(data.all_pemain_playing, (key, pemain_playing) => {
+                                option_pemain +=
+                                    `<option value=${pemain_playing.id}>${pemain_playing.name}</option>`;
+                            });
+                        }
+                        option_pemain += `<option value="" selected>-- Pilih Nama Pemain --</option>`;
                         $.each(data.pemainNonPlaying, (key, pemain_nonplaying) => {
                             option_pemain +=
                                 `<option value=${pemain_nonplaying.id}>${pemain_nonplaying.name}</option>`;
@@ -409,6 +420,25 @@
                 }
             });
 
+        }
+
+        function showModal(result){
+          var msg_modal = "";
+          
+          if(result == "Menang"){
+            msg_modal = "Apakah anda yakin Tim 1 Menang dari Tim 2?";
+            $('#konfirmasi').attr("onclick","resultGame('Menang')");
+          }
+          else if(result == "Seri"){
+            msg_modal = "Apakah anda yakin Tim 1 Seri dengan Tim 2?";
+            $('#konfirmasi').attr("onclick","resultGame('Seri')");
+          }
+          else if (result == "Kalah"){
+            msg_modal = "Apakah anda yakin Tim 1 Kalah dari Tim 2?";
+            $('#konfirmasi').attr("onclick","resultGame('Kalah')");
+          }
+          $('#modal_message').html(msg_modal);
+          $('#modal_confirm').modal('show');
         }
     </script>
 @endsection
