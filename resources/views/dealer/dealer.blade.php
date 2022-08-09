@@ -16,52 +16,40 @@
     <div class="container pt-10 pt-md-14">
         <div class="card">
             <div class="card-header">
-                <h1 style="text-align: center">HAPUS KARTU</h1>
+                <h1 style="text-align: center">TUKAR ROYALE CARD</h1>
             </div>
             <div class="card-body">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-auto">
-                        <h3>Nama Tim : </h3>
+                        <h3>Nama Tim:</h3>
                     </div>
-
                     {{-- Select Nama Tim --}}
                     <div class="col-auto">
                         <select class="form-select" name="teamName" id="teamName">
-                            <option value="pilih" hidden>-- Pilih Nama Pemain --</option>
+                            <option value="pilih" hidden>-- Pilih Pemain --</option>
                             @for ($x = 0; $x < count($pemain); $x++)
                                 <option value="{{ $pemain[$x]->id }}">{{ str_replace('_', ' ', $pemain[$x]->name) }}
                                 </option>
                             @endfor
                         </select>
                     </div>
-                </div>
-            </div>
-            <div class="card-body border-top border-1">
+                </div>  
+                <hr class="my-2">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-auto mb-4">
                         <h2>KARTU DIMILIKI</h2>
                     </div>
                 </div>
-                <div class="row align-items-center justify-content-center mb-6">
-                    {{-- Carousel Tampil Kartu --}}
-                    <div class="col">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-12">
                         <div id="listUtuh" class="owl-carousel owl-theme">
-                            {{-- @for ($x = 0; $x < count($kartu); $x++)
-                                <div class="item">
-                                    <img src="{{ asset('/asset/img/' . $kartu[$x]->gambar . '.png') }}"
-                                        class="card-img-top">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckDefault">
-                                    {{ str_replace('_', ' ', $kartu[$x]->namaKartu) }}
-                                </div>
-                            @endfor --}}
                         </div>
                     </div>
                 </div>
-                <div class="card-footer mt-3">
-                    <div class="row align-items-center">
-                        <button id="btnHapus" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmHapus">HAPUS</button>
-                    </div>
+            </div>
+            <div class="card-footer mt-3">
+                <div class="row align-items-center">
+                    <button id="btnHapus" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmHapus">HAPUS</button>
                 </div>
             </div>
         </div>

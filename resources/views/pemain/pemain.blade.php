@@ -37,15 +37,15 @@
     <div class="content-wrapper">
         {{-- Navbar --}}
         <header class="wrapper bg-soft-primary">
-            <nav class="navbar navbar-expand-lg center-nav transparent navbar-light py-3">
+            <nav class="navbar navbar-expand-lg classic transparent navbar-light py-3">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
                         <a href="#">
                             <img src="{{ asset('asset/img/MOB FT 2022.svg') }}" alt="" />
                         </a>
                     </div>
-                    <div class="navbar-other w-100 d-flex ms-auto">
-                        <ul class="navbar-nav flex-row align-items-center ms-auto justify-content-end">
+                    <div class="navbar-other w-100 d-flex ms-md-auto">
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <li class="nav-item dropdown language-select">
                                 <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true"
@@ -74,13 +74,13 @@
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
             <div style="overflow: auto; padding-bottom: 10rem;">
-                <img src="{{ asset('asset/img/peta-isometric-01(crop).png') }}" alt="Rally Map" usemap="#image-map" />
+                <img src="{{ asset('asset/img/peta-isometric-revisi-01(crop).png') }}" alt="Rally Map" usemap="#image-map" />
 
                 <map name="image-map">
                     <area id="1" class='penpos' target="" alt="TF 2.3" title="TF 2.3" href=""
                         coords="527,408,9" shape="circle">
-                    <area id="2" class='penpos' target="" alt="Sebelah TG" title="Sebelah TG"
-                        href="" coords="809,286,9" shape="circle">
+                    <area id="2" class='penpos' target="" alt="TF Lantai 1 (Depan PAJ TI)"
+                        title="TF Lantai 1 (Depan PAJ TI)" href="" coords="389,488,9" shape="circle">
                     <area id="3" class='penpos' target="" alt="TF Dekat Keluwih" title="TF Dekat Keluwih"
                         href="" coords="588,368,9" shape="circle">
                     <area id="4" class='penpos' target="" alt="Kelas Gedung TB (1.1 C)"
@@ -105,15 +105,15 @@
                     <area id="13" class='penpos' target="" alt="Sebelah TF 2.3" title="Sebelah TF 2.3"
                         href="" coords="581,389,9" shape="circle">
                     <area id="14" class='penpos' target="" alt="Jembatan ke Farmasi"
-                        title="Jembatan ke Farmasi" href="" coords="766,502,9" shape="circle">
+                        title="Jembatan ke Farmasi" href="" coords="767,532,9" shape="circle">
                     <area id="15" class='penpos' target="" alt="Antara TE dan Keluwih"
                         title="Antara TE dan Keluwih" href="" coords="564,370,9" shape="circle">
-                    <area id="16" class='penpos' target="" alt="TF Lantai 1 (Depan PAJ TI)"
-                        title="TF Lantai 1 (Depan PAJ TI)" href="" coords="389,488,9" shape="circle">
+                    <area id="16" class='penpos' target="" alt="Sebelah TG" title="Sebelah TG" 
+                        href="" coords="809,286,9" shape="circle">
                     <area id="17" class='penpos' target="" alt="Jalan Antara TA dan TF"
                         title="Jalan Antara TA dan TF" href="" coords="458,521,9" shape="circle">
-                    <area id="18" class='penpos' target="" alt="Jembatan TA dan TF"
-                        title="Jembatan TA dan TF" href="" coords="470,491,9" shape="circle">
+                    <area id="18" class='penpos' target="" alt="Depan Papan No Smoking"
+                        title="Depan Papan No Smoking" href="" coords="510,553,9" shape="circle">
                     <area id="19" class='penpos' target="" alt="Depan BEM FT" title="Depan BEM FT"
                         href="" coords="328,532,9" shape="circle">
                     <area id="20" class='penpos' target="" alt="Depan TA" title="Depan TA"

@@ -15,28 +15,30 @@
     <div class="container pt-10 pt-md-14">
         <div class="card">
             <div class="card-body">
-                <table id="tabel" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Nama Pos</th>
-                            <th>Nama Tim</th>
-                            <th>Status</th>
-                            <th>Jam Ditambah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (count($historyPenpos) != 0)
-                            @foreach ($historyPenpos as $history)
-                                <tr>
-                                    <td>{{ $penpos->name }}</td>
-                                    <td>{{ $history->namaPemain }}</td>
-                                    <td>{{ $history->pivot->result }}</td>
-                                    <td>{{ $history->waktuDapat }}</td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table id="tabel" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nama Pos</th>
+                                <th>Nama Tim</th>
+                                <th>Status</th>
+                                <th>Jam Ditambah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (count($historyPenpos) != 0)
+                                @foreach ($historyPenpos as $history)
+                                    <tr>
+                                        <td>{{ $penpos->name }}</td>
+                                        <td>{{ $history->namaPemain }}</td>
+                                        <td>{{ $history->pivot->result }}</td>
+                                        <td>{{ $history->waktuDapat }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

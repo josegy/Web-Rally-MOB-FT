@@ -27,14 +27,14 @@
                         <div class="col-auto mx-3">
                             <select name="namaTim" id="pemain_id" class="form-select" required>
                                 @if (count($all_pemain_playing) != 0)
-                                    <option value="" hidden>-- Pilih Nama Pemain Playing--</option>
+                                    <option value="" hidden>-- Pilih Pemain yang Bermain --</option>
                                     @foreach ($all_pemain_playing as $pemainPlaying)
                                         <option value="{{ $pemainPlaying->id }}">
                                             {{ $pemainPlaying->name }}
                                         </option>
                                     @endforeach
                                 @else
-                                    <option value="" hidden>-- Pilih Nama Pemain --</option>
+                                    <option value="" hidden>-- Pilih Pemain --</option>
                                     @foreach ($all_pemain as $pemain)
                                         <option value="{{ $pemain->id }}">
                                             {{ $pemain->name }}
@@ -92,7 +92,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="">Konfirmasi</h5>
+                    <h3 class="modal-title" id="">Konfirmasi</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body flex">
@@ -101,8 +101,8 @@
                     {{-- Contoh Kalah: Apakah anda yakin Tim 1 Kalah dari Tim 2? --}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="">Konfirmasi</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="">Ya</button>
                 </div>
             </div>
         </div>

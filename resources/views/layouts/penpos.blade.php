@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="{{ asset('template/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
   @yield('cdn')
-  @yield('style')
 </head>
 
 <body>
@@ -31,11 +30,10 @@
           <div class="navbar-other w-100 d-flex ms-md-auto">
             <ul class="navbar-nav flex-row align-items-center ms-auto">
               <li class="nav-item dropdown language-select">
-                <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->penpos->name }}</a>
+                <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                 <ul class="dropdown-menu">
                   <li class="nav-item">
-                    <a href="#" class="dropdown-item" id="halUtama">Halaman Utama</a>
-                    <a href="#" class="dropdown-item" id="halHistory">History</a>
+                    <a href="{{ route('penpos.history') }}" class="dropdown-item">History</a>
                     <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}

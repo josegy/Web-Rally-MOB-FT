@@ -27,14 +27,14 @@
                         <div class="col-auto mx-3">
                             <select name="namaTim" id="pemain1_id" class="form-select" required>
                                 @if (count($all_pemain_playing) != 0)
-                                    <option value="">-- Pilih Nama Pemain Playing--</option>
+                                    <option value="">-- Pilih Pemain yang Bermain --</option>
                                     @foreach ($all_pemain_playing as $pemainPlaying)
                                         <option value="{{ $pemainPlaying->id }}">
                                             {{ $pemainPlaying->name }}
                                         </option>
                                     @endforeach
                                 @endif
-                                <option value="">-- Pilih Nama Pemain --</option>
+                                <option value="">-- Pilih Pemain 1 --</option>
                                 @foreach ($all_pemain as $pemain)
                                     <option value="{{ $pemain->id }}">
                                         {{ $pemain->name }}
@@ -58,14 +58,14 @@
                         <div class="col-auto mx-3">
                             <select name="namaTim" id="pemain2_id" class="form-select" required>
                                 @if (count($all_pemain_playing) != 0)
-                                    <option value="">-- Pilih Nama Pemain Playing--</option>
+                                    <option value="">-- Pilih Pemain yang Bermain--</option>
                                     @foreach ($all_pemain_playing as $pemainPlaying)
                                         <option value="{{ $pemainPlaying->id }}">
                                             {{ $pemainPlaying->name }}
                                         </option>
                                     @endforeach
                                 @endif
-                                <option value="">-- Pilih Nama Pemain --</option>
+                                <option value="">-- Pilih Pemain 2 --</option>
                                 @foreach ($all_pemain as $pemain)
                                     <option value="{{ $pemain->id }}">
                                         {{ $pemain->name }}
@@ -149,8 +149,8 @@
                     {{-- Contoh Kalah: Apakah anda yakin Tim 1 Kalah dari Tim 2 --}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="">Konfirmasi</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <button id="konfirmasi" type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="">Ya</button>
                 </div>
             </div>
         </div>
