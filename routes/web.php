@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     // cuma untuk halaman awal
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/','HomeController@index');
 
     // Route Penpos
     Route::group(
@@ -68,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
 
 Auth::routes();
 
-// Dealer 
+// Dealer
 Route::get('/dealer', 'DealerController@dealer')->name('dealer');
 Route::post('/dealer/change', 'DealerController@change')->name('dealer.change');
 Route::post('/dealer/hapus', 'DealerController@hapus')->name('dealer.hapus');
