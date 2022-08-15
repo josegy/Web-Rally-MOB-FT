@@ -14,6 +14,9 @@
 @section('penpos_content')
     <div class="container pt-10 pt-md-14">
         <div class="card">
+            <div class="card-header text-center">
+                <h1>Histori</h1>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="tabel" class="table table-striped">

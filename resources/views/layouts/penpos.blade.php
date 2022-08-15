@@ -23,7 +23,7 @@
       <nav class="navbar navbar-expand-lg classic navbar-light py-3">
         <div class="container flex-lg-row flex-nowrap align-items-center">
           <div class="navbar-brand w-100">
-            <a href="#">
+            <a href="{{route('penpos.index')}}">
               <img src="{{ asset('asset/img/MOB FT 2022.svg') }}" alt="" />
             </a>
           </div>
@@ -34,7 +34,7 @@
                 <ul class="dropdown-menu">
                   <li class="nav-item">
                     <a href="{{ route('penpos.index') }}" class="dropdown-item {{ Request::is('penpos') ? 'active' : '' }}">Penpos</a>
-                    <a href="{{ route('penpos.history') }}" class="dropdown-item {{ Request::is('penpos/history') ? 'active' : '' }}">History</a>
+                    <a href="{{ route('penpos.history') }}" class="dropdown-item {{ Request::is('penpos/history') ? 'active' : '' }}">Histori</a>
                     @if(Auth::user()->name == "ED")
                     <a href="{{ route('ed') }}" class="dropdown-item {{ Request::is('ed') ? 'active' : '' }}">Waktu</a>
                     <a href="{{ route('dealer') }}" class="dropdown-item {{ Request::is('dealer') ? 'active' : '' }}">Dealer</a>

@@ -14,7 +14,7 @@
                         <h2 class="text-mob mb-3"><b>Masuk</b></h2>
                         <div class="form-floating mb-3">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus placeholder="email" >
-                            <label for="email"><span><i class="fas fa-address-book"></i></span>{{ __(' E-Mail Address') }}</label>
+                            <label for="email"><span><i class="fas fa-address-book"></i></span>{{ __(' Email') }}</label>
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

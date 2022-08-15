@@ -40,7 +40,7 @@
             <nav class="navbar navbar-expand-lg classic transparent navbar-light py-3">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
-                        <a href="#">
+                        <a href="#atas">
                             <img src="{{ asset('asset/img/MOB FT 2022.svg') }}" alt="" />
                         </a>
                     </div>
@@ -70,7 +70,7 @@
         {{-- End Navbar --}}
     </div>
 
-    <section class="wrapper bg-soft-primary pb-3">
+    <section class="wrapper bg-soft-primary pb-3" id="atas">
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
             <div style="overflow: auto; padding-bottom: 10rem;">
@@ -451,16 +451,6 @@
                     })
 
                     $.each(data.utuh, function(key, value) {
-                        // var lambang = "";
-                        // if (data.utuh[key].namaKartu.contains('wajik')) {
-                        //     lambang = `<span class="text-red fs-20">♦</span>`;
-                        // } else if (data.utuh[key].namaKartu.contains('keriting')) {
-                        //     lambang = `<span class="text-dark fs-20">♣</span>`;
-                        // } else if (data.utuh[key].namaKartu.contains('love')) {
-                        //     lambang = `<span class="text-red fs-20">♥</span>`;
-                        // } else if (data.utuh[key].namaKartu.contains('waru')) {
-                        //     lambang = `<span class="text-dark fs-20">♠</span>`;
-                        // }
                         $('#listUtuh')
                             .trigger('add.owl.carousel', [
                                 `<div class="item">
