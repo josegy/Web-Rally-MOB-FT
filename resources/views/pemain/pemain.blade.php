@@ -428,7 +428,8 @@
                     'fs-14 badge bg-pale-red text-red rounded-pill');
             } else {
                 $('#status-' + e.penposStatus.penpos.id).html(e.penposStatus.status).removeClass(
-                    'fs-14 badge bg-pale-red text-red rounded-pill').addClass(
+                    'fs-14 badge bg-pale-red text-red rounded-pill').removeClass(
+                    'fs-14 badge bg-pale-green text-green rounded-pill').addClass(
                     'fs-14 badge bg-pale-yellow text-yellow rounded-pill');
             }
         });
@@ -443,20 +444,30 @@
                 success: function(data) {
                     // alert('success');
 
-                    var i = 1
+                    var i = 1;
                     $.each(data.utuh, function(key, value) {
                         $("#listUtuh").trigger('remove.owl.carousel', [key]).trigger(
                             'refresh.owl.carousel');
                     })
 
                     $.each(data.utuh, function(key, value) {
+                        // var lambang = "";
+                        // if (data.utuh[key].namaKartu.contains('wajik')) {
+                        //     lambang = `<span class="text-red fs-20">♦</span>`;
+                        // } else if (data.utuh[key].namaKartu.contains('keriting')) {
+                        //     lambang = `<span class="text-dark fs-20">♣</span>`;
+                        // } else if (data.utuh[key].namaKartu.contains('love')) {
+                        //     lambang = `<span class="text-red fs-20">♥</span>`;
+                        // } else if (data.utuh[key].namaKartu.contains('waru')) {
+                        //     lambang = `<span class="text-dark fs-20">♠</span>`;
+                        // }
                         $('#listUtuh')
                             .trigger('add.owl.carousel', [
                                 `<div class="item">
                                     <div class="card border-0 shadow ">
                                         <img src="{{ asset('/asset/img/${data.utuh[key].gambar}.png') }}" class="card-img-top">
                                     </div>
-                                    <h6>${data.utuh[key].namaKartu.replace('_', ' ')}</h6>
+                                    <h6 class="fs-20">${data.utuh[key].namaKartu.replace('_', '').replace('wajik', '<span class="text-red">♦</span>').replace('keriting', '♣').replace('love', '<span class="text-red">♥</span>').replace('waru', '♠')}</h6>
                                 </div>`
                             ]).trigger('refresh.owl.carousel');
                     })
