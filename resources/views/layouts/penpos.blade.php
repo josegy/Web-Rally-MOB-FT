@@ -33,12 +33,12 @@
                 <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                 <ul class="dropdown-menu">
                   <li class="nav-item">
+                    <a href="{{ route('penpos.index') }}" class="dropdown-item {{ Request::is('penpos') ? 'active' : '' }}">Penpos</a>
+                    <a href="{{ route('penpos.history') }}" class="dropdown-item {{ Request::is('penpos/history') ? 'active' : '' }}">History</a>
                     @if(Auth::user()->name == "ED")
                     <a href="{{ route('ed') }}" class="dropdown-item {{ Request::is('ed') ? 'active' : '' }}">Waktu</a>
                     <a href="{{ route('dealer') }}" class="dropdown-item {{ Request::is('dealer') ? 'active' : '' }}">Dealer</a>
                     @endif
-                    <a href="{{ route('penpos.index') }}" class="dropdown-item {{ Request::is('penpos') ? 'active' : '' }}">Penpos</a>
-                    <a href="{{ route('penpos.history') }}" class="dropdown-item {{ Request::is('penpos/history') ? 'active' : '' }}">History</a>
                     <a href="{{ route('logout') }}" class="dropdown-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
