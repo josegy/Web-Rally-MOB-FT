@@ -141,7 +141,7 @@
                                     <img src="{{ asset('/asset/img/${data.utuh[key].gambar}.png') }}"
                                     class="card-img-top">
                                     <input class="form-check-input" type="checkbox" value="${data.utuh[key].namaKartu}" id="check_${key}">
-                                    ${data.utuh[key].namaKartu.replace('_', ' ')}
+                                    ${data.utuh[key].namaKartu.replace('_', '').replace('wajik', '<span class="text-red">♦</span>').replace('keriting', '♣').replace('love', '<span class="text-red">♥</span>').replace('waru', '♠')}
                                     </div>`
                             ]).trigger('refresh.owl.carousel');
                     })
