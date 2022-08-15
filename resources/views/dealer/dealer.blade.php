@@ -140,8 +140,8 @@
                                 `<div class="item">
                                     <img src="{{ asset('/asset/img/${data.utuh[key].gambar}.png') }}"
                                     class="card-img-top">
-                                    <input class="form-check-input" type="checkbox" value="${data.utuh[key].namaKartu}" id="check_${key}">
-                                    ${data.utuh[key].namaKartu.replace('_', '').replace('wajik', '<span class="text-red">♦</span>').replace('keriting', '♣').replace('love', '<span class="text-red">♥</span>').replace('waru', '♠')}
+                                    <input class="form-check-input fs-20" type="checkbox" value="${data.utuh[key].namaKartu}" id="check_${key}">
+                                    <h2>${data.utuh[key].namaKartu.replace('_', '').replace('wajik', '<span class="text-red">♦</span>').replace('keriting', '♣').replace('love', '<span class="text-red">♥</span>').replace('waru', '♠')}</h2>
                                     </div>`
                             ]).trigger('refresh.owl.carousel');
                     })
