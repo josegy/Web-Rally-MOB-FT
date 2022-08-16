@@ -74,7 +74,7 @@
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
             <div style="overflow: auto; padding-bottom: 10rem;">
-                <img src="{{ asset('asset/img/peta-isometric-revisi-01(crop).png') }}" alt="Rally Map" usemap="#image-map" />
+                <img src="{{ asset('asset/img/peta-isometric-revisi2-01(crop).png') }}" width="1195" alt="Rally Map" usemap="#image-map" />
 
                 <map name="image-map">
                     <area id="1" class='penpos' target="" alt="TF 2.3" title="TF 2.3" href=""
@@ -95,8 +95,8 @@
                         title="Antara Boulevard dan Gaztek" href="" coords="656,401,9" shape="circle">
                     <area id="9" class='penpos' target="" alt="Depan TU" title="Depan TU"
                         href="" coords="528,572,9" shape="circle">
-                    <area id="10" class='penpos' target="" alt="TG Lantai 1" title="TG Lantai 1"
-                        href="" coords="624,226,9" shape="circle">
+                    <area id="10" class='penpos' target="" alt="Depan BEM FT" title="Depan BEM FT"
+                        href="" coords="328,532,9" shape="circle">
                     <area id="11" class='penpos' target="" alt="TF 2.1 A" title="TF 2.1 A"
                         href="" coords="441,460,9" shape="circle">
                     <area id="12" class='penpos' target="" alt="Depan Lab Desain Kerja dan Ergonomi"
@@ -114,8 +114,8 @@
                         title="Jalan Antara TA dan TF" href="" coords="458,521,9" shape="circle">
                     <area id="18" class='penpos' target="" alt="Depan Papan No Smoking"
                         title="Depan Papan No Smoking" href="" coords="510,553,9" shape="circle">
-                    <area id="19" class='penpos' target="" alt="Depan BEM FT" title="Depan BEM FT"
-                        href="" coords="328,532,9" shape="circle">
+                    <area id="19" class='penpos' target="" alt="TG Lantai 1" title="TG Lantai 1"
+                        href="" coords="624,226,9" shape="circle">
                     <area id="20" class='penpos' target="" alt="Depan TA" title="Depan TA"
                         href="" coords="536,600,9" shape="circle">
                 </map>
