@@ -74,11 +74,11 @@
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
             <div style="overflow: auto; padding-bottom: 10rem;">
-                <img src="{{ asset('asset/img/peta-isometric-revisi2-01(crop).png') }}" width="1195" alt="Rally Map" usemap="#image-map" />
+                <img src="{{ asset('asset/img/peta-isometric-revisi3-01(crop).png') }}" width="1195" alt="Rally Map" usemap="#image-map" />
 
                 <map name="image-map">
                     <area id="1" class='penpos' target="" alt="TF 2.3" title="TF 2.3" href=""
-                        coords="527,408,9" shape="circle">
+                        coords="523,408,9" shape="circle">
                     <area id="2" class='penpos' target="" alt="TF Lantai 1 (Depan PAJ TI)"
                         title="TF Lantai 1 (Depan PAJ TI)" href="" coords="389,488,9" shape="circle">
                     <area id="3" class='penpos' target="" alt="TF Dekat Keluwih" title="TF Dekat Keluwih"
@@ -108,8 +108,8 @@
                         title="Jembatan ke Farmasi" href="" coords="767,532,9" shape="circle">
                     <area id="15" class='penpos' target="" alt="Antara TE dan Keluwih"
                         title="Antara TE dan Keluwih" href="" coords="564,370,9" shape="circle">
-                    <area id="16" class='penpos' target="" alt="Sebelah TG" title="Sebelah TG" 
-                        href="" coords="809,286,9" shape="circle">
+                    <area id="16" class='penpos' target="" alt="Sebelah Ruang diskusi jalan dari TE ke TG" 
+                        title="Sebelah Ruang diskusi jalan dari TE ke TG" href="" coords="747,319,9" shape="circle">
                     <area id="17" class='penpos' target="" alt="Jalan Antara TA dan TF"
                         title="Jalan Antara TA dan TF" href="" coords="458,521,9" shape="circle">
                     <area id="18" class='penpos' target="" alt="Depan Papan No Smoking"
