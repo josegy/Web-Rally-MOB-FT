@@ -74,7 +74,8 @@
         <div class="container">
             <h2 class="fs-44 text-center">MAP RALLY</h2>
             <div style="overflow: auto; padding-bottom: 10rem;">
-                <img src="{{ asset('asset/img/peta-isometric-revisi3-01(crop).png') }}" width="1195" alt="Rally Map" usemap="#image-map" />
+                <img src="{{ asset('asset/img/peta-isometric-revisi3-01(crop).png') }}" width="1195" alt="Rally Map"
+                    usemap="#image-map" />
 
                 <map name="image-map">
                     <area id="1" class='penpos' target="" alt="TF 2.3" title="TF 2.3" href=""
@@ -108,8 +109,10 @@
                         title="Jembatan ke Farmasi" href="" coords="767,532,9" shape="circle">
                     <area id="15" class='penpos' target="" alt="Antara TE dan Keluwih"
                         title="Antara TE dan Keluwih" href="" coords="564,370,9" shape="circle">
-                    <area id="16" class='penpos' target="" alt="Sebelah Ruang diskusi jalan dari TE ke TG" 
-                        title="Sebelah Ruang diskusi jalan dari TE ke TG" href="" coords="747,319,9" shape="circle">
+                    <area id="16" class='penpos' target=""
+                        alt="Sebelah Ruang diskusi jalan dari TE ke TG"
+                        title="Sebelah Ruang diskusi jalan dari TE ke TG" href="" coords="747,319,9"
+                        shape="circle">
                     <area id="17" class='penpos' target="" alt="Jalan Antara TA dan TF"
                         title="Jalan Antara TA dan TF" href="" coords="458,521,9" shape="circle">
                     <area id="18" class='penpos' target="" alt="Depan Papan No Smoking"
@@ -487,8 +490,9 @@
             })
         })
 
-        let special = localStorage.getItem('special');
         $('#tukarKartu').click(function() {
+            // localStorage.removeItem('special');
+            let special = localStorage.getItem('special');
             console.log(localStorage.getItem('special'));
             $.ajax({
                 type: 'POST',
@@ -509,8 +513,8 @@
                     $('#selectKartu').html(data.selectKartu);
 
                     if (data.special == 'tutup') {
-                        console.log('masuk special');
                         $('#spesial').prop('disabled', true);
+                        console.log('masuk special');
                     }
 
                     if (jumlahPotongan < 1) {
@@ -520,24 +524,26 @@
                         console.log('masuk 1');
 
                     } else if (jumlahPotongan < 3) {
-                        if ((jumlahKartu < 1 || special == 'true') && data.special == 'tutup') {
-
+                        if (jumlahKartu < 1 || special == 'true' || data.special == 'tutup') {
                             $('#spesial').prop('disabled', true);
+                            console.log('masuk yang lain');
                         }
                         $('#random').prop('disabled', true);
                         $('#pilih').prop('disabled', true);
                         console.log('masuk 3');
 
                     } else if (jumlahPotongan < 5) {
-                        if (jumlahKartu < 1 || special == 'true') {
+                        if (jumlahKartu < 1 || special == 'true' || data.special == 'tutup') {
                             $('#spesial').prop('disabled', true);
+                            console.log('masuk yang lain');
                         }
                         $('#pilih').prop('disabled', true);
                         console.log('masuk 5');
                     }
 
-                    if ((jumlahKartu < 1 || special == 'true') && data.special == 'tutup') {
+                    if (jumlahKartu < 1 || special == 'true' || data.special == 'tutup') {
                         $('#spesial').prop('disabled', true);
+                        console.log('masuk yang lain');
                     }
 
                     $('#tukar').modal('show');
