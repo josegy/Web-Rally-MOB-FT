@@ -1,4 +1,4 @@
-@extends('layouts.penpos')
+    @extends('layouts.penpos')
 @section('penpos_content')
     @if (session('status'))
         <div class="alert alert-custom alert-light-success fade show mb-5" role="alert" style="width:100%; Max-height:5em;">
@@ -23,14 +23,12 @@
                         <label for="">
                             <h3>Waktu Mulai</h3>
                         </label>
-                        <input type="time" class='form-control' id='start' name='start'
-                            value='{{ $data[0]->start }}'>
+                        <input type="time" class='form-control' id='start' name='start' value="<?php echo date("H:i",strtotime($data[0]->start));?>">
                         <br>
                         <label for="">
                             <h3>Waktu Selesai</h3>
                         </label>
-                        <input type="time" class='form-control' id='end' name='end'
-                            value='{{ $data[0]->end }}'>
+                        <input type="time" class='form-control' id='end' name='end'  value="<?php echo date("H:i",strtotime($data[0]->end))  ?>" >
                     </div>
                     <br>
                     <div class="text-end">
