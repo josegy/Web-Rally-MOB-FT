@@ -53,7 +53,6 @@ class KartuController extends Controller
             $special = 'buka';
         }
 
-
         return response()->json(array(
             'potongan' => $potongan,
             'jumlahPotongan' => $jumlahPotongan,
@@ -144,11 +143,11 @@ class KartuController extends Controller
 
             // delete 1 kartu
             $kartuKey = $request->get('kartukey');
-
+            
             $explode = explode(';', $kartuKey);
             $namaKartu = $explode[0];
             $kunci = $explode[1];
-
+            
             $idKartu = DB::table('kartu_pemain as kp')
                 ->join('kartu as k', 'k.id', '=', 'kp.kartu_id')
                 ->select(DB::raw('kp.id as id'))
@@ -156,7 +155,7 @@ class KartuController extends Controller
                 ->where('kp.pemain_id', '=', $user->id)
                 ->get();
 
-            DB::table('kartu_pemain')->where('kartu_id', '=', $idKartu[0]->id)->delete();
+            DB::table('kartu_pemain')->where('id', '=', $idKartu[0]->id)->delete();
 
             $specialCard = $request->get('specialCard');
 
